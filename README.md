@@ -1,2 +1,2 @@
 # duke-shares-lunch
-An iOS app to help Duke Students sell their food points
+An iOS app to help Duke students sell their food points
