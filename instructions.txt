@@ -1,0 +1,39 @@
+To set up the REST API, type the line
+
+./update.sh
+
+Then you should be able to preform select queries on the database
+using curl. For example, SELECT * from registeredusers; becomes
+
+curl http://localhost:3000/registeredusers |python -m json.tool
+
+The |python -m json.tool part just formats the json result.
+Foreign keys are also supported by postgrest. To get the seller and buyer names
+for a particular purchase, use
+
+curl http://localhost:3000/purchase?select=activeseller(registereduser(name)),registereduser(uid,name) |python -m json.tool
+
+This query automatically finds the foreign key to activeseller in purchase.
+It then finds the foreign key to registered user from activeseller, and finds the name
+for that uid. This is the seller's name. 
+It also finds the key to registered user directly from purchase, bid.
+This is the buyer's name. 
+This link won't work as written, because paranthesees can't be put in a URL. '(' is encoded as %28 
+and ')' is encoded as %29, so instead we use
+
+curl http://localhost:3000/purchase?select=activeseller%28registereduser%28name%29%29,registereduser%28uid,name%29 |python -m json.tool
+
+
+To modify the database, type 
+
+nano api-schema.sql
+*make modifications* 
+Then:
+ 
+sudo docker cp api-schema.sql  tutorial:/api-schema.sql
+
+sudo docker exec -it tutorial psql -U postgres -f api-schema.sql postgres
+
+Then when you run ./postgrest tutorial.conf again it will be serving the updated version
+
+I think that's about it for now.
