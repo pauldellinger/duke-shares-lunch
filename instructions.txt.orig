@@ -1,9 +1,15 @@
 <<<<<<< HEAD
+Install docker with 
+apt-get install docker.io
+
+Then - 
+=======
 To clone to your vm:
 
 nano ~/.ssh/id_rsa.pub
 
-copy what's in there, then go to github settings, add it as an SSH key
+copy what's in there, then go to github settings, add it as an SSH key. 
+Then do
 
 git clone git@github.com:pauldellinger/duke-shares-lunch.git
 
@@ -11,10 +17,6 @@ You should have the file system in your vm as duke-shares-lunch
 
 >>>>>>> 69e734c937fe995604895f3757595a4403c220f7
 
-
-Install docker with                        
-apt-get install docker.io
-  Then -  
 To set up the REST API, type the line
 
 ./update.sh
