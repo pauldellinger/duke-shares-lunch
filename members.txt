@@ -1,0 +1,3 @@
+Josh Romine - Spent time learning Swift/X-Code and assisted with database setup
+AJ Eckmann - Worked on endpoints and database setup
+Paul Dellinger - Made the REST API and worked on endpoints
