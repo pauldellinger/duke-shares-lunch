@@ -1,3 +1,8 @@
+Install docker with 
+apt-get install docker.io
+
+Then - 
+
 To set up the REST API, type the line
 
 ./update.sh
@@ -30,10 +35,39 @@ nano api-schema.sql
 *make modifications* 
 Then:
  
-sudo docker cp api-schema.sql  tutorial:/api-schema.sql
-
-sudo docker exec -it tutorial psql -U postgres -f api-schema.sql postgres
+./update.sh
 
 Then when you run ./postgrest tutorial.conf again it will be serving the updated version
 
 I think that's about it for now.
+
+
+11/6
+
+We host the database on the web with nginx.
+
+Install nginx with apt-get install nginx
+
+Then do
+cp test.pauldellinger.com /etc/nginx/sites-available
+
+sudo ln -s /etc/nginx/sites-available/test.pauldellinger.com /etc/nginx/sites-enabled/
+
+This tells nginx to put whatever's on localhost:3000/ on the web. We run the api on localhost:3000/
+
+Change the nginx.conf file with
+nano etc/nginx/nginx.conf
+
+Change the line "include /etc/nginx/sites-enabled/*;"  -->  include /etc/nginx/sites-enabled/test.pauldellinger.com;
+now run 
+sudo systemctl restart nginx
+
+Run 
+./postgrest tutorial.conf
+
+You should be able to access basic info about the api by pointing your web browser to the vm's external IP address.
+
+Accessing the endpoints now requires a token. You put it in the header of the request. Check out the
+postman, it's probably the best way to test it.
+
+

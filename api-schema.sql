@@ -2,7 +2,7 @@ DROP SCHEMA lunches CASCADE;
 CREATE SCHEMA lunches;
 CREATE TABLE lunches.RegisteredUser
               (
-                uid INTEGER NOT NULL PRIMARY KEY,
+                uid serial NOT NULL PRIMARY KEY,
                 email VARCHAR(50) NOT NULL UNIQUE,
                 name VARCHAR(50) NOT NULL,
                 venmo VARCHAR(20) NOT NULL UNIQUE,
@@ -10,7 +10,7 @@ CREATE TABLE lunches.RegisteredUser
                 dorm VARCHAR(20)
                 );
 CREATE TABLE lunches.ActiveSeller
-                (saleid INTEGER NOT NULL PRIMARY KEY,
+                (saleid serial NOT NULL PRIMARY KEY,
                 uid INTEGER NOT NULL REFERENCES lunches.RegisteredUser(uid),
                 OrderTime TIMESTAMP,
                 status BOOLEAN NOT NULL,
@@ -71,3 +71,21 @@ grant select on lunches.purchase to web_anon;
 grant select on lunches.activeseller to web_anon;
 grant select on lunches.meals to web_anon;
 grant select on lunches.sellpreferences to web_anon;
+
+
+create role authenticator noinherit login password 'mysecretpassword';
+grant web_anon to authenticator;
+
+REVOKE usage on schema lunches from web_anon;
+
+create role todo_user nologin;
+grant todo_user to authenticator;
+
+grant usage on schema lunches to todo_user;
+grant all on lunches.registereduser to todo_user;
+grant all on lunches.ActiveSeller to todo_user;
+grant ALL on lunches.Purchase to todo_user;
+grant usage, select on sequence lunches.RegisteredUser_uid_seq to todo_user;
+grant all on lunches.meals to todo_user;
+grant all on lunches.sellpreferences to todo_user;
+grant usage, select on sequence lunches.ActiveSeller_saleid_seq to todo_user;
