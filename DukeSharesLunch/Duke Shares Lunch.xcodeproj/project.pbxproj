@@ -1,0 +1,641 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DA04220F237B697800864DEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04220E237B697800864DEE /* AppDelegate.swift */; };
+		DA042211237B697800864DEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042210237B697800864DEE /* SceneDelegate.swift */; };
+		DA042213237B697800864DEE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042212237B697800864DEE /* FirstViewController.swift */; };
+		DA042215237B697800864DEE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042214237B697800864DEE /* SecondViewController.swift */; };
+		DA042218237B697800864DEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042216237B697800864DEE /* Main.storyboard */; };
+		DA04221A237B697B00864DEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA042219237B697B00864DEE /* Assets.xcassets */; };
+		DA04221D237B697B00864DEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA04221B237B697B00864DEE /* LaunchScreen.storyboard */; };
+		DA042228237B697B00864DEE /* Duke_Shares_LunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042227237B697B00864DEE /* Duke_Shares_LunchTests.swift */; };
+		DA042233237B697B00864DEE /* Duke_Shares_LunchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042232237B697B00864DEE /* Duke_Shares_LunchUITests.swift */; };
+		DA042243237B8D9400864DEE /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042242237B8D9400864DEE /* LocationTableViewController.swift */; };
+		DA042248237BA5CD00864DEE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042246237B966700864DEE /* Location.swift */; };
+		DA042249237BA5CD00864DEE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042246237B966700864DEE /* Location.swift */; };
+		DA04224C237BA99900864DEE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042246237B966700864DEE /* Location.swift */; };
+		DA042250237BBCA500864DEE /* WebServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04224F237BBCA500864DEE /* WebServiceAPI.swift */; };
+		DA042251237BBF1700864DEE /* WebServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04224F237BBCA500864DEE /* WebServiceAPI.swift */; };
+		DA042252237BBF1800864DEE /* WebServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04224F237BBCA500864DEE /* WebServiceAPI.swift */; };
+		DA042253237BC14F00864DEE /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042242237B8D9400864DEE /* LocationTableViewController.swift */; };
+		DA042254237BC15000864DEE /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042242237B8D9400864DEE /* LocationTableViewController.swift */; };
+		DACE3C93237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
+		DACE3C94237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
+		DACE3C95237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
+		DACE3C97237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */; };
+		DACE3C98237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */; };
+		DACE3C99237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */; };
+		DACE3C9B237C811A0030804C /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */; };
+		DACE3C9C237C811A0030804C /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */; };
+		DACE3C9D237C811A0030804C /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DA042224237B697B00864DEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA042203237B697800864DEE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA04220A237B697800864DEE;
+			remoteInfo = "Duke Shares Lunch";
+		};
+		DA04222F237B697B00864DEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA042203237B697800864DEE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA04220A237B697800864DEE;
+			remoteInfo = "Duke Shares Lunch";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DA04220B237B697800864DEE /* Duke Shares Lunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duke Shares Lunch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA04220E237B697800864DEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DA042210237B697800864DEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		DA042212237B697800864DEE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		DA042214237B697800864DEE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		DA042217237B697800864DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DA042219237B697B00864DEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DA04221C237B697B00864DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DA04221E237B697B00864DEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA042223237B697B00864DEE /* Duke Shares LunchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Duke Shares LunchTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA042227237B697B00864DEE /* Duke_Shares_LunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duke_Shares_LunchTests.swift; sourceTree = "<group>"; };
+		DA042229237B697B00864DEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA04222E237B697B00864DEE /* Duke Shares LunchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Duke Shares LunchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA042232237B697B00864DEE /* Duke_Shares_LunchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duke_Shares_LunchUITests.swift; sourceTree = "<group>"; };
+		DA042234237B697B00864DEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA042242237B8D9400864DEE /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
+		DA042246237B966700864DEE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		DA04224F237BBCA500864DEE /* WebServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceAPI.swift; sourceTree = "<group>"; };
+		DACE3C92237C7AA80030804C /* Seller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
+		DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailTableViewCell.swift; sourceTree = "<group>"; };
+		DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DA042208237B697800864DEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA042220237B697B00864DEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA04222B237B697B00864DEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DA042202237B697800864DEE = {
+			isa = PBXGroup;
+			children = (
+				DA04220D237B697800864DEE /* Duke Shares Lunch */,
+				DA042226237B697B00864DEE /* Duke Shares LunchTests */,
+				DA042231237B697B00864DEE /* Duke Shares LunchUITests */,
+				DA04220C237B697800864DEE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DA04220C237B697800864DEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DA04220B237B697800864DEE /* Duke Shares Lunch.app */,
+				DA042223237B697B00864DEE /* Duke Shares LunchTests.xctest */,
+				DA04222E237B697B00864DEE /* Duke Shares LunchUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DA04220D237B697800864DEE /* Duke Shares Lunch */ = {
+			isa = PBXGroup;
+			children = (
+				DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */,
+				DA042246237B966700864DEE /* Location.swift */,
+				DACE3C92237C7AA80030804C /* Seller.swift */,
+				DA04220E237B697800864DEE /* AppDelegate.swift */,
+				DA042210237B697800864DEE /* SceneDelegate.swift */,
+				DA042212237B697800864DEE /* FirstViewController.swift */,
+				DA042214237B697800864DEE /* SecondViewController.swift */,
+				DA042216237B697800864DEE /* Main.storyboard */,
+				DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */,
+				DA04224F237BBCA500864DEE /* WebServiceAPI.swift */,
+				DA042242237B8D9400864DEE /* LocationTableViewController.swift */,
+				DA042219237B697B00864DEE /* Assets.xcassets */,
+				DA04221B237B697B00864DEE /* LaunchScreen.storyboard */,
+				DA04221E237B697B00864DEE /* Info.plist */,
+			);
+			path = "Duke Shares Lunch";
+			sourceTree = "<group>";
+		};
+		DA042226237B697B00864DEE /* Duke Shares LunchTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA042227237B697B00864DEE /* Duke_Shares_LunchTests.swift */,
+				DA042229237B697B00864DEE /* Info.plist */,
+			);
+			path = "Duke Shares LunchTests";
+			sourceTree = "<group>";
+		};
+		DA042231237B697B00864DEE /* Duke Shares LunchUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DA042232237B697B00864DEE /* Duke_Shares_LunchUITests.swift */,
+				DA042234237B697B00864DEE /* Info.plist */,
+			);
+			path = "Duke Shares LunchUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DA04220A237B697800864DEE /* Duke Shares Lunch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA042237237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares Lunch" */;
+			buildPhases = (
+				DA042207237B697800864DEE /* Sources */,
+				DA042208237B697800864DEE /* Frameworks */,
+				DA042209237B697800864DEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Duke Shares Lunch";
+			productName = "Duke Shares Lunch";
+			productReference = DA04220B237B697800864DEE /* Duke Shares Lunch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA042222237B697B00864DEE /* Duke Shares LunchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA04223A237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares LunchTests" */;
+			buildPhases = (
+				DA04221F237B697B00864DEE /* Sources */,
+				DA042220237B697B00864DEE /* Frameworks */,
+				DA042221237B697B00864DEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA042225237B697B00864DEE /* PBXTargetDependency */,
+			);
+			name = "Duke Shares LunchTests";
+			productName = "Duke Shares LunchTests";
+			productReference = DA042223237B697B00864DEE /* Duke Shares LunchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DA04222D237B697B00864DEE /* Duke Shares LunchUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA04223D237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares LunchUITests" */;
+			buildPhases = (
+				DA04222A237B697B00864DEE /* Sources */,
+				DA04222B237B697B00864DEE /* Frameworks */,
+				DA04222C237B697B00864DEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA042230237B697B00864DEE /* PBXTargetDependency */,
+			);
+			name = "Duke Shares LunchUITests";
+			productName = "Duke Shares LunchUITests";
+			productReference = DA04222E237B697B00864DEE /* Duke Shares LunchUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DA042203237B697800864DEE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "July Boys";
+				TargetAttributes = {
+					DA04220A237B697800864DEE = {
+						CreatedOnToolsVersion = 11.2;
+					};
+					DA042222237B697B00864DEE = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = DA04220A237B697800864DEE;
+					};
+					DA04222D237B697B00864DEE = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = DA04220A237B697800864DEE;
+					};
+				};
+			};
+			buildConfigurationList = DA042206237B697800864DEE /* Build configuration list for PBXProject "Duke Shares Lunch" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DA042202237B697800864DEE;
+			productRefGroup = DA04220C237B697800864DEE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DA04220A237B697800864DEE /* Duke Shares Lunch */,
+				DA042222237B697B00864DEE /* Duke Shares LunchTests */,
+				DA04222D237B697B00864DEE /* Duke Shares LunchUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DA042209237B697800864DEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA04221D237B697B00864DEE /* LaunchScreen.storyboard in Resources */,
+				DA04221A237B697B00864DEE /* Assets.xcassets in Resources */,
+				DA042218237B697800864DEE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA042221237B697B00864DEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA04222C237B697B00864DEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DA042207237B697800864DEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA042215237B697800864DEE /* SecondViewController.swift in Sources */,
+				DA042243237B8D9400864DEE /* LocationTableViewController.swift in Sources */,
+				DA042213237B697800864DEE /* FirstViewController.swift in Sources */,
+				DA04220F237B697800864DEE /* AppDelegate.swift in Sources */,
+				DA042211237B697800864DEE /* SceneDelegate.swift in Sources */,
+				DACE3C93237C7AA80030804C /* Seller.swift in Sources */,
+				DACE3C9B237C811A0030804C /* LocationTableViewCell.swift in Sources */,
+				DA04224C237BA99900864DEE /* Location.swift in Sources */,
+				DA042250237BBCA500864DEE /* WebServiceAPI.swift in Sources */,
+				DACE3C97237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA04221F237B697B00864DEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DACE3C94237C7AA80030804C /* Seller.swift in Sources */,
+				DACE3C9C237C811A0030804C /* LocationTableViewCell.swift in Sources */,
+				DACE3C98237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
+				DA042251237BBF1700864DEE /* WebServiceAPI.swift in Sources */,
+				DA042249237BA5CD00864DEE /* Location.swift in Sources */,
+				DA042228237B697B00864DEE /* Duke_Shares_LunchTests.swift in Sources */,
+				DA042253237BC14F00864DEE /* LocationTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA04222A237B697B00864DEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DACE3C95237C7AA80030804C /* Seller.swift in Sources */,
+				DACE3C9D237C811A0030804C /* LocationTableViewCell.swift in Sources */,
+				DACE3C99237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
+				DA042252237BBF1800864DEE /* WebServiceAPI.swift in Sources */,
+				DA042248237BA5CD00864DEE /* Location.swift in Sources */,
+				DA042233237B697B00864DEE /* Duke_Shares_LunchUITests.swift in Sources */,
+				DA042254237BC15000864DEE /* LocationTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DA042225237B697B00864DEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA04220A237B697800864DEE /* Duke Shares Lunch */;
+			targetProxy = DA042224237B697B00864DEE /* PBXContainerItemProxy */;
+		};
+		DA042230237B697B00864DEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA04220A237B697800864DEE /* Duke Shares Lunch */;
+			targetProxy = DA04222F237B697B00864DEE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DA042216237B697800864DEE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA042217237B697800864DEE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DA04221B237B697B00864DEE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA04221C237B697B00864DEE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DA042235237B697B00864DEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DA042236237B697B00864DEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DA042238237B697B00864DEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Duke Shares Lunch/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "July-Boys.Duke-Shares-Lunch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DA042239237B697B00864DEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Duke Shares Lunch/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "July-Boys.Duke-Shares-Lunch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DA04223B237B697B00864DEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Duke Shares LunchTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "July-Boys.Duke-Shares-LunchTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Duke Shares Lunch.app/Duke Shares Lunch";
+			};
+			name = Debug;
+		};
+		DA04223C237B697B00864DEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Duke Shares LunchTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "July-Boys.Duke-Shares-LunchTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Duke Shares Lunch.app/Duke Shares Lunch";
+			};
+			name = Release;
+		};
+		DA04223E237B697B00864DEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Duke Shares LunchUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "July-Boys.Duke-Shares-LunchUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Duke Shares Lunch";
+			};
+			name = Debug;
+		};
+		DA04223F237B697B00864DEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Duke Shares LunchUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "July-Boys.Duke-Shares-LunchUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Duke Shares Lunch";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DA042206237B697800864DEE /* Build configuration list for PBXProject "Duke Shares Lunch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA042235237B697B00864DEE /* Debug */,
+				DA042236237B697B00864DEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA042237237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares Lunch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA042238237B697B00864DEE /* Debug */,
+				DA042239237B697B00864DEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA04223A237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares LunchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA04223B237B697B00864DEE /* Debug */,
+				DA04223C237B697B00864DEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA04223D237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares LunchUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA04223E237B697B00864DEE /* Debug */,
+				DA04223F237B697B00864DEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DA042203237B697800864DEE /* Project object */;
+}
