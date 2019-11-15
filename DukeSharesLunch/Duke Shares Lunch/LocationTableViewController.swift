@@ -81,7 +81,7 @@ class LocationTableViewController: UITableViewController {
         return cell
     }
     
-    func getDataFromUrl(website: String){
+    private func getDataFromUrl(website: String){
         
         //make request to addresss in parameter
         var request = URLRequest(url: URL(string: website)!,timeoutInterval: Double.infinity)
@@ -106,7 +106,7 @@ class LocationTableViewController: UITableViewController {
                 let jsonResponse = try JSONSerialization.jsonObject(with:
                     data, options: [])
                 
-                print(jsonResponse) //Response result
+                //print(jsonResponse) //Response result
                 guard let jsonArray = jsonResponse as? [[String: Any]] else {
                     return
                 }
@@ -114,7 +114,7 @@ class LocationTableViewController: UITableViewController {
                 for dic in jsonArray{
                     guard let name = dic["location"] as? String else { return }
                     guard let count = dic["count"] as? Int else { return }
-                    print(name, count) //Output
+                    //print(name, count) //Output
                     guard let location = Location(name: name, count: count) else {
                         fatalError("Unable to instantiate location")
                     }
@@ -178,15 +178,29 @@ class LocationTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedRestaurant = locations[indexPath.row]
+//        //print(selectedRestaurant.name)
+//        if let viewController = storyboard?.instantiateViewController(identifier: "LocationDetailTableViewController") as? LocationDetailTableViewController {
+//            viewController.restaurant = selectedRestaurant
+//            navigationController?.pushViewController(viewController, animated: true)
+//        }
+//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        //Give the restaurant selected to the next view controller (The detail page)
+        guard let detailViewController = segue.destination as? LocationDetailTableViewController,
+            let index = tableView.indexPathForSelectedRow?.row
+            else {
+                return
+        }
+        detailViewController.restaurant = locations[index]
+        //print(locations[index])
     }
-    */
+    
 
 
 
