@@ -4,6 +4,7 @@ CREATE TABLE lunches.RegisteredUser
               (
                 uid serial NOT NULL PRIMARY KEY,
                 email VARCHAR(50) NOT NULL UNIQUE,
+		password VARCHAR(50) NOT NULL,
                 name VARCHAR(50) NOT NULL,
                 venmo VARCHAR(20) NOT NULL UNIQUE,
                 major VARCHAR(20),
@@ -24,7 +25,7 @@ CREATE TABLE lunches.SellPreferences
                 PRIMARY KEY(uid, location));
 
 CREATE TABLE lunches.Purchase
-                (pid INTEGER NOT NULL PRIMARY KEY,
+                (pid serial NOT NULL PRIMARY KEY,
                 saleid INTEGER NOT NULL REFERENCES lunches.ActiveSeller(saleid),
                 bid INTEGER NOT NULL REFERENCES lunches.RegisteredUser(uid),
                 price DECIMAL(5,2) CHECK(price > 0) NOT NULL,
@@ -34,15 +35,17 @@ CREATE TABLE lunches.Purchase
 
 
 CREATE TABLE lunches.Meals
-            (mid INTEGER NOT NULL PRIMARY KEY,
+            (mid serial NOT NULL PRIMARY KEY,
             price DECIMAL(5,2) CHECK(price > 0),
             location VARCHAR(20) NOT NULL,
             description VARCHAR(200));
 
 
-INSERT INTO lunches.RegisteredUser VALUES(1, 'pd88@duke.edu', 'Paul Dellinger', 'paul_dellinger', 'Computer Science', 'Kilgo');
-INSERT INTO lunches.RegisteredUser VALUES(2, 'jcr34@duke.edu', 'Josh Romine', 'joshielikescash');
-INSERT INTO lunches.RegisteredUser VALUES(3, 'aje11@duke.edu', 'AJ Eckmann', 'AJs Venmo');
+
+
+INSERT INTO lunches.RegisteredUser VALUES(1, 'pd88@duke.edu', 'password', 'Paul Dellinger', 'paul_dellinger', 'Computer Science', 'Kilgo');
+INSERT INTO lunches.RegisteredUser VALUES(2, 'jcr34@duke.edu', 'password', 'Josh Romine', 'joshielikescash');
+INSERT INTO lunches.RegisteredUser VALUES(3, 'aje11@duke.edu', 'password', 'AJ Eckmann', 'AJs Venmo');
 --Three example users
 
 INSERT INTO lunches.ActiveSeller VALUES(2001, 1,'2019-10-25 02:36:00', TRUE, 0.60, 'Il Forno');
@@ -64,7 +67,14 @@ INSERT INTO lunches.Meals VALUES(4001, 8.85, 'Il Forno', 'Make your own pasta bo
 INSERT INTO lunches.Meals VALUES(4002, 1.50, 'Il Forno', 'Extra Chicken');
 
 
+CREATE VIEW lunches.ActiveRestaurants as (
+SELECT location, count(*)
+From lunches.Activeseller
+GROUP BY location
+ORDER BY location);
+
 CREATE ROLE web_anon nologin;
+
 GRANT USAGE  on schema lunches to web_anon;
 grant select on lunches.registereduser to web_anon;
 grant select on lunches.purchase to web_anon;
@@ -75,6 +85,7 @@ grant select on lunches.sellpreferences to web_anon;
 
 create role authenticator noinherit login password 'mysecretpassword';
 grant web_anon to authenticator;
+
 
 REVOKE usage on schema lunches from web_anon;
 
@@ -89,3 +100,8 @@ grant usage, select on sequence lunches.RegisteredUser_uid_seq to todo_user;
 grant all on lunches.meals to todo_user;
 grant all on lunches.sellpreferences to todo_user;
 grant usage, select on sequence lunches.ActiveSeller_saleid_seq to todo_user;
+grant usage, select on sequence lunches.meals_mid_seq to todo_user;
+grant usage, select on sequence lunches.Purchase_pid_seq to todo_user;
+
+grant select on lunches.ActiveRestaurants to todo_user;
+

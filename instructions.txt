@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 To clone to your vm:
 
 nano ~/.ssh/id_rsa.pub
@@ -8,8 +8,6 @@ copy what's in there, then go to github settings, add it as an SSH key
 git clone git@github.com:pauldellinger/duke-shares-lunch.git
 
 You should have the file system in your vm as duke-shares-lunch
-
->>>>>>> 69e734c937fe995604895f3757595a4403c220f7
 
 
 Install docker with                        
@@ -82,4 +80,20 @@ You should be able to access basic info about the api by pointing your web brows
 Accessing the endpoints now requires a token. You put it in the header of the request. Check out the
 postman, it's probably the best way to test it.
 
+
+11/19
+
+Now need to install pgjwt to help with jwt generation in the user table. 
+
+https://github.com/michelp/pgjwt
+
+
+The database is now simplified because it doesn't run in a docker container.
+To set up the REST API, run 
+
+./build.sh
+
+Then type 
+./postgrest tutorial.conf
+To begin running the API
 
