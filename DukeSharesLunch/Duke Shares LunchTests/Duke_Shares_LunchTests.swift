@@ -44,5 +44,35 @@ class Duke_Shares_LunchTests: XCTestCase {
         
         
     }
+    //MARK: User Class Tests
+    
+    // Confirm that the User initializer returns a User object when passed valid parameters.
+    func testUserInitializationSucceeds() {
+        // Empty String
+        let emptyEmailUser = User.init(email: "", password: "foobar")
+        XCTAssertNil(emptyEmailUser)
+        
+        let empytPasswordUser = User.init(email: "foo@bar.com", password: "")
+        XCTAssertNil(empytPasswordUser)
+        
+    }
+    func testUserCreation(){
+        let randy = Int.random(in: 1000..<9000)
+        let exampleUser = User.init(email: "foo\(randy)@bar.com", password: "foobar")
+        exampleUser!.createUser()
+        sleep(1)
+        exampleUser?.login()
+        sleep(1)
+        XCTAssertNotNil(exampleUser?.token)
+    }
+    func testUserLoginSucceeds() {
+        let exampleUser = User.init(email: "foo@bar.com", password: "foobar")
+        exampleUser!.login()
+        sleep(1)
+        print(exampleUser?.token)
+        XCTAssertNotNil(exampleUser?.token)
+        
+        
+    }
 
 }
