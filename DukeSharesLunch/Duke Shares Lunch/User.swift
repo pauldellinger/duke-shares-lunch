@@ -12,7 +12,7 @@ class User {
     
     //MARK: Properties
     
-    
+    //commit test
     var uid: Int?
     var name: String?
     var password: String
