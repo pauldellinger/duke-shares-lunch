@@ -14,6 +14,7 @@ class User {
     
     //commit test
     // commit 2
+    //paul to josh
     var uid: Int?
     var name: String?
     var password: String
