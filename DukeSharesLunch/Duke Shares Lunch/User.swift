@@ -11,6 +11,8 @@ import UIKit
 class User {
     
     //MARK: Properties
+    
+    
     var uid: Int?
     var name: String?
     var password: String
