@@ -10,7 +10,6 @@
 		DA04220F237B697800864DEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04220E237B697800864DEE /* AppDelegate.swift */; };
 		DA042211237B697800864DEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042210237B697800864DEE /* SceneDelegate.swift */; };
 		DA042213237B697800864DEE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042212237B697800864DEE /* FirstViewController.swift */; };
-		DA042215237B697800864DEE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042214237B697800864DEE /* SecondViewController.swift */; };
 		DA042218237B697800864DEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042216237B697800864DEE /* Main.storyboard */; };
 		DA04221A237B697B00864DEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA042219237B697B00864DEE /* Assets.xcassets */; };
 		DA04221D237B697B00864DEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA04221B237B697B00864DEE /* LaunchScreen.storyboard */; };
@@ -25,6 +24,12 @@
 		DA2FB73C237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
 		DA2FB73D237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
 		DA2FB73E237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
+		DA5AABBB2387738000CB1B5C /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */; };
+		DA5AABBC2387738000CB1B5C /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */; };
+		DA5AABBD2387738000CB1B5C /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */; };
+		DA5AABBF23878F2500CB1B5C /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */; };
+		DA5AABC023878F2500CB1B5C /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */; };
+		DA5AABC123878F2500CB1B5C /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */; };
 		DACE3C93237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
 		DACE3C94237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
 		DACE3C95237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
@@ -61,7 +66,6 @@
 		DA04220E237B697800864DEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA042210237B697800864DEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DA042212237B697800864DEE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		DA042214237B697800864DEE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		DA042217237B697800864DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA042219237B697B00864DEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA04221C237B697B00864DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 		DA042242237B8D9400864DEE /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		DA042246237B966700864DEE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		DA2FB73B237F46F800323AED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
+		DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		DACE3C92237C7AA80030804C /* Seller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
 		DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailTableViewCell.swift; sourceTree = "<group>"; };
 		DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
@@ -135,8 +141,9 @@
 				DA04220E237B697800864DEE /* AppDelegate.swift */,
 				DA042210237B697800864DEE /* SceneDelegate.swift */,
 				DA042212237B697800864DEE /* FirstViewController.swift */,
-				DA042214237B697800864DEE /* SecondViewController.swift */,
 				DA042216237B697800864DEE /* Main.storyboard */,
+				DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */,
+				DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */,
 				DACE3CDC237CC5060030804C /* LocationDetailTableViewController.swift */,
 				DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */,
 				DA042242237B8D9400864DEE /* LocationTableViewController.swift */,
@@ -297,9 +304,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA042215237B697800864DEE /* SecondViewController.swift in Sources */,
 				DACE3CDD237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,
 				DA042243237B8D9400864DEE /* LocationTableViewController.swift in Sources */,
+				DA5AABBF23878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
 				DA042213237B697800864DEE /* FirstViewController.swift in Sources */,
 				DA04220F237B697800864DEE /* AppDelegate.swift in Sources */,
 				DA042211237B697800864DEE /* SceneDelegate.swift in Sources */,
@@ -308,6 +315,7 @@
 				DA04224C237BA99900864DEE /* Location.swift in Sources */,
 				DACE3C97237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
 				DA2FB73C237F46F800323AED /* User.swift in Sources */,
+				DA5AABBB2387738000CB1B5C /* UserPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,8 +326,10 @@
 				DACE3C94237C7AA80030804C /* Seller.swift in Sources */,
 				DACE3C9C237C811A0030804C /* LocationTableViewCell.swift in Sources */,
 				DACE3C98237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
+				DA5AABBC2387738000CB1B5C /* UserPageViewController.swift in Sources */,
 				DA042249237BA5CD00864DEE /* Location.swift in Sources */,
 				DA2FB73D237F46F800323AED /* User.swift in Sources */,
+				DA5AABC023878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
 				DACE3CDE237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,
 				DA042228237B697B00864DEE /* Duke_Shares_LunchTests.swift in Sources */,
 				DA042253237BC14F00864DEE /* LocationTableViewController.swift in Sources */,
@@ -333,8 +343,10 @@
 				DACE3C95237C7AA80030804C /* Seller.swift in Sources */,
 				DACE3C9D237C811A0030804C /* LocationTableViewCell.swift in Sources */,
 				DACE3C99237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
+				DA5AABBD2387738000CB1B5C /* UserPageViewController.swift in Sources */,
 				DA042248237BA5CD00864DEE /* Location.swift in Sources */,
 				DA2FB73E237F46F800323AED /* User.swift in Sources */,
+				DA5AABC123878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
 				DACE3CDF237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,
 				DA042233237B697B00864DEE /* Duke_Shares_LunchUITests.swift in Sources */,
 				DA042254237BC15000864DEE /* LocationTableViewController.swift in Sources */,
