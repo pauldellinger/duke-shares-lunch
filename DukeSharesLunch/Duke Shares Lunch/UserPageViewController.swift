@@ -25,10 +25,10 @@ class UserPageViewController: UIViewController {
             if credentialValidate(email: email, password: pass){
                 print("valid!")
                 user = User.init(email: email, password: pass)
-                print(user?.email, user?.password)
-                user?.login()
-                sleep(2)
-                print(user?.token)
+                // print(user?.email, user?.password)
+                user?.login(viewController: self)
+                //sleep(2)
+                // print(user?.token)
                 
             }
             else{
@@ -43,6 +43,10 @@ class UserPageViewController: UIViewController {
         passwordInput.placeholder = "password"
         // Do any additional setup after loading the view.
     }
+    func tokenUpdated(user:User){
+           self.performSegue(withIdentifier: "loginSegue", sender: self)
+           
+       }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         if (textField == emailInput) {
@@ -74,6 +78,10 @@ class UserPageViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
     
     func fadeViewInThenOut(view : UIView, delay: TimeInterval) {
         let animationDuration = 0.25

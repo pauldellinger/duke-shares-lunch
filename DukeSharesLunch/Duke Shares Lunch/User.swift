@@ -71,7 +71,7 @@ class User {
 
     }
         
-    func login(){
+    func login(viewController: UserPageViewController){
         
         let parameters = "{ \"email\": \"\(self.email)\", \"pass\": \"\(self.password)\" }"
         let postData = parameters.data(using: .utf8)
@@ -108,6 +108,11 @@ class User {
                         fatalError("Unable to instantiate seller")
                     }
                     self.token = jwtToken as? String
+                    DispatchQueue.main.async{
+                        if !(self.token?.isEmpty ?? false){
+                            viewController.tokenUpdated(user:self)
+                        }
+                    }
                 }
                 //reload the table with the new values
                 //Response not in JSON format
