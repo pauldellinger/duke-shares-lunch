@@ -13,6 +13,7 @@ class User {
     //MARK: Properties
     
     //commit test
+    // commit 2
     var uid: Int?
     var name: String?
     var password: String
