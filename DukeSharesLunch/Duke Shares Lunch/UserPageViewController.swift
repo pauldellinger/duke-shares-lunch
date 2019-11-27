@@ -32,13 +32,14 @@ class UserPageViewController: UIViewController {
                 
             }
             else{
-                fadeViewInThenOut(view: invalidLabel, delay: 5)
+                showError()
             }
             
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailInput.becomeFirstResponder()
         emailInput.placeholder = "email"
         passwordInput.placeholder = "password"
         // Do any additional setup after loading the view.
@@ -81,20 +82,25 @@ class UserPageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        guard let nextController = segue.destination as? TabController
+            else {
+                return
+        }
+        nextController.user = user
     }
     
-    func fadeViewInThenOut(view : UIView, delay: TimeInterval) {
+    func showError() {
         let animationDuration = 0.25
 
         // Fade in the view
         UIView.animate(withDuration: animationDuration, animations: { () -> Void in
-            view.alpha = 1
+            self.invalidLabel.alpha = 1
             }) { (Bool) -> Void in
 
                 // After the animation completes, fade out the view after a delay
 
-                UIView.animate(withDuration: animationDuration, delay: delay, animations: { () -> Void in
-                    view.alpha = 0
+                UIView.animate(withDuration: animationDuration, delay: 5, animations: { () -> Void in
+                    self.invalidLabel.alpha = 0
                     },
                     completion: nil)
         }
