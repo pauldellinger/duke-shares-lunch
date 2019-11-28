@@ -8,39 +8,89 @@
     </dependencies>
     <scenes>
         <!--Sell-->
-        <scene sceneID="hNz-n2-bh7">
+        <scene sceneID="doA-vh-Sia">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
+                <navigationController id="tjZ-OG-F4S" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sell" image="dollarsign.square.fill" catalog="system" id="pyF-nI-IEC"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WEL-p6-QIx">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6Kt-Qf-Bai" kind="relationship" relationship="rootViewController" id="OpQ-qB-U3K"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UPL-tG-28E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1396" y="-610"/>
+        </scene>
+        <!--Sell-->
+        <scene sceneID="QKk-rj-cgd">
+            <objects>
+                <tableViewController title="Sell" id="LpK-Lf-B5X" customClass="SellLocationTableViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="G6X-4t-UnD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="718"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SellLocationTableViewCell" id="Bmp-O8-628" customClass="SellLocationTableViewCell" customModule="Duke_Shares_Lunch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bmp-O8-628" id="Mk0-an-X11">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tN-vf-Hlg">
+                                            <rect key="frame" x="20" y="11" width="374" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="3tN-vf-Hlg" id="RcE-XR-3Ff"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LpK-Lf-B5X" id="fqU-iv-us1"/>
+                            <outlet property="delegate" destination="LpK-Lf-B5X" id="PaP-R2-EMP"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Sell" image="dollarsign.square.fill" catalog="system" id="sqW-Hw-Rbp"/>
+                    <navigationItem key="navigationItem" title="Where to sell your food points?" id="Nmj-BU-PtC"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f9F-0e-875" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3136" y="-1273"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="84s-xL-KMo">
+            <objects>
+                <viewController id="Ew0-CW-CLe" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FdI-6i-W68">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="First View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
-                                <rect key="frame" x="131.5" y="426.5" width="151" height="43"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by FirstViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5M-7J-77L">
-                                <rect key="frame" x="110" y="477.5" width="194.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eis-sm-mnc">
+                                <rect key="frame" x="0.0" y="505" width="414" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </datePicker>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAW-LN-Pow">
+                                <rect key="frame" x="0.0" y="191" width="414" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
-                            <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="cfb-er-3JN"/>
-                            <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="e1l-AV-tCB"/>
-                            <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
+                        <viewLayoutGuide key="safeArea" id="cKy-Tn-Dgp"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Sell" image="dollarsign.square.fill" catalog="system" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" id="Lvd-kS-Odc"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="737-Jw-831" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="-684"/>
+            <point key="canvasLocation" x="4197" y="-610"/>
         </scene>
         <!--Buy-->
         <scene sceneID="uxz-D6-3GH">
@@ -154,54 +204,6 @@
             </objects>
             <point key="canvasLocation" x="2407.2463768115945" y="118.52678571428571"/>
         </scene>
-        <!--Meal Selector Table View Controller-->
-        <scene sceneID="cgv-RT-OZh">
-            <objects>
-                <tableViewController id="Mlc-k0-jxF" customClass="MealSelectorTableViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="X2x-jd-e6D">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MealSelectorTableViewCell" rowHeight="130" id="cph-dH-AZn" customClass="MealSelectorTableViewCell" customModule="Duke_Shares_Lunch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="130"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cph-dH-AZn" id="o00-sq-gQG">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJm-hd-oRP">
-                                            <rect key="frame" x="29" y="11" width="260" height="108"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nim-gi-wbV">
-                                            <rect key="frame" x="297" y="44" width="138" height="42"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="nameLabel" destination="hJm-hd-oRP" id="is0-50-Mhm"/>
-                                    <outlet property="priceLabel" destination="Nim-gi-wbV" id="mze-NP-ilf"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Mlc-k0-jxF" id="yB5-N8-Keb"/>
-                            <outlet property="delegate" destination="Mlc-k0-jxF" id="S4s-Rg-ycc"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vXx-GL-pNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3801" y="92"/>
-        </scene>
         <!--Submit Footer View Controller-->
         <scene sceneID="9FK-x2-bvO">
             <objects>
@@ -249,9 +251,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0g-dr-eLQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4311.594202898551" y="844.41964285714278"/>
+            <point key="canvasLocation" x="3420" y="119"/>
         </scene>
-        <!--Second-->
+        <!--Login-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="UserPageViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
@@ -291,7 +293,7 @@
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
-                    <navigationItem key="navigationItem" id="Cro-yD-nzt"/>
+                    <navigationItem key="navigationItem" title="Login" id="Cro-yD-nzt"/>
                     <connections>
                         <outlet property="emailInput" destination="5Wj-tC-ur0" id="A0q-2v-cNj"/>
                         <outlet property="invalidLabel" destination="QTr-eg-5nE" id="17A-wD-Ql5"/>
@@ -411,7 +413,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ix1-dA-hxJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="961"/>
+            <point key="canvasLocation" x="1271" y="854"/>
         </scene>
         <!--Tab Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -425,7 +427,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Je6-f8-wgT" kind="relationship" relationship="viewControllers" id="Dh0-Xv-d6z"/>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="tjZ-OG-F4S" kind="relationship" relationship="viewControllers" id="Jgu-11-zYB"/>
                         <segue destination="2tQ-FG-Et6" kind="relationship" relationship="viewControllers" id="EZd-MN-nnh"/>
                     </connections>
                 </tabBarController>
@@ -479,7 +481,54 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFf-li-bgS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5138" y="844"/>
+            <point key="canvasLocation" x="3667" y="855"/>
+        </scene>
+        <!--Where would you like to sell your food points?-->
+        <scene sceneID="LO6-fb-lmE">
+            <objects>
+                <viewController id="6Kt-Qf-Bai" customClass="SubmitSellLocationViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SBT-ob-Zv3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Abq-QO-F1r">
+                                <rect key="frame" x="0.0" y="44" width="414" height="718"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="LpK-Lf-B5X" kind="embed" id="0Dw-sK-I9J"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTy-Cl-ajx">
+                                <rect key="frame" x="296" y="757" width="98" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitAction:" destination="6Kt-Qf-Bai" eventType="touchUpInside" id="TVe-rQ-1b5"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All of WU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncP-uP-Ppr">
+                                <rect key="frame" x="20" y="777" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="szc-05-kF6">
+                                <rect key="frame" x="100" y="772" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="3Mp-hC-K8X"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Where would you like to sell your food points?" id="u8a-CD-IqJ"/>
+                    <connections>
+                        <outlet property="allOfWUSwitch" destination="szc-05-kF6" id="Edx-OJ-6lj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xsh-U9-BlL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3134.7826086956525" y="-610.04464285714278"/>
         </scene>
     </scenes>
     <resources>
