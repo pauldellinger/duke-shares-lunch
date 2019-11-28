@@ -230,7 +230,8 @@ class User {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
  
-            if let httpResponse = response as? HTTPURLResponse 
+            if let httpResponse = response as? HTTPURLResponse {
+
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 201 {
                     let locationHeader = httpResponse.allHeaderFields["Location"] as! String
