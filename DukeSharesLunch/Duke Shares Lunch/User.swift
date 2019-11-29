@@ -229,9 +229,9 @@ class User {
         request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
- 
+            
             if let httpResponse = response as? HTTPURLResponse {
-
+                
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 201 {
                     let locationHeader = httpResponse.allHeaderFields["Location"] as! String
@@ -252,6 +252,71 @@ class User {
         }
         
         task.resume()
+    }
+    
+    func createSales(locations: [String]?, ordertime:Int, rate:Double, viewController: SalePickerViewController){
+        // TODO: http://postgrest.org/en/v6.0/api.html#upsert
+        //let parameters = "{  \"saleid\": \(seller.saleid), \"bid\": \(self.uid!), \"price\": \(price), \"approve\": false, \"paid\": false, \"p_description\": \"\(description)\"}"
+        // print(parameters)
+        // postBody = genPostBody(locations)
+        
+        let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
+        var request = URLRequest(url: URL(string: "http://35.194.58.92/activeseller")!,timeoutInterval: Double.infinity)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 201 {
+                    print("Successfully inserted sales!")
+                }
+                else{
+                    print("Did not get 201 code, row not inserted")
+                }
+            }
+            guard let data = data else {
+                print(String(describing: error))
+                return
+            }
+            print(String(data: data, encoding: .utf8)!)
+            
+        }
+        
+        task.resume()
+        
+    }
+    func genPostBody(locations:[String], ordertime:Int, rate: Double) -> Data{
+        var sales = [[String:Any]]()
+        for location in locations{
+            print(location)
+            var sale = [String:Any]()
+            sale["uid"] = self.uid
+            
+            let date = Date().addingTimeInterval(Double(ordertime) * 60.0)
+            //print(stringFromDate(date))
+            sale["ordertime"] = stringFromDate(date)
+            
+            sale["status"] = true
+            sale["percent"] = round(1000.0 * rate) / 1000.0
+            sale["location"] = location
+            sales.append(sale)
+        }
+        let JSON = try? JSONSerialization.data(withJSONObject: sales, options: [])
+        print(sales)
+        return JSON!
+    }
+    private func stringFromDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.string(from: date)
     }
         
 }

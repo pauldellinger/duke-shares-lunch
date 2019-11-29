@@ -28,7 +28,7 @@ class LocationDetailTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         //let website = "http://35.194.58.92/activeseller?select=saleid,uid,registereduser(name,venmo),ordertime,status,percent,location"
         //print(restaurant)
-        self.refreshControl?.beginRefreshing()
+        //self.refreshControl?.beginRefreshing()
         getDataFromUrl()
         
     }

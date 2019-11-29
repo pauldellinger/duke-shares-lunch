@@ -19,6 +19,7 @@ class SubmitFooterViewController: UIViewController {
         print(description)
         
         user?.createPurchase(seller: seller!, price: tallyPrice(), description: createDescription(meals: meals), viewController: self)
+        //segue here
     }
 
     

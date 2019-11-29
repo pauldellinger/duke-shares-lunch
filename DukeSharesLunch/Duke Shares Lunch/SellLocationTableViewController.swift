@@ -94,6 +94,27 @@ class SellLocationTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        refreshParent()
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
+        refreshParent()
+
+    }
+    func refreshParent(){
+        let parent = self.parent as? SubmitSellLocationViewController
+        parent?.selectedLocations = [String]()
+        let selected = self.tableView.indexPathsForSelectedRows
+        for (index, location) in locations.enumerated() {
+            
+            let myRow = IndexPath(row: index, section:0)
+            if selected?.contains(myRow) ?? false {
+                // print(meal.name)
+                parent?.selectedLocations += [location]
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

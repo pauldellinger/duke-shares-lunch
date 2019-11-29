@@ -22,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UPL-tG-28E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="-610"/>
+            <point key="canvasLocation" x="1512" y="-610"/>
         </scene>
         <!--Sell-->
         <scene sceneID="QKk-rj-cgd">
@@ -66,33 +66,71 @@
             </objects>
             <point key="canvasLocation" x="3136" y="-1273"/>
         </scene>
-        <!--View Controller-->
+        <!--Rate and Ordertime-->
         <scene sceneID="84s-xL-KMo">
             <objects>
-                <viewController id="Ew0-CW-CLe" sceneMemberID="viewController">
+                <viewController id="Ew0-CW-CLe" customClass="SalePickerViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FdI-6i-W68">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eis-sm-mnc">
-                                <rect key="frame" x="0.0" y="505" width="414" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </datePicker>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAW-LN-Pow">
+                            <pickerView tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAW-LN-Pow">
                                 <rect key="frame" x="0.0" y="191" width="414" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
+                            <pickerView tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ce5-NW-gLr">
+                                <rect key="frame" x="0.0" y="456" width="414" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How long until you order?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqv-7Q-QsF">
+                                <rect key="frame" x="0.0" y="429" width="414" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What percentage do you want venmo'd back to you?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9G-cQ-H3G">
+                                <rect key="frame" x="0.0" y="154" width="414" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1A2-Mz-U1S">
+                                <rect key="frame" x="331" y="640" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luN-FD-hc4">
+                                <rect key="frame" x="108" y="732" width="199" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitSellerAction:" destination="Ew0-CW-CLe" eventType="touchUpInside" id="axU-ed-DmZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I don't care when I order" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weW-ud-6lU">
+                                <rect key="frame" x="108" y="626" width="199" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="cKy-Tn-Dgp"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Lvd-kS-Odc"/>
+                    <navigationItem key="navigationItem" title="Rate and Ordertime" id="Lvd-kS-Odc"/>
+                    <connections>
+                        <outlet property="noTimeSwitch" destination="1A2-Mz-U1S" id="Qwa-UD-H6d"/>
+                        <outlet property="ratePicker" destination="zAW-LN-Pow" id="kMZ-o6-89d"/>
+                        <outlet property="timePicker" destination="Ce5-NW-gLr" id="dV8-NF-lKb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="737-Jw-831" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4197" y="-610"/>
+            <point key="canvasLocation" x="4005.7971014492755" y="-610.04464285714278"/>
         </scene>
-        <!--Buy-->
+        <!--Available Locations-->
         <scene sceneID="uxz-D6-3GH">
             <objects>
                 <tableViewController id="Je6-f8-wgT" customClass="LocationTableViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
@@ -137,12 +175,13 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Buy" image="dollarsign.circle" catalog="system" id="bYx-8j-Rdm" userLabel="Sellers" colorLabel="IBBuiltInLabel-Blue"/>
+                    <navigationItem key="navigationItem" title="Available Locations" id="ApW-pW-qv6"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gr4-d0-h0B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1272" y="119"/>
+            <point key="canvasLocation" x="2770" y="708"/>
         </scene>
-        <!--Location Detail Table View Controller-->
+        <!--Pick a Seller-->
         <scene sceneID="3ZA-jK-GSy">
             <objects>
                 <tableViewController storyboardIdentifier="LocationDetailTableViewController" id="fPF-pm-1cM" customClass="LocationDetailTableViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
@@ -194,7 +233,7 @@
                             <outlet property="delegate" destination="fPF-pm-1cM" id="DOA-Jv-G2b"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="88g-ah-cWt"/>
+                    <navigationItem key="navigationItem" title="Pick a Seller" id="88g-ah-cWt"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="vZe-R7-9Gb">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -202,7 +241,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zX-T4-m1y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2407.2463768115945" y="118.52678571428571"/>
+            <point key="canvasLocation" x="4006" y="708"/>
         </scene>
         <!--Submit Footer View Controller-->
         <scene sceneID="9FK-x2-bvO">
@@ -251,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0g-dr-eLQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3420" y="119"/>
+            <point key="canvasLocation" x="5019" y="708"/>
         </scene>
         <!--Login-->
         <scene sceneID="wg7-f3-ORb">
@@ -308,6 +347,7 @@
         <!--Navigation Controller-->
         <scene sceneID="U4p-iv-Ip3">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="elk-Kj-lSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="UbS-B8-rlv" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UxS-fa-QEk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -317,9 +357,25 @@
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="CN0-7J-ZvO"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="elk-Kj-lSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1903" y="43"/>
+        </scene>
+        <!--Buy-->
+        <scene sceneID="Q8u-u2-OcU">
+            <objects>
+                <navigationController id="0z4-d3-pJM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Buy" image="dollarsign.circle" catalog="system" id="Kne-DA-Kpx"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ctd-zV-Flj">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Je6-f8-wgT" kind="relationship" relationship="rootViewController" id="udi-ed-8bx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oAH-jJ-Kg2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1512" y="708"/>
         </scene>
         <!--Profile-->
         <scene sceneID="ghT-Tm-Ejg">
@@ -413,7 +469,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ix1-dA-hxJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1271" y="854"/>
+            <point key="canvasLocation" x="77" y="1016"/>
         </scene>
         <!--Tab Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -426,7 +482,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Je6-f8-wgT" kind="relationship" relationship="viewControllers" id="Dh0-Xv-d6z"/>
+                        <segue destination="0z4-d3-pJM" kind="relationship" relationship="viewControllers" id="eKu-JZ-abi"/>
                         <segue destination="tjZ-OG-F4S" kind="relationship" relationship="viewControllers" id="Jgu-11-zYB"/>
                         <segue destination="2tQ-FG-Et6" kind="relationship" relationship="viewControllers" id="EZd-MN-nnh"/>
                     </connections>
@@ -481,7 +537,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFf-li-bgS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3667" y="855"/>
+            <point key="canvasLocation" x="5019" y="1383"/>
         </scene>
         <!--Where would you like to sell your food points?-->
         <scene sceneID="LO6-fb-lmE">
@@ -504,6 +560,7 @@
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitAction:" destination="6Kt-Qf-Bai" eventType="touchUpInside" id="TVe-rQ-1b5"/>
+                                    <segue destination="Ew0-CW-CLe" kind="show" identifier="pickerSegue" id="cdk-U7-aWR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All of WU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncP-uP-Ppr">
@@ -528,7 +585,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xsh-U9-BlL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3134.7826086956525" y="-610.04464285714278"/>
+            <point key="canvasLocation" x="2770" y="-610"/>
         </scene>
     </scenes>
     <resources>

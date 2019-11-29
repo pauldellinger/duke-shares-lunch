@@ -35,7 +35,7 @@ class LocationTableViewController: UITableViewController {
     override func viewDidLoad() {
         //required function for controller
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated:true);
+        //self.navigationController?.setNavigationBarHidden(true, animated:true);
         // print(self.tabBarController.user)
 
         // Uncomment the following line to preserve selection between presentations
