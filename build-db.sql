@@ -3,19 +3,19 @@ CREATE TABLE RegisteredUser
               (
                 uid serial NOT NULL PRIMARY KEY,
                 email VARCHAR(50) NOT NULL UNIQUE,
-		password VARCHAR(50) NOT NULL,
                 name VARCHAR(50) NOT NULL,
                 venmo VARCHAR(20) NOT NULL UNIQUE,
                 major VARCHAR(20),
                 dorm VARCHAR(20)
                 );
 CREATE TABLE ActiveSeller
-                (saleid serial NOT NULL PRIMARY KEY,
+                (saleid serial NOT NULL UNIQUE,
                 uid INTEGER NOT NULL REFERENCES RegisteredUser(uid),
                 OrderTime TIMESTAMP,
                 status BOOLEAN NOT NULL,
                 percent DECIMAL(5,2) NOT NULL,
-                location VARCHAR(20) NOT NULL);
+                location VARCHAR(20) NOT NULL,
+			PRIMARY KEY(uid, location));
 
 CREATE TABLE SellPreferences
                 (uid INTEGER NOT NULL REFERENCES RegisteredUser(uid),
@@ -42,9 +42,9 @@ CREATE TABLE Meals
 
 
 
-INSERT INTO RegisteredUser VALUES(1, 'pd88@duke.edu', 'password', 'Paul Dellinger', 'paul_dellinger', 'Computer Science', 'Kilgo');
-INSERT INTO RegisteredUser VALUES(2, 'jcr34@duke.edu', 'password', 'Josh Romine', 'joshielikescash');
-INSERT INTO RegisteredUser VALUES(3, 'aje11@duke.edu', 'password', 'AJ Eckmann', 'AJs Venmo');
+INSERT INTO RegisteredUser VALUES(1, 'pd88@duke.edu',  'Paul Dellinger', 'paul_dellinger', 'Computer Science', 'Kilgo');
+INSERT INTO RegisteredUser VALUES(2, 'jcr34@duke.edu',  'Josh Romine', 'joshielikescash');
+INSERT INTO RegisteredUser VALUES(3, 'aje11@duke.edu',  'AJ Eckmann', 'AJs Venmo');
 --Three example users
 
 INSERT INTO ActiveSeller VALUES(2001, 1,'2019-10-25 02:36:00', TRUE, 0.60, 'Il Forno');
