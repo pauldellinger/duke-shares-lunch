@@ -14,12 +14,13 @@ class User {
     
     var uid: Int?
     var name: String?
-    var password: String
-    var email: String
+    var password: String?
+    var email: String?
     var token: String?
     var venmo: String?
     var major: String?
     var dorm: String?
+    var activeSales:[Seller]?
     
     init? (email:String, password:String ){
 
@@ -29,8 +30,14 @@ class User {
             return nil
         }
     }
+    init? (name: String, venmo:String){
+        self.name = name
+        self.venmo = venmo
+    }
+    
+    
     func createUser(){
-        let parameters = "{ \"email\": \"\(self.email)\", \"pass\": \"\(self.password)\" }"
+        let parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\" }"
         let postData = parameters.data(using: .utf8)
         var request = URLRequest(url: URL(string: "http://35.194.58.92/rpc/make_user")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -71,8 +78,10 @@ class User {
     }
         
     func login(viewController: UserPageViewController?){
-        
-        let parameters = "{ \"email\": \"\(self.email)\", \"pass\": \"\(self.password)\" }"
+        let email = self.email!
+        let password = self.password!
+        let parameters = "{ \"email\": \"\(email)\", \"pass\": \"\(password)\" }"
+    
         let postData = parameters.data(using: .utf8)
         var request = URLRequest(url: URL(string: "http://35.194.58.92/rpc/login")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -83,7 +92,6 @@ class User {
         
         //specify type of request
         request.httpMethod = "POST"
-        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
@@ -133,12 +141,13 @@ class User {
         //We have to call the task here because it's asynchronous
         task.resume()
     }
+    
     func getInfo(){
         print("getting info!")
         let scheme = "http"
         let host = "35.194.58.92"
         let path = "/registereduser"
-        let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email)")
+        let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
@@ -305,7 +314,7 @@ class User {
             sale["ordertime"] = stringFromDate(date)
             
             sale["status"] = true
-            sale["percent"] = round(1000.0 * rate) / 1000.0
+            sale["percent"] = round(100.0 * rate) / 100.0
             sale["location"] = location
             sales.append(sale)
         }
@@ -318,7 +327,185 @@ class User {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter.string(from: date)
     }
+    
+    func getUserSales(viewcontroller: Any?){
+        print("getting active sales!")
+        let scheme = "http"
+        let host = "35.194.58.92"
+        let path = "/activeseller"
+        let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
+        let uidEquality = "eq.\(self.uid!)"
+        let queryItem2 = URLQueryItem(name: "uid", value: uidEquality)
         
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        urlComponents.queryItems! += [queryItem2]
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        // print(url)
+        
+        //specify type of request
+        request.httpMethod = "GET"
+        
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        
+        //make request to addresss in parameter
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 200 {
+                    print("Got the Active Sales!")
+                }
+                else{
+                    print("Did not get 200 code, something went wrong")
+                }
+            }
+            guard let data = data else {
+                print(String(describing: error))
+                return
+            }
+            do{
+                //print(data)
+                
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+                
+                //print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+//                var sales = [Seller]()
+                self.activeSales = [Seller]()
+                for dic in jsonArray{
+                    guard let sale = Seller(json:dic) else {
+                        fatalError("Unable to instantiate seller")
+                    }
+                    self.activeSales?.append(sale)
+                    
+                }
+                DispatchQueue.main.async{
+                    if let viewcontroller = viewcontroller as? ActiveSalesTableViewController{
+                        viewcontroller.handleSuccessfulGetSales()
+                    }
+                    if let viewcontroller = viewcontroller as? SubmitSellLocationViewController{
+                        viewcontroller.handleSuccessfulGetSales()
+                    }
+                }
+            
+                //reload the table with the new values
+                //Response not in JSON format
+            } catch let parsingError {
+                print("Error", parsingError)
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
+    
+    func getPurchases(viewController: Any?){
+        print("getting purchases!")
+        let scheme = "http"
+        let host = "35.194.58.92"
+        let path = "/rpc/unapproved_purchase"
+        let queryItem = URLQueryItem(name: "sellerid", value: String(self.uid!))
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        print(url)
+        
+        //specify type of request
+        request.httpMethod = "GET"
+        
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        print(request)
+        
+        //make request to addresss in parameter
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("requesting!")
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 200 {
+                    print("Got the Purchases!")
+                }
+                else{
+                    print("Did not get 200 code, something went wrong")
+                }
+            }
+            guard let data = data else {
+                print(String(describing: error))
+                return
+            }
+            do{
+                //print(data)
+                
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+                
+                //print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+                //                var sales = [Seller]()
+                var purchases = [Purchase]()
+                for dic in jsonArray{
+                    let pid = dic["pid"] as! Int
+                    
+                    var seller : Seller?
+                    print(self.activeSales)
+                    for sale in self.activeSales ?? [] {
+                        print(sale.saleid)
+                        if sale.saleid == dic["saleid"] as! Int{
+                            seller = sale
+                        }
+                    }
+                    
+                    let buyer = User.init(name: dic["buyername"] as! String, venmo: dic["buyervenmo"] as! String)!
+                    let approve = dic["approve"] as! Bool
+                    let paid = dic["paid"] as! Bool
+                    let description = dic["p_description"] as! String
+                    
+                    let purchase = Purchase.init(pid: pid, seller: seller!, buyer: buyer, approve: approve, paid: paid, description: description)!
+                    
+                    purchases.append(purchase)
+                    
+                }
+                print(purchases[0].seller.locationName)
+                
+                DispatchQueue.main.async{
+                    if let viewController = viewController as? ActiveSalesTableViewController{
+                        viewController.handleSuccessfulGetPurchase(purchases:purchases)
+                    }
+                }
+                 
+                
+                //reload the table with the new values
+                //Response not in JSON format
+            } catch let parsingError {
+                print("Error", parsingError)
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
 }
 
 

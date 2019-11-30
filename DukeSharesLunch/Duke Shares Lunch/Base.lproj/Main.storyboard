@@ -64,7 +64,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9F-0e-875" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3136" y="-1273"/>
+            <point key="canvasLocation" x="2771" y="-1256"/>
         </scene>
         <!--Rate and Ordertime-->
         <scene sceneID="84s-xL-KMo">
@@ -96,7 +96,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1A2-Mz-U1S">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1A2-Mz-U1S">
                                 <rect key="frame" x="331" y="640" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
@@ -124,11 +124,148 @@
                         <outlet property="noTimeSwitch" destination="1A2-Mz-U1S" id="Qwa-UD-H6d"/>
                         <outlet property="ratePicker" destination="zAW-LN-Pow" id="kMZ-o6-89d"/>
                         <outlet property="timePicker" destination="Ce5-NW-gLr" id="dV8-NF-lKb"/>
+                        <segue destination="Yag-Gc-rPj" kind="show" id="4ao-rc-iGg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="737-Jw-831" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4005.7971014492755" y="-610.04464285714278"/>
+        </scene>
+        <!--Active Sales-->
+        <scene sceneID="c3G-1T-G04">
+            <objects>
+                <viewController id="Yag-Gc-rPj" customClass="MySalesViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vV0-ah-flY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xPv-VD-1RZ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="650"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="7MY-Mq-kbr" kind="embed" id="Ccg-Tf-TMW"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asd-Tv-Arc">
+                                <rect key="frame" x="108" y="746" width="197" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sell at More Locations"/>
+                                <connections>
+                                    <action selector="moreLocationsAction:" destination="Yag-Gc-rPj" eventType="touchUpInside" id="ER5-6e-C4y"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="qsl-EL-gMO"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Active Sales" id="x6P-9i-j8h"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ca7-4Q-Zwg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3463.7681159420295" y="95.758928571428569"/>
+        </scene>
+        <!--Active Sales Table View Controller-->
+        <scene sceneID="ura-Ag-qbm">
+            <objects>
+                <tableViewController id="7MY-Mq-kbr" customClass="ActiveSalesTableViewController" customModule="Duke_Shares_Lunch" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7zT-hL-j3b" customClass="ActiveSales">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="650"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActiveSaleCell" rowHeight="100" id="vlc-rJ-3g6" customClass="ActiveSalesTableViewCell" customModule="Duke_Shares_Lunch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vlc-rJ-3g6" id="kHE-MW-7c4">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Restaurant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOZ-dg-bKy">
+                                            <rect key="frame" x="20" y="20" width="99" height="59"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9Z-dv-4ts">
+                                            <rect key="frame" x="127" y="20" width="78" height="59"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time until orer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrn-aZ-uvE">
+                                            <rect key="frame" x="213" y="20" width="78" height="59"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knr-1v-yR7">
+                                            <rect key="frame" x="348" y="38" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kq0-LK-eQy">
+                                            <rect key="frame" x="351" y="31.5" width="38" height="38"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" backgroundImage="circle.fill" catalog="system">
+                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="buyerCountLabel" destination="knr-1v-yR7" id="B6n-yJ-obx"/>
+                                    <outlet property="locationLabel" destination="dOZ-dg-bKy" id="EGM-2x-fSH"/>
+                                    <outlet property="rateLabel" destination="W9Z-dv-4ts" id="tef-LP-M94"/>
+                                    <outlet property="timeLabel" destination="Rrn-aZ-uvE" id="kOx-2D-FCS"/>
+                                    <segue destination="VJ3-aN-er5" kind="show" id="Mg1-aX-7wS"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7MY-Mq-kbr" id="Rhp-of-sbl"/>
+                            <outlet property="delegate" destination="7MY-Mq-kbr" id="F5B-dU-Zlw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q1f-n2-Adh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4331.884057971015" y="95.758928571428569"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="UKA-l9-CRM">
+            <objects>
+                <tableViewController id="VJ3-aN-er5" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xKH-D8-gne">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="596"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TZO-Wp-8K7">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TZO-Wp-8K7" id="8zv-va-Ohs">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VJ3-aN-er5" id="EiY-NB-9ex"/>
+                            <outlet property="delegate" destination="VJ3-aN-er5" id="iJf-Ip-SF2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="AVN-ZI-Pgx"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ddE-Vb-bHA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5301" y="96"/>
         </scene>
         <!--Available Locations-->
         <scene sceneID="uxz-D6-3GH">
@@ -347,7 +484,6 @@
         <!--Navigation Controller-->
         <scene sceneID="U4p-iv-Ip3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="elk-Kj-lSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="UbS-B8-rlv" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UxS-fa-QEk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -357,6 +493,7 @@
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="CN0-7J-ZvO"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="elk-Kj-lSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1903" y="43"/>
         </scene>
@@ -489,7 +626,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="119"/>
+            <point key="canvasLocation" x="77" y="43"/>
         </scene>
         <!--Meal Selector Table View Controller-->
         <scene sceneID="WdG-7u-tlD">
@@ -581,6 +718,7 @@
                     <navigationItem key="navigationItem" title="Where would you like to sell your food points?" id="u8a-CD-IqJ"/>
                     <connections>
                         <outlet property="allOfWUSwitch" destination="szc-05-kF6" id="Edx-OJ-6lj"/>
+                        <segue destination="Yag-Gc-rPj" kind="show" identifier="hasActiveSalesSegue" animates="NO" id="LvM-Zs-xcI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xsh-U9-BlL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -589,9 +727,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="circle.fill" catalog="system" width="64" height="60"/>
         <image name="dollarsign.circle" catalog="system" width="64" height="60"/>
         <image name="dollarsign.square.fill" catalog="system" width="64" height="56"/>
         <image name="person" catalog="system" width="64" height="58"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="LvM-Zs-xcI"/>
+    </inferredMetricsTieBreakers>
 </document>

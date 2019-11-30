@@ -66,7 +66,7 @@ class Duke_Shares_LunchTests: XCTestCase {
         XCTAssertNotNil(exampleUser?.token)
     }
     func testUserLoginSucceeds() {
-        let exampleUser = User.init(email: "foo@bar.com", password: "foobar")
+        let exampleUser = User.init(email: "pd88@duke.edu", password: "Password1")
         exampleUser!.login(viewController: nil)
         sleep(1)
         print(exampleUser?.token)
@@ -146,6 +146,20 @@ class Duke_Shares_LunchTests: XCTestCase {
         if let JSON = JSON {
             print(String(data: JSON, encoding: String.Encoding.utf8))
         }
+    }
+    func testGetPurchases(){
+        let exampleUser = User.init(email: "pd88@duke.edu", password: "Password1")
+        exampleUser!.login(viewController: nil)
+        sleep(1)
+        print(exampleUser?.token)
+        exampleUser?.getInfo()
+        sleep(1)
+        print(exampleUser?.uid)
+        exampleUser?.getUserSales(viewcontroller: nil)
+        sleep(1)
+        exampleUser?.getPurchases(viewController: nil)
+        sleep(1)
+        
     }
 
 }

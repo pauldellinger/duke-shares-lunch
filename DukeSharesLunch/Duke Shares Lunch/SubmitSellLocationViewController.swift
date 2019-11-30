@@ -25,6 +25,7 @@ class SubmitSellLocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        user?.getUserSales(viewcontroller: self)
 
         // Do any additional setup after loading the view.
     }
@@ -54,6 +55,11 @@ class SubmitSellLocationViewController: UIViewController {
     }
     
 
+    func handleSuccessfulGetSales(){
+        if !(user?.activeSales?.isEmpty ?? true){
+            self.performSegue(withIdentifier: "hasActiveSalesSegue", sender: self)
+        }
+    }
     
     // MARK: - Navigation
 
@@ -61,15 +67,20 @@ class SubmitSellLocationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        let destinationController = segue.destination as? SalePickerViewController
-        
-        if allOfWUSwitch.isOn{
+        if let destinationController = segue.destination as? SalePickerViewController {
             
-            destinationController?.locations = loadWU()
+            if allOfWUSwitch.isOn{
+                
+                destinationController.locations = loadWU()
+            }
+            destinationController.locations = selectedLocations
+            destinationController.user = user
+            
         }
-        destinationController?.locations = selectedLocations
-        destinationController?.user = user
-        
+        if let destinationController = segue.destination as? MySalesViewController {
+            destinationController.user = user
+            
+        }
         
     }
 

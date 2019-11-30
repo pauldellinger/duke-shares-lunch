@@ -3,7 +3,7 @@
 //  Duke Shares Lunch
 //
 //  Created by Chris Theodore on 11/13/19.
-//  Copyright © 2019 July Boys. All rights reserved.
+//  Copyright © 2019 July Guys. All rights reserved.
 //
 
 import UIKit
