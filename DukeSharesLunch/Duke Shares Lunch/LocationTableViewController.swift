@@ -14,6 +14,7 @@ class LocationTableViewController: UITableViewController {
     
     //MARK: Properties
     var locations = [Location]()
+    var user:User?
     //Global variable locations, an array of the locations we display
     
     private func loadSampleLocations() {
@@ -34,6 +35,8 @@ class LocationTableViewController: UITableViewController {
     override func viewDidLoad() {
         //required function for controller
         super.viewDidLoad()
+        //self.navigationController?.setNavigationBarHidden(true, animated:true);
+        // print(self.tabBarController.user)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -198,6 +201,7 @@ class LocationTableViewController: UITableViewController {
                 return
         }
         detailViewController.restaurant = locations[index]
+        detailViewController.user = user
         //print(locations[index])
     }
     

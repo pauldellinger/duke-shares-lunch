@@ -13,11 +13,14 @@ class LocationDetailTableViewController: UITableViewController {
     var sellers = [Seller]()
     var restaurant:Location?
     
+    var user: User?
     
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated:true);
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -25,13 +28,17 @@ class LocationDetailTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         //let website = "http://35.194.58.92/activeseller?select=saleid,uid,registereduser(name,venmo),ordertime,status,percent,location"
         //print(restaurant)
-        
+        //self.refreshControl?.beginRefreshing()
         getDataFromUrl()
         
     }
 
     // MARK: - Table view data source
-
+    @objc func refresh(sender:AnyObject)
+    {
+        // Updating your data here...
+        getDataFromUrl()
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -42,6 +49,8 @@ class LocationDetailTableViewController: UITableViewController {
         return sellers.count
     }
     private func getDataFromUrl(){
+        
+        
         let scheme = "http"
         let host = "35.194.58.92"
         let path = "/activeseller"
@@ -65,7 +74,7 @@ class LocationDetailTableViewController: UITableViewController {
         request.httpMethod = "GET"
 
         //authorization
-        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidG9kb191c2VyIn0.IWnJCBgXAYfPGA-zB4JPlcAGfDYkwTwCTmQM-boguV8", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(user?.token ?? "")", forHTTPHeaderField: "Authorization")
 
         //Use the URLSession built in to make a dataTask (basically a request)
 
@@ -88,6 +97,10 @@ class LocationDetailTableViewController: UITableViewController {
                 }
                 print(jsonArray)
                 //iterate over JSON, adding each to location
+                
+                //clear sellers before we add to them
+                
+                self.sellers = [Seller]()
                 for dic in jsonArray{
 
                     guard let seller = Seller(json:dic) else {
@@ -111,13 +124,14 @@ class LocationDetailTableViewController: UITableViewController {
     
     
     private func updateView() {
-           //This function updates the table
-           let hasSellers = sellers.count > 0
-
-           if hasSellers{
-               tableView.reloadData()
-           }
-       }
+        //This function updates the table
+        let hasSellers = sellers.count > 0
+        
+        if hasSellers{
+            tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        }
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
@@ -177,14 +191,25 @@ class LocationDetailTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+
+        guard let detailViewController = segue.destination as? SubmitFooterViewController,
+            let index = tableView.indexPathForSelectedRow?.row
+            else {
+                return
+        }
+        print("handing over seller: ", sellers[index])
+        detailViewController.seller = sellers[index]
+        detailViewController.user = user
+    
+        
     }
-    */
+    
 
 }
