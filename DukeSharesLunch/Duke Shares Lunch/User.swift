@@ -272,6 +272,7 @@ class User {
         let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
         var request = URLRequest(url: URL(string: "http://35.194.58.92/activeseller")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("resolution=merge-duplicates", forHTTPHeaderField: "Prefer")
         
         request.httpMethod = "POST"
         request.httpBody = postData
@@ -286,6 +287,10 @@ class User {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 201 {
                     print("Successfully inserted sales!")
+                    DispatchQueue.main.async{
+                        viewController.handleSuccessfulInsert()
+                    }
+                    
                 }
                 else{
                     print("Did not get 201 code, row not inserted")
@@ -314,7 +319,7 @@ class User {
             sale["ordertime"] = stringFromDate(date)
             
             sale["status"] = true
-            sale["percent"] = round(100.0 * rate) / 100.0
+            sale["percent"] = String(format: "%.2f", rate)
             sale["location"] = location
             sales.append(sale)
         }
@@ -479,11 +484,12 @@ class User {
                     }
                     
                     let buyer = User.init(name: dic["buyername"] as! String, venmo: dic["buyervenmo"] as! String)!
+                    let price = dic["price"] as! Double
                     let approve = dic["approve"] as! Bool
                     let paid = dic["paid"] as! Bool
                     let description = dic["p_description"] as! String
                     
-                    let purchase = Purchase.init(pid: pid, seller: seller!, buyer: buyer, approve: approve, paid: paid, description: description)!
+                    let purchase = Purchase.init(pid: pid, seller: seller!, buyer: buyer, price: price, approve: approve, paid: paid, description: description)!
                     
                     purchases.append(purchase)
                     

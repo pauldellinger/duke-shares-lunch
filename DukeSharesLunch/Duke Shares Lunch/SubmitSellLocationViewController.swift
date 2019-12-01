@@ -72,8 +72,7 @@ class SubmitSellLocationViewController: UIViewController {
             if allOfWUSwitch.isOn{
                 
                 destinationController.locations = loadWU()
-            }
-            destinationController.locations = selectedLocations
+            } else{ destinationController.locations = selectedLocations }
             destinationController.user = user
             
         }

@@ -23,7 +23,7 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
             ordertime = timePickerData[timePicker.selectedRow(inComponent: 0)]
         }
         
-        let rate = Double(ratePickerData[ratePicker.selectedRow(inComponent: 0)])
+        let rate = Double(ratePickerData[ratePicker.selectedRow(inComponent: 0)])/100.0
         
         print(locations, ordertime, rate)
             user?.createSales(locations: locations, ordertime: ordertime, rate:rate, viewController:self)
@@ -71,7 +71,9 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
 
     func handleSuccessfulInsert(){
-        //call segue here
+        //
+        print("segueing to MyActiveSales")
+        performSegue(withIdentifier: "showMyActiveSalesSegue", sender: self)
     }
     // MARK: - Navigation
 

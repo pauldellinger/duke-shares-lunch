@@ -22,7 +22,7 @@ class TabController: UITabBarController {
         buyPage.user = user
         
         let sellNav = self.viewControllers![1] as! UINavigationController
-        let sellPage = sellNav.children[0] as! SubmitSellLocationViewController
+        let sellPage = sellNav.children[0] as! MySalesViewController
         sellPage.user = user
         
         

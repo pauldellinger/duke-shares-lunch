@@ -42,6 +42,8 @@ class UserPageViewController: UIViewController {
         emailInput.becomeFirstResponder()
         emailInput.placeholder = "email"
         passwordInput.placeholder = "password"
+        let tap = UITapGestureRecognizer(target:self.view, action: #selector(self.view.endEditing))
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
     func tokenUpdated(user:User){

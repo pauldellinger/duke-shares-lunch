@@ -10,8 +10,10 @@ import UIKit
 
 class MySalesViewController: UIViewController {
     var user: User?
+    var selected: Purchase?
+    
     @IBAction func moreLocationsAction(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
+        performSegue(withIdentifier: "sellAtMoreSegue", sender: self)
     }
     
     override func viewDidLoad() {
@@ -19,8 +21,15 @@ class MySalesViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        let child = self.children[0] as! ActiveSalesTableViewController
+        child.refresh(sender: self)
+    }
     
-
+    func showPurchaseDetail(purchase: Purchase){
+        selected = purchase
+        performSegue(withIdentifier: "showPurchaseApprovalSegue", sender: self)
+    }
     
     // MARK: - Navigation
 
@@ -28,10 +37,20 @@ class MySalesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        let detailViewController = segue.destination as? ActiveSalesTableViewController
-//        detailViewController?.seller = seller
-        detailViewController?.user = user
+        if let detailViewController = segue.destination as? ActiveSalesTableViewController{
+            detailViewController.user = user
 
+        }
+        if let nextController = segue.destination as? PurchaseApprovalViewController{
+            nextController.user = user
+            nextController.purchase = selected
+        }
+        
+        if let nextController = segue.destination as? SubmitSellLocationViewController{
+            nextController.user = user
+        }
+        
+//        detailViewController?.seller = seller
     }
     
 

@@ -54,12 +54,13 @@ class SubmitFooterViewController: UIViewController {
         for meal in meals {
             description.append("\(meal.name)#")
         }
-        description.append(":\(commentsTextField.text ?? "")")
+        description.append(":\(commentsTextField.text ?? " ")")
         return description
     }
     
     func handleSuccessfulInsert(pid: Int){
         // call segue here
+        performSegue(withIdentifier: "waitForSellerSegue", sender: self)
     }
     // MARK: - Navigation
 
@@ -67,10 +68,16 @@ class SubmitFooterViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        let detailViewController = segue.destination as? MealSelectorTableViewController
-        detailViewController?.seller = seller
-        detailViewController?.user = user
+        if let detailViewController = segue.destination as? MealSelectorTableViewController{
+            detailViewController.seller = seller
+            detailViewController.user = user
+        }
+        if let nextController = segue.destination as? WaitForSellerViewController{
+            nextController.seller = seller
+            nextController.user = user
+        }
     }
+    
     
 
 }

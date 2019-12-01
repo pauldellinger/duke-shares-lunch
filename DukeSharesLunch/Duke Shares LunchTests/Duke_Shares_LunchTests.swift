@@ -141,7 +141,7 @@ class Duke_Shares_LunchTests: XCTestCase {
         sleep(1)
         let locations = ["Il Forno", "Ginger and Soy"]
         let ordertime = 5
-        let rate = 0.85
+        let rate = 0.90
         let JSON = exampleUser?.genPostBody(locations:locations, ordertime:ordertime, rate: rate)
         if let JSON = JSON {
             print(String(data: JSON, encoding: String.Encoding.utf8))

@@ -18,9 +18,10 @@ class ActiveSalesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         if user?.activeSales?.isEmpty ?? true{
             //add refresh spinner
-            //user?.getUserSales(viewcontroller: self)
+            refresh(sender: self)
         }
         user?.getPurchases(viewController: self)
 
@@ -32,7 +33,11 @@ class ActiveSalesTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    @objc func refresh(sender:AnyObject){
+        refreshControl?.beginRefreshing()
+        user?.getUserSales(viewcontroller: self)
+        
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -51,12 +56,11 @@ class ActiveSalesTableViewController: UITableViewController {
         //print(purchases)
         unapprovedPurchases = purchases
         print(unapprovedPurchases)
+        self.refreshControl?.endRefreshing()
         tableView.reloadData()
         //stop refresh spinner
         
     }
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
@@ -85,6 +89,16 @@ class ActiveSalesTableViewController: UITableViewController {
         }
 
         return cell
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let sale = user?.activeSales?[indexPath.row]{
+            for purchase in unapprovedPurchases{
+                if purchase.seller.locationName == sale.locationName{
+                    let parent = self.parent as! MySalesViewController
+                    parent.showPurchaseDetail(purchase: purchase)
+                }
+            }
+        }
     }
     
 
