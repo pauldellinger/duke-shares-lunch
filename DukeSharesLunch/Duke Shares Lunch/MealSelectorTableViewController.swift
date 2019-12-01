@@ -21,6 +21,7 @@ class MealSelectorTableViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        
         loadMeals(restaurant: seller!.locationName)
         refreshFooter()
     

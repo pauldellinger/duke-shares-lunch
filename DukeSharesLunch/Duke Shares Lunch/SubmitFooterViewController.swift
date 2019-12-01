@@ -27,6 +27,7 @@ class SubmitFooterViewController: UIViewController {
     var seller: Seller?
     var user: User?
     var meals = [Meal]()
+    var purchase = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,8 @@ class SubmitFooterViewController: UIViewController {
     
     func handleSuccessfulInsert(pid: Int){
         // call segue here
+        purchase = pid
+        
         performSegue(withIdentifier: "waitForSellerSegue", sender: self)
     }
     // MARK: - Navigation
@@ -75,6 +78,8 @@ class SubmitFooterViewController: UIViewController {
         if let nextController = segue.destination as? WaitForSellerViewController{
             nextController.seller = seller
             nextController.user = user
+            nextController.purchase = purchase
+            nextController.cost = tallyPrice()
         }
     }
     

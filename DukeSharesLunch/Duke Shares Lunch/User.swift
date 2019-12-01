@@ -246,7 +246,9 @@ class User {
                     let locationHeader = httpResponse.allHeaderFields["Location"] as! String
                     let pid = locationHeader.components(separatedBy: ".")[1]
                     print("pid, \(pid)")
-                    viewController?.handleSuccessfulInsert(pid:Int(pid)!)
+                    DispatchQueue.main.async{
+                        viewController?.handleSuccessfulInsert(pid:Int(pid)!)
+                    }
                 }
                 else{
                     print("Did not get 201 code, row not inserted")
@@ -499,6 +501,82 @@ class User {
                 DispatchQueue.main.async{
                     if let viewController = viewController as? ActiveSalesTableViewController{
                         viewController.handleSuccessfulGetPurchase(purchases:purchases)
+                    }
+                }
+                 
+                
+                //reload the table with the new values
+                //Response not in JSON format
+            } catch let parsingError {
+                print("Error", parsingError)
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
+    func checkPurchase(pid:Int, viewController: WaitForSellerViewController?){
+        print("looking for purchase!")
+        let scheme = "http"
+        let host = "35.194.58.92"
+        let path = "/purchase"
+        let queryItem = URLQueryItem(name: "pid", value: "eq.\(pid)")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        print(url)
+        
+        //specify type of request
+        request.httpMethod = "GET"
+        
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        print(request)
+        
+        //make request to addresss in parameter
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print("requesting!")
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 200 {
+                    print("Got the Purchase!")
+                }
+                else{
+                    print("Did not get 200 code, something went wrong")
+                }
+            }
+            guard let data = data else {
+                print(String(describing: error))
+                return
+            }
+            do{
+                //print(data)
+                
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+                
+                //print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+                //                var sales = [Seller]()
+                for dic in jsonArray{
+                    let approved = dic["approve"] as? Bool
+                    
+                        DispatchQueue.main.async{
+                            if let viewController = viewController{
+                                if approved ?? false{
+                                    viewController.handleApproval(approved: true)
+                                } else { viewController.handleApproval(approved: false) }
+                        }
                     }
                 }
                  
