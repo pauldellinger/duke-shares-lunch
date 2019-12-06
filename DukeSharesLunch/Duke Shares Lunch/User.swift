@@ -39,7 +39,7 @@ class User {
     func createUser(){
         let parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\" }"
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "http://35.194.58.92/rpc/make_user")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "http://35.193.85.182/rpc/make_user")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -83,7 +83,7 @@ class User {
         let parameters = "{ \"email\": \"\(email)\", \"pass\": \"\(password)\" }"
     
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "http://35.194.58.92/rpc/login")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "http://35.193.85.182/rpc/login")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -145,7 +145,7 @@ class User {
     func getInfo(){
         print("getting info!")
         let scheme = "http"
-        let host = "35.194.58.92"
+        let host = "35.193.85.182"
         let path = "/registereduser"
         let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
         var urlComponents = URLComponents()
@@ -228,7 +228,7 @@ class User {
         let parameters = "{  \"saleid\": \(seller.saleid), \"bid\": \(self.uid!), \"price\": \(price), \"approve\": false, \"paid\": false, \"p_description\": \"\(description)\"}"
         print(parameters)
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "http://35.194.58.92/purchase")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "http://35.193.85.182/purchase")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -272,7 +272,7 @@ class User {
         // postBody = genPostBody(locations)
         
         let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
-        var request = URLRequest(url: URL(string: "http://35.194.58.92/activeseller")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "http://35.193.85.182/activeseller")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("resolution=merge-duplicates", forHTTPHeaderField: "Prefer")
         
@@ -338,7 +338,7 @@ class User {
     func getUserSales(viewcontroller: Any?){
         print("getting active sales!")
         let scheme = "http"
-        let host = "35.194.58.92"
+        let host = "35.193.85.182"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
         let uidEquality = "eq.\(self.uid!)"
@@ -421,7 +421,7 @@ class User {
     func getPurchases(viewController: Any?){
         print("getting purchases!")
         let scheme = "http"
-        let host = "35.194.58.92"
+        let host = "35.193.85.182"
         let path = "/rpc/unapproved_purchase"
         let queryItem = URLQueryItem(name: "sellerid", value: String(self.uid!))
         var urlComponents = URLComponents()
@@ -517,7 +517,7 @@ class User {
     func checkPurchase(pid:Int, viewController: WaitForSellerViewController?){
         print("looking for purchase!")
         let scheme = "http"
-        let host = "35.194.58.92"
+        let host = "35.193.85.182"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(pid)")
         var urlComponents = URLComponents()

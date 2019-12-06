@@ -32,7 +32,7 @@ class Purchase {
     func approve(user: User,viewController: PurchaseApprovalViewController?){
         print("Approving purchase!")
         let scheme = "http"
-        let host = "35.194.58.92"
+        let host = "35.193.85.182"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()
@@ -80,7 +80,7 @@ class Purchase {
     func decline(user: User, viewController: Any?){
         print("Removing purchase!")
         let scheme = "http"
-        let host = "35.194.58.92"
+        let host = "35.193.85.182"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()
@@ -114,11 +114,6 @@ class Purchase {
                             viewController.handleDecline()
                         }
                     }
-                    if let viewController = viewController as? ActiveSalesTableViewController{
-                        DispatchQueue.main.async{
-                            viewController.handleDecline()
-                        }
-                    }
                     //call handle function in main queue
                 }
                 else{
@@ -133,7 +128,7 @@ class Purchase {
     func complete(user: User, viewController: WaitForVenmoViewController?){
         print("Approving purchase!")
         let scheme = "http"
-        let host = "35.194.58.92"
+        let host = "35.193.85.182"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()

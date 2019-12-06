@@ -52,7 +52,7 @@ class LocationDetailTableViewController: UITableViewController {
         
         
         let scheme = "http"
-        let host = "35.194.58.92"
+        let host = "35.193.85.182"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
         let restaurantEquality = "eq." + restaurant!.name
@@ -150,23 +150,28 @@ class LocationDetailTableViewController: UITableViewController {
         cell.name.text = seller.sellerName
         cell.rate.text = String(seller.rate)
         let ordertime = timeUntilOrder(ordertime: seller.ordertime)
-        if ordertime>0 { cell.ordertime.text = "\(ordertime) minutes unil ordering" }
+        if ordertime > 0 {
+            cell.ordertime.text = "\(ordertime) minutes unil ordering"
+        }
         else {
-        cell.ordertime.text = "Ready Now!"
+            cell.ordertime.text = "Ready Now!"
         }
         // Configure the cell...
         
         return cell
     }
     func timeUntilOrder(ordertime: String) -> Int{
+        print(ordertime)
         if ordertime.isEmpty { return 0 }
+        let ordertimeFixed = ordertime.replacingOccurrences(of: "T", with: " ")
+        print(ordertimeFixed)
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let current = Date()
         // print(current)
-        let time = formatter.date(from: ordertime)
-        // print(time)
+        let time = formatter.date(from: ordertimeFixed)
+        print("from psql:", time)
         if let interval = (time?.timeIntervalSince(current)){
             let minuteDifference = Int((interval/60).rounded(.up))
             return minuteDifference

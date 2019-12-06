@@ -45,7 +45,7 @@ class LocationTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         //Make request for data, add it to locations (global variable)
-        getDataFromUrl(website: "http://35.194.58.92/activerestaurants")
+        getDataFromUrl(website: "http://35.193.85.182/activerestaurants")
         
     }
 

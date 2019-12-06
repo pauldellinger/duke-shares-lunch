@@ -163,7 +163,7 @@ class Duke_Shares_LunchTests: XCTestCase {
     }
     func testTimeUntilOrder(){
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-ddHH:mm:ss"
         var date = formatter.string(from: Date().addingTimeInterval(300))
         print(date)
         let vc = LocationDetailTableViewController()

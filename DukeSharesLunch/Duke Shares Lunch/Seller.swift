@@ -83,6 +83,49 @@ class Seller{
         self.rate = percent
         self.ordertime = ordertime
     }
+    
+    func remove(token: String, viewController: Any?){
+        print("Removing from ActiveSeller!")
+        let scheme = "http"
+        let host = "35.193.85.182"
+        let path = "/activeseller"
+        let queryItem = URLQueryItem(name: "saleid", value: "eq.\(self.saleid)")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        print(url)
+        request.httpMethod = "DELETE"
+        //specify type of request
+        
+        //authorization
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 204 {
+                    print("Sale Deleted Deleted!")
+                    if let viewController = viewController as? ActiveSalesTableViewController{
+                        DispatchQueue.main.async{
+                            viewController.handleSaleRemoval()
+                        }
+                    }
+                    //call handle function in main queue
+                }
+                else{
+                    print("Did not get 204 code, something went wrong")
+                }
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
 
     
 }

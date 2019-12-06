@@ -116,22 +116,15 @@ class ActiveSalesTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             if let sale = user?.activeSales?[indexPath.row]{
-                for purchase in unapprovedPurchases{
-                    if purchase.seller.locationName == sale.locationName{
-                        purchase.decline(user: user!, viewController: self)
-                        refreshControl?.beginRefreshing()
-                    }
-                    user?.activeSales?.remove(at: indexPath[1])
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                }
+                sale.remove(token:user?.token ?? "", viewController:self)
             }
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
     
-        func handleDecline(){
-            refreshControl?.endRefreshing()
+        func handleSaleRemoval(){
+            refresh(sender:self)
         }
     /*
     // Override to support rearranging the table view.
