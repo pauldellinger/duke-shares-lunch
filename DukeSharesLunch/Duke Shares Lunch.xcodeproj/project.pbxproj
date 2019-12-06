@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DA04220F237B697800864DEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04220E237B697800864DEE /* AppDelegate.swift */; };
 		DA042211237B697800864DEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042210237B697800864DEE /* SceneDelegate.swift */; };
-		DA042213237B697800864DEE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042212237B697800864DEE /* FirstViewController.swift */; };
 		DA042218237B697800864DEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042216237B697800864DEE /* Main.storyboard */; };
 		DA04221A237B697B00864DEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA042219237B697B00864DEE /* Assets.xcassets */; };
 		DA04221D237B697B00864DEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA04221B237B697B00864DEE /* LaunchScreen.storyboard */; };
@@ -33,6 +32,11 @@
 		DA6AE0B0238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */; };
 		DA6AE0B1238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */; };
 		DA6AE0B2238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */; };
+		DA958254239442C200F10973 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042216237B697800864DEE /* Main.storyboard */; };
+		DA958255239442C300F10973 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042216237B697800864DEE /* Main.storyboard */; };
+		DA958257239443BF00F10973 /* VenmoSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA958256239443BF00F10973 /* VenmoSellerViewController.swift */; };
+		DA958258239443BF00F10973 /* VenmoSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA958256239443BF00F10973 /* VenmoSellerViewController.swift */; };
+		DA958259239443BF00F10973 /* VenmoSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA958256239443BF00F10973 /* VenmoSellerViewController.swift */; };
 		DABA3C9F2389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
 		DABA3CA02389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
 		DABA3CA12389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
@@ -57,6 +61,42 @@
 		DAD1E992238F317700FE55E7 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E991238F317700FE55E7 /* Meal.swift */; };
 		DAD1E993238F317700FE55E7 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E991238F317700FE55E7 /* Meal.swift */; };
 		DAD1E994238F317700FE55E7 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E991238F317700FE55E7 /* Meal.swift */; };
+		DAD1E99D238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E99C238F584500FE55E7 /* SellLocationTableViewController.swift */; };
+		DAD1E99E238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E99C238F584500FE55E7 /* SellLocationTableViewController.swift */; };
+		DAD1E99F238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E99C238F584500FE55E7 /* SellLocationTableViewController.swift */; };
+		DAD1E9A1238F58AC00FE55E7 /* SellLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9A0238F58AC00FE55E7 /* SellLocationTableViewCell.swift */; };
+		DAD1E9A2238F58AC00FE55E7 /* SellLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9A0238F58AC00FE55E7 /* SellLocationTableViewCell.swift */; };
+		DAD1E9A3238F58AC00FE55E7 /* SellLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9A0238F58AC00FE55E7 /* SellLocationTableViewCell.swift */; };
+		DAD1E9A9238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9A8238F656500FE55E7 /* SubmitSellLocationViewController.swift */; };
+		DAD1E9AA238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9A8238F656500FE55E7 /* SubmitSellLocationViewController.swift */; };
+		DAD1E9AB238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9A8238F656500FE55E7 /* SubmitSellLocationViewController.swift */; };
+		DAD1E9B123905DCE00FE55E7 /* SalePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9B023905DCE00FE55E7 /* SalePickerViewController.swift */; };
+		DAD1E9B223905DCE00FE55E7 /* SalePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9B023905DCE00FE55E7 /* SalePickerViewController.swift */; };
+		DAD1E9B323905DCE00FE55E7 /* SalePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9B023905DCE00FE55E7 /* SalePickerViewController.swift */; };
+		DAD1E9B52390AB4200FE55E7 /* MySalesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9B42390AB4200FE55E7 /* MySalesViewController.swift */; };
+		DAD1E9B62390AB4200FE55E7 /* MySalesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9B42390AB4200FE55E7 /* MySalesViewController.swift */; };
+		DAD1E9B72390AB4200FE55E7 /* MySalesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9B42390AB4200FE55E7 /* MySalesViewController.swift */; };
+		DAD1E9BD23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9BC23917DB600FE55E7 /* ActiveSalesTableViewController.swift */; };
+		DAD1E9BE23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9BC23917DB600FE55E7 /* ActiveSalesTableViewController.swift */; };
+		DAD1E9BF23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9BC23917DB600FE55E7 /* ActiveSalesTableViewController.swift */; };
+		DAD1E9C12391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C02391C35E00FE55E7 /* ActiveSalesTableViewCell.swift */; };
+		DAD1E9C22391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C02391C35E00FE55E7 /* ActiveSalesTableViewCell.swift */; };
+		DAD1E9C32391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C02391C35E00FE55E7 /* ActiveSalesTableViewCell.swift */; };
+		DAD1E9C52391D1CC00FE55E7 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C42391D1CC00FE55E7 /* Purchase.swift */; };
+		DAD1E9C62391D1CC00FE55E7 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C42391D1CC00FE55E7 /* Purchase.swift */; };
+		DAD1E9C72391D1CC00FE55E7 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C42391D1CC00FE55E7 /* Purchase.swift */; };
+		DAD1E9C92393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C82393249700FE55E7 /* PurchaseApprovalViewController.swift */; };
+		DAD1E9CA2393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C82393249700FE55E7 /* PurchaseApprovalViewController.swift */; };
+		DAD1E9CB2393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9C82393249700FE55E7 /* PurchaseApprovalViewController.swift */; };
+		DAD1E9CD23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9CC23934F8700FE55E7 /* WaitForVenmoViewController.swift */; };
+		DAD1E9CE23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9CC23934F8700FE55E7 /* WaitForVenmoViewController.swift */; };
+		DAD1E9CF23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9CC23934F8700FE55E7 /* WaitForVenmoViewController.swift */; };
+		DAD1E9D1239357F000FE55E7 /* BuyFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */; };
+		DAD1E9D2239357F000FE55E7 /* BuyFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */; };
+		DAD1E9D3239357F000FE55E7 /* BuyFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */; };
+		DAD1E9D52393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
+		DAD1E9D62393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
+		DAD1E9D72393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
 		DAFBC9F8238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
 		DAFBC9F9238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
 		DAFBC9FA238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
@@ -83,7 +123,6 @@
 		DA04220B237B697800864DEE /* Duke Shares Lunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duke Shares Lunch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA04220E237B697800864DEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA042210237B697800864DEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DA042212237B697800864DEE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		DA042217237B697800864DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA042219237B697B00864DEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA04221C237B697B00864DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,6 +139,7 @@
 		DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSelectorTableViewController.swift; sourceTree = "<group>"; };
+		DA958256239443BF00F10973 /* VenmoSellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenmoSellerViewController.swift; sourceTree = "<group>"; };
 		DABA3C9E2389CB3700576315 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		DABA3CAB238A070000576315 /* restaurants.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 		DACE3C92237C7AA80030804C /* Seller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
@@ -108,6 +148,18 @@
 		DACE3CDC237CC5060030804C /* LocationDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailTableViewController.swift; sourceTree = "<group>"; };
 		DAD1E98D238F196E00FE55E7 /* SubmitFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitFooterViewController.swift; sourceTree = "<group>"; };
 		DAD1E991238F317700FE55E7 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		DAD1E99C238F584500FE55E7 /* SellLocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellLocationTableViewController.swift; sourceTree = "<group>"; };
+		DAD1E9A0238F58AC00FE55E7 /* SellLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellLocationTableViewCell.swift; sourceTree = "<group>"; };
+		DAD1E9A8238F656500FE55E7 /* SubmitSellLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSellLocationViewController.swift; sourceTree = "<group>"; };
+		DAD1E9B023905DCE00FE55E7 /* SalePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalePickerViewController.swift; sourceTree = "<group>"; };
+		DAD1E9B42390AB4200FE55E7 /* MySalesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySalesViewController.swift; sourceTree = "<group>"; };
+		DAD1E9BC23917DB600FE55E7 /* ActiveSalesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSalesTableViewController.swift; sourceTree = "<group>"; };
+		DAD1E9C02391C35E00FE55E7 /* ActiveSalesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSalesTableViewCell.swift; sourceTree = "<group>"; };
+		DAD1E9C42391D1CC00FE55E7 /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
+		DAD1E9C82393249700FE55E7 /* PurchaseApprovalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseApprovalViewController.swift; sourceTree = "<group>"; };
+		DAD1E9CC23934F8700FE55E7 /* WaitForVenmoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForVenmoViewController.swift; sourceTree = "<group>"; };
+		DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyFoodViewController.swift; sourceTree = "<group>"; };
+		DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForSellerViewController.swift; sourceTree = "<group>"; };
 		DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSelectorTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,15 +211,25 @@
 		DA04220D237B697800864DEE /* Duke Shares Lunch */ = {
 			isa = PBXGroup;
 			children = (
-				DABA3CAB238A070000576315 /* restaurants.json */,
-				DA042246237B966700864DEE /* Location.swift */,
-				DACE3C92237C7AA80030804C /* Seller.swift */,
 				DA2FB73B237F46F800323AED /* User.swift */,
 				DAD1E991238F317700FE55E7 /* Meal.swift */,
+				DAD1E9C42391D1CC00FE55E7 /* Purchase.swift */,
+				DACE3C92237C7AA80030804C /* Seller.swift */,
+				DA042246237B966700864DEE /* Location.swift */,
 				DA04220E237B697800864DEE /* AppDelegate.swift */,
 				DA042210237B697800864DEE /* SceneDelegate.swift */,
-				DA042212237B697800864DEE /* FirstViewController.swift */,
-				DA042216237B697800864DEE /* Main.storyboard */,
+				DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */,
+				DAD1E9CC23934F8700FE55E7 /* WaitForVenmoViewController.swift */,
+				DAD1E9C82393249700FE55E7 /* PurchaseApprovalViewController.swift */,
+				DAD1E9C02391C35E00FE55E7 /* ActiveSalesTableViewCell.swift */,
+				DAD1E9BC23917DB600FE55E7 /* ActiveSalesTableViewController.swift */,
+				DAD1E9B42390AB4200FE55E7 /* MySalesViewController.swift */,
+				DAD1E9B023905DCE00FE55E7 /* SalePickerViewController.swift */,
+				DAD1E9A8238F656500FE55E7 /* SubmitSellLocationViewController.swift */,
+				DAD1E99C238F584500FE55E7 /* SellLocationTableViewController.swift */,
+				DAD1E9A0238F58AC00FE55E7 /* SellLocationTableViewCell.swift */,
+				DA958256239443BF00F10973 /* VenmoSellerViewController.swift */,
+				DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */,
 				DAD1E98D238F196E00FE55E7 /* SubmitFooterViewController.swift */,
 				DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */,
 				DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */,
@@ -178,9 +240,11 @@
 				DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */,
 				DA042242237B8D9400864DEE /* LocationTableViewController.swift */,
 				DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */,
-				DA042219237B697B00864DEE /* Assets.xcassets */,
+				DA042216237B697800864DEE /* Main.storyboard */,
 				DA04221B237B697B00864DEE /* LaunchScreen.storyboard */,
+				DABA3CAB238A070000576315 /* restaurants.json */,
 				DA04221E237B697B00864DEE /* Info.plist */,
+				DA042219237B697B00864DEE /* Assets.xcassets */,
 			);
 			path = "Duke Shares Lunch";
 			sourceTree = "<group>";
@@ -319,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DABA3CAD238A070000576315 /* restaurants.json in Resources */,
+				DA958254239442C200F10973 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DABA3CAE238A070000576315 /* restaurants.json in Resources */,
+				DA958255239442C300F10973 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,23 +403,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD1E9CD23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */,
+				DAD1E9C12391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
 				DABA3C9F2389CB3700576315 /* TabController.swift in Sources */,
+				DAD1E9A9238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */,
 				DA6AE0B0238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */,
 				DACE3CDD237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,
 				DAD1E992238F317700FE55E7 /* Meal.swift in Sources */,
 				DA042243237B8D9400864DEE /* LocationTableViewController.swift in Sources */,
+				DAD1E9C92393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */,
 				DA5AABBF23878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
-				DA042213237B697800864DEE /* FirstViewController.swift in Sources */,
+				DAD1E9B52390AB4200FE55E7 /* MySalesViewController.swift in Sources */,
 				DA04220F237B697800864DEE /* AppDelegate.swift in Sources */,
 				DA042211237B697800864DEE /* SceneDelegate.swift in Sources */,
 				DACE3C93237C7AA80030804C /* Seller.swift in Sources */,
 				DACE3C9B237C811A0030804C /* LocationTableViewCell.swift in Sources */,
 				DAD1E98E238F196E00FE55E7 /* SubmitFooterViewController.swift in Sources */,
 				DA04224C237BA99900864DEE /* Location.swift in Sources */,
+				DA958257239443BF00F10973 /* VenmoSellerViewController.swift in Sources */,
 				DACE3C97237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
 				DAFBC9F8238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */,
+				DAD1E9BD23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */,
+				DAD1E9D1239357F000FE55E7 /* BuyFoodViewController.swift in Sources */,
+				DAD1E9A1238F58AC00FE55E7 /* SellLocationTableViewCell.swift in Sources */,
 				DA2FB73C237F46F800323AED /* User.swift in Sources */,
+				DAD1E9C52391D1CC00FE55E7 /* Purchase.swift in Sources */,
+				DAD1E99D238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */,
 				DA5AABBB2387738000CB1B5C /* UserPageViewController.swift in Sources */,
+				DAD1E9D52393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */,
+				DAD1E9B123905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,21 +439,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD1E99E238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */,
+				DA958258239443BF00F10973 /* VenmoSellerViewController.swift in Sources */,
 				DAD1E98F238F196E00FE55E7 /* SubmitFooterViewController.swift in Sources */,
+				DAD1E9D62393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */,
+				DAD1E9B223905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
 				DACE3C94237C7AA80030804C /* Seller.swift in Sources */,
 				DACE3C9C237C811A0030804C /* LocationTableViewCell.swift in Sources */,
+				DAD1E9C62391D1CC00FE55E7 /* Purchase.swift in Sources */,
+				DAD1E9CA2393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */,
+				DAD1E9AA238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */,
 				DACE3C98237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
 				DA5AABBC2387738000CB1B5C /* UserPageViewController.swift in Sources */,
 				DABA3CA02389CB3700576315 /* TabController.swift in Sources */,
 				DA042249237BA5CD00864DEE /* Location.swift in Sources */,
+				DAD1E9CE23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */,
 				DA2FB73D237F46F800323AED /* User.swift in Sources */,
 				DA5AABC023878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
+				DAD1E9D2239357F000FE55E7 /* BuyFoodViewController.swift in Sources */,
+				DAD1E9C22391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
+				DAD1E9BE23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */,
 				DAFBC9F9238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */,
 				DAD1E993238F317700FE55E7 /* Meal.swift in Sources */,
+				DAD1E9A2238F58AC00FE55E7 /* SellLocationTableViewCell.swift in Sources */,
 				DACE3CDE237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,
 				DA042228237B697B00864DEE /* Duke_Shares_LunchTests.swift in Sources */,
 				DA042253237BC14F00864DEE /* LocationTableViewController.swift in Sources */,
 				DA6AE0B1238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */,
+				DAD1E9B62390AB4200FE55E7 /* MySalesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,21 +474,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD1E99F238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */,
+				DA958259239443BF00F10973 /* VenmoSellerViewController.swift in Sources */,
 				DAD1E990238F196E00FE55E7 /* SubmitFooterViewController.swift in Sources */,
+				DAD1E9D72393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */,
+				DAD1E9B323905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
 				DACE3C95237C7AA80030804C /* Seller.swift in Sources */,
 				DACE3C9D237C811A0030804C /* LocationTableViewCell.swift in Sources */,
+				DAD1E9C72391D1CC00FE55E7 /* Purchase.swift in Sources */,
+				DAD1E9CB2393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */,
+				DAD1E9AB238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */,
 				DACE3C99237C7F620030804C /* LocationDetailTableViewCell.swift in Sources */,
 				DA5AABBD2387738000CB1B5C /* UserPageViewController.swift in Sources */,
 				DABA3CA12389CB3700576315 /* TabController.swift in Sources */,
 				DA042248237BA5CD00864DEE /* Location.swift in Sources */,
+				DAD1E9CF23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */,
 				DA2FB73E237F46F800323AED /* User.swift in Sources */,
 				DA5AABC123878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
+				DAD1E9D3239357F000FE55E7 /* BuyFoodViewController.swift in Sources */,
+				DAD1E9C32391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
+				DAD1E9BF23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */,
 				DAFBC9FA238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */,
 				DAD1E994238F317700FE55E7 /* Meal.swift in Sources */,
+				DAD1E9A3238F58AC00FE55E7 /* SellLocationTableViewCell.swift in Sources */,
 				DACE3CDF237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,
 				DA042233237B697B00864DEE /* Duke_Shares_LunchUITests.swift in Sources */,
 				DA042254237BC15000864DEE /* LocationTableViewController.swift in Sources */,
 				DA6AE0B2238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */,
+				DAD1E9B72390AB4200FE55E7 /* MySalesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,7 +659,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6GH5DL24KD;
 				INFOPLIST_FILE = "Duke Shares Lunch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -574,7 +678,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6GH5DL24KD;
 				INFOPLIST_FILE = "Duke Shares Lunch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -15,7 +15,6 @@ class VenmoSellerViewController: UIViewController {
     
     @IBAction func goVenmoAction(_ sender: Any) {
         let venmoHooks = "venmo://paycharge?txn=pay&recipients=\(seller!.sellerVenmo)&amount=\(cost!)&note=DukeSharesLunch"
-        //let venmoHooks = "venmo://users?user_id=\(seller!.sellerVenmo)"
         print(venmoHooks)
         let venmoUrl = URL(string: venmoHooks)
         if UIApplication.shared.canOpenURL(venmoUrl!){

@@ -114,6 +114,11 @@ class Purchase {
                             viewController.handleDecline()
                         }
                     }
+                    if let viewController = viewController as? ActiveSalesTableViewController{
+                        DispatchQueue.main.async{
+                            viewController.handleDecline()
+                        }
+                    }
                     //call handle function in main queue
                 }
                 else{

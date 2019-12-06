@@ -25,7 +25,7 @@ class SubmitSellLocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        user?.getUserSales(viewcontroller: self)
+        //user?.getUserSales(viewcontroller: self)
 
         // Do any additional setup after loading the view.
     }

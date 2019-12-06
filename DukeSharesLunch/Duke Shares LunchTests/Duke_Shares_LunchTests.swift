@@ -161,5 +161,18 @@ class Duke_Shares_LunchTests: XCTestCase {
         sleep(1)
         
     }
+    func testTimeUntilOrder(){
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        var date = formatter.string(from: Date().addingTimeInterval(300))
+        print(date)
+        let vc = LocationDetailTableViewController()
+        XCTAssert(5 == vc.timeUntilOrder(ordertime:date))
+        date = formatter.string(from: Date().addingTimeInterval(-300))
+        XCTAssert(-5 == vc.timeUntilOrder(ordertime:date))
+        date = formatter.string(from: Date().addingTimeInterval(0))
+        XCTAssert(0 == vc.timeUntilOrder(ordertime:date))
+
+    }
 
 }

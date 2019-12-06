@@ -149,10 +149,28 @@ class LocationDetailTableViewController: UITableViewController {
         let seller = sellers[indexPath.row]
         cell.name.text = seller.sellerName
         cell.rate.text = String(seller.rate)
-        cell.ordertime.text = seller.ordertime
+        let ordertime = timeUntilOrder(ordertime: seller.ordertime)
+        if ordertime>0 { cell.ordertime.text = "\(ordertime) minutes unil ordering" }
+        else {
+        cell.ordertime.text = "Ready Now!"
+        }
         // Configure the cell...
         
         return cell
+    }
+    func timeUntilOrder(ordertime: String) -> Int{
+        if ordertime.isEmpty { return 0 }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let current = Date()
+        // print(current)
+        let time = formatter.date(from: ordertime)
+        // print(time)
+        if let interval = (time?.timeIntervalSince(current)){
+            let minuteDifference = Int((interval/60).rounded(.up))
+            return minuteDifference
+        } else { return 0 }
     }
     
 

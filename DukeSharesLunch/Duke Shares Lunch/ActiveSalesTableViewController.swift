@@ -110,18 +110,29 @@ class ActiveSalesTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            if let sale = user?.activeSales?[indexPath.row]{
+                for purchase in unapprovedPurchases{
+                    if purchase.seller.locationName == sale.locationName{
+                        purchase.decline(user: user!, viewController: self)
+                        refreshControl?.beginRefreshing()
+                    }
+                    user?.activeSales?.remove(at: indexPath[1])
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
-
+    
+        func handleDecline(){
+            refreshControl?.endRefreshing()
+        }
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

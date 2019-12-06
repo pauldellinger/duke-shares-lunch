@@ -496,7 +496,7 @@ class User {
                     purchases.append(purchase)
                     
                 }
-                print(purchases[0].seller.locationName)
+                //print(purchases[0].seller.locationName)
                 
                 DispatchQueue.main.async{
                     if let viewController = viewController as? ActiveSalesTableViewController{
