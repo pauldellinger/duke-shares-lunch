@@ -119,7 +119,7 @@ $$ language plpgsql security definer;
 drop function make_user;
 
 create or replace function
-make_user(email text, pass text)
+make_user(email text, pass text, venmo text, name text, major text default NULL, dorm text default NULL)
   RETURNS smallint AS -- return 1 if successful, else 0
 $BODY$
 DECLARE
@@ -131,6 +131,9 @@ BEGIN
     EXECUTE FORMAT (
 	'INSERT INTO basic_auth.users(email,pass,role) values(%L, %L, %L)', 
 	email, pass, 'todo_user');
+   EXECUTE FORMAT (
+	'INSERT INTO public.REGISTEREDUSER(email,name,venmo,major,dorm)  VALUES(%L, %L, %L, %L, %L)',
+	email, name,  venmo, major, dorm);
 	RETURN 1;
     -- Simple Exception
 EXCEPTION
@@ -151,4 +154,4 @@ language plpgsql security definer;
 grant execute on function login(text,text) to web_anon;
 
 -- only authenticated can make a new user
-grant execute on function make_user(text,text) to authenticator;
+grant execute on function make_user(text,text,text,text,text,text) to authenticator;

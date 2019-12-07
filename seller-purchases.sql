@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION unapproved_purchase(sellerid integer)
+CREATE OR REPLACE FUNCTION seller_purchases(sellerid integer)
 	RETURNS TABLE (
 	pid integer,
 	saleid integer,
