@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubmitFooterViewController: UIViewController {
+class SubmitFooterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var commentsTextField: UITextField!
@@ -31,8 +31,13 @@ class SubmitFooterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        commentsTextField.delegate = self
 
         // Do any additional setup after loading the view.
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func refreshTotal(){

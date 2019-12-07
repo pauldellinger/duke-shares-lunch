@@ -23,7 +23,7 @@ class User {
     var activeSales:[Seller]?
     
     init? (email:String, password:String ){
-
+        
         self.email = email
         self.password = password
         if email.isEmpty || password.isEmpty {
@@ -33,11 +33,22 @@ class User {
     init? (name: String, venmo:String){
         self.name = name
         self.venmo = venmo
+        if name.isEmpty || venmo.isEmpty {
+            return nil
+        }
+    }
+    init? (name:String, email:String, password: String,venmo: String, major:String?, dorm:String?){
+        self.email = email
+        self.password = password
+        self.name = name
+        self.venmo = venmo
+        self.major = major ?? ""
+        self.dorm = dorm ?? ""
     }
     
-    
-    func createUser(){
-        let parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\" }"
+        
+    func createUser(viewController: CreateProfileViewController?){
+        let parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\", \"major\": \"\(self.major ?? "")\", \"dorm\": \"\(self.dorm ?? "")\" }"
         let postData = parameters.data(using: .utf8)
         var request = URLRequest(url: URL(string: "http://35.193.85.182/rpc/make_user")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -48,6 +59,7 @@ class User {
         
         //specify type of request
         request.httpMethod = "POST"
+        print(postData)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -60,6 +72,11 @@ class User {
                         print(value)
                         if value==1{
                             print("User Creation Successful")
+                            DispatchQueue.main.async{
+                                self.login(viewController:viewController)
+                            }
+                        } else{
+                            print("User Creation Unsuccessul")
                         }
                     } else {
                         print("text cannot be converted to Int")
@@ -77,7 +94,7 @@ class User {
 
     }
         
-    func login(viewController: UserPageViewController?){
+    func login(viewController: Any?){
         let email = self.email!
         let password = self.password!
         let parameters = "{ \"email\": \"\(email)\", \"pass\": \"\(password)\" }"
@@ -97,7 +114,9 @@ class User {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 403 &&  !(viewController==nil){
                     DispatchQueue.main.async{
-                        viewController?.showError()
+                        if let viewController = viewController as? UserPageViewController{
+                            viewController.showError()
+                        }
                     }
                 }
             }
@@ -127,7 +146,12 @@ class User {
                     if !(viewController==nil){
                         DispatchQueue.main.async{
                             if !(self.token?.isEmpty ?? false){
-                                viewController?.tokenUpdated(user:self)
+                                if let viewController = viewController as? UserPageViewController{
+                                    viewController.tokenUpdated(user:self)
+                                }
+                                if let viewController = viewController as? CreateProfileViewController{
+                                    viewController.handleSuccessfulCreate()
+                                }
                             }
                         }
                     }

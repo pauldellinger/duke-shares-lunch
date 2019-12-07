@@ -20,6 +20,9 @@
 		DA04224C237BA99900864DEE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042246237B966700864DEE /* Location.swift */; };
 		DA042253237BC14F00864DEE /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042242237B8D9400864DEE /* LocationTableViewController.swift */; };
 		DA042254237BC15000864DEE /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042242237B8D9400864DEE /* LocationTableViewController.swift */; };
+		DA1D7F02239B200E00B042F4 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */; };
+		DA1D7F03239B200E00B042F4 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */; };
+		DA1D7F04239B200E00B042F4 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */; };
 		DA2FB73C237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
 		DA2FB73D237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
 		DA2FB73E237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
@@ -135,6 +138,7 @@
 		DA042234237B697B00864DEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA042242237B8D9400864DEE /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		DA042246237B966700864DEE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		DA2FB73B237F46F800323AED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
@@ -233,13 +237,14 @@
 				DAD1E98D238F196E00FE55E7 /* SubmitFooterViewController.swift */,
 				DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */,
 				DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */,
-				DABA3C9E2389CB3700576315 /* TabController.swift */,
-				DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */,
-				DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */,
 				DACE3CDC237CC5060030804C /* LocationDetailTableViewController.swift */,
 				DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */,
 				DA042242237B8D9400864DEE /* LocationTableViewController.swift */,
 				DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */,
+				DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */,
+				DABA3C9E2389CB3700576315 /* TabController.swift */,
+				DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */,
+				DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */,
 				DA042216237B697800864DEE /* Main.storyboard */,
 				DA04221B237B697B00864DEE /* LaunchScreen.storyboard */,
 				DABA3CAB238A070000576315 /* restaurants.json */,
@@ -431,6 +436,7 @@
 				DAD1E99D238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */,
 				DA5AABBB2387738000CB1B5C /* UserPageViewController.swift in Sources */,
 				DAD1E9D52393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */,
+				DA1D7F02239B200E00B042F4 /* CreateProfileViewController.swift in Sources */,
 				DAD1E9B123905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +461,7 @@
 				DA042249237BA5CD00864DEE /* Location.swift in Sources */,
 				DAD1E9CE23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */,
 				DA2FB73D237F46F800323AED /* User.swift in Sources */,
+				DA1D7F03239B200E00B042F4 /* CreateProfileViewController.swift in Sources */,
 				DA5AABC023878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
 				DAD1E9D2239357F000FE55E7 /* BuyFoodViewController.swift in Sources */,
 				DAD1E9C22391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
@@ -490,6 +497,7 @@
 				DA042248237BA5CD00864DEE /* Location.swift in Sources */,
 				DAD1E9CF23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */,
 				DA2FB73E237F46F800323AED /* User.swift in Sources */,
+				DA1D7F04239B200E00B042F4 /* CreateProfileViewController.swift in Sources */,
 				DA5AABC123878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
 				DAD1E9D3239357F000FE55E7 /* BuyFoodViewController.swift in Sources */,
 				DAD1E9C32391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,

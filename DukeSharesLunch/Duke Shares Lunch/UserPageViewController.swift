@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class UserPageViewController: UIViewController {
+class UserPageViewController: UIViewController, UITextFieldDelegate {
     
     var user:User?
     
@@ -39,6 +39,8 @@ class UserPageViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.emailInput.delegate = self
+        self.passwordInput.delegate = self
         emailInput.becomeFirstResponder()
         emailInput.placeholder = "email"
         passwordInput.placeholder = "password"
@@ -51,13 +53,22 @@ class UserPageViewController: UIViewController {
            
        }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         if (textField == emailInput) {
            emailInput.text = ""
         }
         else if (textField == passwordInput) {
            passwordInput.text = ""
         }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailInput {
+            textField.resignFirstResponder()
+            passwordInput.becomeFirstResponder()
+        } else if textField == passwordInput {
+            loginAction(self)
+        }
+        return false
     }
     private func credentialValidate(email:String, password:String) ->Bool{
         let range = NSRange(location: 0, length: email.utf16.count)
