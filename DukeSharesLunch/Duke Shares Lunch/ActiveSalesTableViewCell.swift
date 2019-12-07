@@ -12,6 +12,7 @@ class ActiveSalesTableViewCell: UITableViewCell {
     
     
     
+    @IBOutlet weak var notifyCircle: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!

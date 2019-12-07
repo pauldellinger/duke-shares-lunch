@@ -59,7 +59,7 @@ class Duke_Shares_LunchTests: XCTestCase {
     func testUserCreation(){
         let randy = Int.random(in: 1000..<9000)
         let exampleUser = User.init(email: "foo\(randy)@bar.com", password: "foobar")
-        exampleUser!.createUser()
+        exampleUser!.createUser(viewController:nil)
         sleep(1)
         exampleUser?.login(viewController: nil)
         sleep(1)

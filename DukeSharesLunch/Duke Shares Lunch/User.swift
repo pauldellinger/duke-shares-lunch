@@ -446,7 +446,7 @@ class User {
         print("getting purchases!")
         let scheme = "http"
         let host = "35.193.85.182"
-        let path = "/rpc/unapproved_purchase"
+        let path = "/rpc/seller_purchases"
         let queryItem = URLQueryItem(name: "sellerid", value: String(self.uid!))
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
@@ -496,7 +496,9 @@ class User {
                 print(jsonArray)
                 //iterate over JSON, adding each to location
                 //                var sales = [Seller]()
-                var purchases = [Purchase]()
+                
+                // first element is array of unapproved, second is approved
+                var purchases = [[Purchase](), [Purchase]()]
                 for dic in jsonArray{
                     let pid = dic["pid"] as! Int
                     
@@ -517,7 +519,8 @@ class User {
                     
                     let purchase = Purchase.init(pid: pid, seller: seller!, buyer: buyer, price: price, approve: approve, paid: paid, description: description)!
                     
-                    purchases.append(purchase)
+                    if purchase.approve { purchases[1].append(purchase)}
+                    else {purchases[0].append(purchase)}
                     
                 }
                 //print(purchases[0].seller.locationName)
@@ -609,6 +612,48 @@ class User {
                 //Response not in JSON format
             } catch let parsingError {
                 print("Error", parsingError)
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
+    func removePurchase(pid: Int, viewController: WaitForSellerViewController?){
+        print("Removing purchase!")
+        let scheme = "http"
+        let host = "35.193.85.182"
+        let path = "/purchase"
+        let queryItem = URLQueryItem(name: "pid", value: "eq.\(pid)")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        print(url)
+        request.httpMethod = "DELETE"
+        //specify type of request
+        
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 204 {
+                    print("Purchase Deleted!")
+                    if let viewController = viewController{
+                        DispatchQueue.main.async{
+                            viewController.handleCancellation()
+                        }
+                    }
+                    //call handle function in main queue
+                }
+                else{
+                    print("Did not get 204 code, something went wrong")
+                }
             }
         }
         //We have to call the task here because it's asynchronous

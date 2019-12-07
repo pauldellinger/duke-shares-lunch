@@ -13,8 +13,9 @@ class ActiveSalesTableViewController: UITableViewController {
     
    
     var user: User?
-    var unapprovedPurchases = [Purchase]()
-    
+    //var unapprovedPurchases = [Purchase]()
+    var approvedPurchases = [Purchase]()
+    var sales = [[Purchase](), [Purchase]()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,22 +41,32 @@ class ActiveSalesTableViewController: UITableViewController {
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return user?.activeSales?.count ?? 0
+        if section == 0{
+            return user?.activeSales?.count ?? 0
+        }
+        else { return sales[1].count }
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {return "Your Sales"}
+        else { return "Waiting for Venmo"}
+    }
+    
     func handleSuccessfulGetSales(){
         print("calling get purchases")
         user?.getPurchases(viewController: self)
         //stop refresh spinner
     }
-    func handleSuccessfulGetPurchase(purchases: [Purchase]){
+    func handleSuccessfulGetPurchase(purchases: [[Purchase]]){
         //print(purchases)
-        unapprovedPurchases = purchases
-        print(unapprovedPurchases)
+        sales = purchases
+        print(sales)
+        //unapprovedPurchases = purchases
+        //print(unapprovedPurchases)
         self.refreshControl?.endRefreshing()
         tableView.reloadData()
         //stop refresh spinner
@@ -72,32 +83,60 @@ class ActiveSalesTableViewController: UITableViewController {
         
         
         //Copy the location from the array locations into a table cell
-        
-        if let sale = user?.activeSales?[indexPath.row]{
-            cell.locationLabel.text = sale.locationName
-            cell.rateLabel.text = String(format: "%.2f", sale.rate)
-            cell.timeLabel.text = sale.ordertime
-            var count = 0
-            for purchase in unapprovedPurchases{
-                print(purchase.seller.locationName, sale.locationName)
-                if purchase.seller.locationName == sale.locationName{
-                    count = count + 1
-                    print(count)
+        if indexPath.section == 0{
+            if let sale = user?.activeSales?[indexPath.row]{
+                cell.locationLabel.text = sale.locationName
+                cell.rateLabel.text = "\(Int(sale.rate*100))%"
+                // String(format: "%.2f", sale.rate)
+                cell.timeLabel.text = sale.ordertime
+                var count = 0
+                for purchase in sales[0]{
+                    print(purchase.seller.locationName, sale.locationName)
+                    if purchase.seller.locationName == sale.locationName{
+                        count = count + 1
+                        print(count)
+                    }
+                }
+                if count>0{
+                    cell.buyerCountLabel.text = String(count)
+                    cell.notifyCircle.alpha = 1
+                } else{
+                    cell.buyerCountLabel.alpha = 0
+                    cell.notifyCircle.alpha = 0
                 }
             }
-            cell.buyerCountLabel.text = String(count)
+        }
+        if indexPath.section == 1 {
+            //the labels don't match up because I want to reuse the cell class
+            let sale = sales[1][indexPath.row]
+            cell.locationLabel.text = sale.seller.sellerName
+            cell.rateLabel.text = String(format: "%.2f", sale.price)
+            cell.timeLabel.text = sale.seller.ordertime
+            cell.buyerCountLabel.text = ""
+            
         }
 
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let sale = user?.activeSales?[indexPath.row]{
-            for purchase in unapprovedPurchases{
-                if purchase.seller.locationName == sale.locationName{
-                    let parent = self.parent as! MySalesViewController
-                    parent.showPurchaseDetail(purchase: purchase)
+        // print(indexPath)
+        if indexPath.section == 0 {
+            if let sale = user?.activeSales?[indexPath.row]{
+                print(sale.saleid)
+                //print(sales[0][0].seller.saleid)
+                for purchase in sales[0]{
+                    if purchase.seller.locationName == sale.locationName{
+                        let parent = self.parent as! MySalesViewController
+                        print("giving purchase to parent", purchase.seller.locationName)
+                        parent.showPurchaseDetail(purchase: purchase)
+                    }
                 }
             }
+        }
+        if indexPath.section == 1 {
+            let sale = sales[1][indexPath.row]
+            let parent = self.parent as! MySalesViewController
+            parent.showPurchaseDetail(purchase: sale)
         }
     }
     

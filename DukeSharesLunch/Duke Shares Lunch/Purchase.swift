@@ -125,7 +125,7 @@ class Purchase {
         task.resume()
     }
     
-    func complete(user: User, viewController: WaitForVenmoViewController?){
+    func markPaid(user: User, viewController: WaitForVenmoViewController?){
         print("Approving purchase!")
         let scheme = "http"
         let host = "35.193.85.182"
@@ -159,7 +159,7 @@ class Purchase {
                     //call handle function in main queue
                     if let viewController = viewController{
                         DispatchQueue.main.async{
-                            viewController.handleComplete()
+                            viewController.handlePaid()
                         }
                     }
                 }

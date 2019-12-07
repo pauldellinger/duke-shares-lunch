@@ -14,6 +14,9 @@ class WaitForSellerViewController: UIViewController {
     var user: User?
     var purchase: Int?
     var cost: Double?
+    @IBAction func cancelOrderAction(_ sender: Any) {
+        user?.removePurchase(pid: purchase!, viewController: self)
+    }
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -21,8 +24,12 @@ class WaitForSellerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         scrollView.refreshControl = UIRefreshControl()
         scrollView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl),for: .valueChanged)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        print("wait for seller disappeared")
     }
     
     @objc func handleRefreshControl() {
@@ -35,7 +42,12 @@ class WaitForSellerViewController: UIViewController {
                  performSegue(withIdentifier: "venmoPageSegue", sender: self)
         }
     }
-
+    
+    func handleCancellation(){
+        print("back to the main tab!")
+        //go back to root view controller.
+        navigationController?.popToRootViewController(animated: true)
+    }
     
     // MARK: - Navigation
 

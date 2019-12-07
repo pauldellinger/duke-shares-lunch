@@ -13,7 +13,7 @@ class WaitForVenmoViewController: UIViewController {
     @IBOutlet weak var contentLabel: UILabel!
     @IBAction func venmoCompleteAction(_ sender: Any) {
         
-        purchase?.complete(user:user!, viewController:self)
+        purchase?.markPaid(user:user!, viewController:self)
     }
     @IBAction func cancelOrderAction(_ sender: Any) {
         purchase?.decline(user: user!, viewController: self)
@@ -26,7 +26,7 @@ class WaitForVenmoViewController: UIViewController {
         contentLabel.text = "Did \(purchase!.buyer.name!) (\(purchase!.buyer.venmo!)) venmo you?"
         // Do any additional setup after loading the view.
     }
-    func handleComplete(){
+    func handlePaid(){
         performSegue(withIdentifier: "buyFoodSegue", sender: self)
     }
     func handleDecline(){

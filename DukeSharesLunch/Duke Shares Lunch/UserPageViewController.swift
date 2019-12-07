@@ -77,7 +77,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
         
         
         let rangePass = NSRange(location: 0, length: password.utf16.count)
-        let regexPass = try! NSRegularExpression(pattern:"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{6,20}$")
+        let regexPass = try! NSRegularExpression(pattern:"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z-_\\d]{6,20}$")
         if regexPass.firstMatch(in: password, options: [], range: rangePass) == nil { return false }
         
         return true

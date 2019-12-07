@@ -28,7 +28,10 @@ class MySalesViewController: UIViewController {
     
     func showPurchaseDetail(purchase: Purchase){
         selected = purchase
-        performSegue(withIdentifier: "showPurchaseApprovalSegue", sender: self)
+        if purchase.approve{ performSegue(withIdentifier: "salesToVenmoSegue", sender: self)
+        }else{
+            performSegue(withIdentifier: "showPurchaseApprovalSegue", sender: self)
+        }
     }
     
     // MARK: - Navigation
@@ -46,6 +49,10 @@ class MySalesViewController: UIViewController {
             nextController.purchase = selected
         }
         
+        if let nextController = segue.destination as? WaitForVenmoViewController{
+            nextController.user = user
+            nextController.purchase = selected
+        }
         if let nextController = segue.destination as? SubmitSellLocationViewController{
             nextController.user = user
         }

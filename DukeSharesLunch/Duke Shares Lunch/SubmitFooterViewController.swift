@@ -17,8 +17,10 @@ class SubmitFooterViewController: UIViewController, UITextFieldDelegate {
         print("button pressed!")
         let description = createDescription(meals: meals)
         print(description)
-        
-        user?.createPurchase(seller: seller!, price: tallyPrice(), description: createDescription(meals: meals), viewController: self)
+        let price = tallyPrice()
+        if price>0{
+            user?.createPurchase(seller: seller!, price: price, description: createDescription(meals: meals), viewController: self)
+        }
         //segue here
     }
 
