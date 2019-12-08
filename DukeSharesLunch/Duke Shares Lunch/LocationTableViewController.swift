@@ -35,6 +35,7 @@ class LocationTableViewController: UITableViewController {
     override func viewDidLoad() {
         //required function for controller
         super.viewDidLoad()
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         //self.navigationController?.setNavigationBarHidden(true, animated:true);
         // print(self.tabBarController.user)
 
@@ -47,6 +48,9 @@ class LocationTableViewController: UITableViewController {
         //Make request for data, add it to locations (global variable)
         getDataFromUrl(website: "http://35.193.85.182/activerestaurants")
         
+    }
+    @objc func refresh(){
+        getDataFromUrl(website: "http://35.193.85.182/activerestaurants")
     }
 
     // MARK: - Table view data source
@@ -85,7 +89,8 @@ class LocationTableViewController: UITableViewController {
     }
     
     private func getDataFromUrl(website: String){
-        
+        //clear existing locations, before updated ones
+        self.locations = [Location]()
         //make request to addresss in parameter
         var request = URLRequest(url: URL(string: website)!,timeoutInterval: Double.infinity)
         
@@ -139,11 +144,8 @@ class LocationTableViewController: UITableViewController {
     
     private func updateView() {
         //This function updates the table
-        let hasLocations = locations.count > 0
-
-        if hasLocations{
-            tableView.reloadData()
-        }
+        self.refreshControl?.endRefreshing()
+        tableView.reloadData()
     }
 
     /*

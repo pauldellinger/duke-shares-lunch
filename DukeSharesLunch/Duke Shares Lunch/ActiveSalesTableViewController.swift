@@ -67,6 +67,15 @@ class ActiveSalesTableViewController: UITableViewController {
         print(sales)
         //unapprovedPurchases = purchases
         //print(unapprovedPurchases)
+        if let tabItems = tabBarController?.tabBar.items {
+            // In this case we want to modify the badge number of the third tab:
+            let tabItem = tabItems[1]
+            let badgeCount = sales[0].count + sales[1].count
+            if badgeCount > 0{
+                tabItem.badgeValue = String(sales[0].count + sales[1].count)
+            }
+            else {tabItem.badgeValue = ""}
+        }
         self.refreshControl?.endRefreshing()
         tableView.reloadData()
         //stop refresh spinner
@@ -87,8 +96,16 @@ class ActiveSalesTableViewController: UITableViewController {
             if let sale = user?.activeSales?[indexPath.row]{
                 cell.locationLabel.text = sale.locationName
                 cell.rateLabel.text = "\(Int(sale.rate*100))%"
+                
                 // String(format: "%.2f", sale.rate)
-                cell.timeLabel.text = sale.ordertime
+                let ordertime = timeUntilOrder(ordertime: sale.ordertime)
+                if ordertime > 0 {
+                    cell.timeLabel.text = "\(ordertime) minutes until ordering"
+                }
+                else {
+                    cell.timeLabel.text = "\(ordertime * -1) minutes past ordertime"
+                }
+                //cell.timeLabel.text = sale.ordertime
                 var count = 0
                 for purchase in sales[0]{
                     print(purchase.seller.locationName, sale.locationName)
@@ -109,9 +126,16 @@ class ActiveSalesTableViewController: UITableViewController {
         if indexPath.section == 1 {
             //the labels don't match up because I want to reuse the cell class
             let sale = sales[1][indexPath.row]
-            cell.locationLabel.text = sale.seller.sellerName
+            cell.locationLabel.text = sale.buyer.name
             cell.rateLabel.text = String(format: "%.2f", sale.price)
-            cell.timeLabel.text = sale.seller.ordertime
+            let ordertime = timeUntilOrder(ordertime: sale.seller.ordertime)
+            if ordertime > 0 {
+                cell.timeLabel.text = "\(ordertime) minutes until ordering"
+            }
+            else {
+                cell.timeLabel.text = "\(ordertime * -1) minutes past ordertime"
+            }
+            // cell.timeLabel.text = sale.seller.ordertime
             cell.buyerCountLabel.text = ""
             
         }
@@ -141,30 +165,60 @@ class ActiveSalesTableViewController: UITableViewController {
     }
     
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
+        let cellIdentifier = "ActiveSaleCell"
+               //identifier for cell set in storyboard
+               guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ActiveSalesTableViewCell  else {
+                   fatalError("The dequeued cell is not an instance of ActiveSaleCell")
+               }
+        if indexPath[0] == 0{
+            //if cell.notifyCircle.alpha == 1 { return false }
+        }
         return true
     }
-    */
 
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            if let sale = user?.activeSales?[indexPath.row]{
-                sale.remove(token:user?.token ?? "", viewController:self)
+            if indexPath[0] == 0{
+                // Delete the row from the data source
+                if let sale = user?.activeSales?[indexPath.row]{
+                    sale.remove(token:user?.token ?? "", viewController:self)
+                }
+            }else{
+                let sale = sales[1][indexPath.row]
+                sale.decline(user: self.user!, viewController: self)
             }
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
     
-        func handleSaleRemoval(){
-            refresh(sender:self)
-        }
+    func handleSaleRemoval(){
+        refresh(sender:self)
+    }
+    func timeUntilOrder(ordertime: String) -> Int{
+        print(ordertime)
+        if ordertime.isEmpty { return 0 }
+        let ordertimeFixed = ordertime.replacingOccurrences(of: "T", with: " ")
+        print(ordertimeFixed)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let current = Date()
+        // print(current)
+        let time = formatter.date(from: ordertimeFixed)
+        print("from psql:", time)
+        if let interval = (time?.timeIntervalSince(current)){
+            let minuteDifference = Int((interval/60).rounded(.up))
+            return minuteDifference
+        } else { return 0 }
+    }
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

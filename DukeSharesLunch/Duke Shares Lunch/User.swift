@@ -48,7 +48,13 @@ class User {
     
         
     func createUser(viewController: CreateProfileViewController?){
-        let parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\", \"major\": \"\(self.major ?? "")\", \"dorm\": \"\(self.dorm ?? "")\" }"
+        var parameters : String
+        if self.dorm!.isEmpty || self.major!.isEmpty{
+            // don't send empty dorm and major, default is null
+            parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\" }"
+        } else{
+            parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\", \"major\": \"\(self.major ?? "")\", \"dorm\": \"\(self.dorm ?? "")\" }"
+        }
         let postData = parameters.data(using: .utf8)
         var request = URLRequest(url: URL(string: "http://35.193.85.182/rpc/make_user")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -56,10 +62,8 @@ class User {
         request.httpMethod = "POST"
         request.httpBody = postData
         //make request to addresss in parameter
-        
-        //specify type of request
-        request.httpMethod = "POST"
-        print(postData)
+        //This token will work for everyone  - need a way to generate and have them expire after one use
+        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidG9kb191c2VyIn0.IWnJCBgXAYfPGA-zB4JPlcAGfDYkwTwCTmQM-boguV8", forHTTPHeaderField: "Authorization")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -72,9 +76,7 @@ class User {
                         print(value)
                         if value==1{
                             print("User Creation Successful")
-                            DispatchQueue.main.async{
                                 self.login(viewController:viewController)
-                            }
                         } else{
                             print("User Creation Unsuccessul")
                         }
@@ -112,7 +114,7 @@ class User {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
-                if httpResponse.statusCode == 403 &&  !(viewController==nil){
+                if httpResponse.statusCode != 403 &&  !(viewController==nil){
                     DispatchQueue.main.async{
                         if let viewController = viewController as? UserPageViewController{
                             viewController.showError()
@@ -146,10 +148,15 @@ class User {
                     if !(viewController==nil){
                         DispatchQueue.main.async{
                             if !(self.token?.isEmpty ?? false){
+                                let defaults = UserDefaults.standard
+                                defaults.set(email, forKey: "email")
+                                defaults.set(password, forKey: "password")
+                                defaults.set(self.token, forKey: "token")
                                 if let viewController = viewController as? UserPageViewController{
                                     viewController.tokenUpdated(user:self)
                                 }
                                 if let viewController = viewController as? CreateProfileViewController{
+                                    // print(self.token, "giving the token to creatprofileviewcontroller")
                                     viewController.handleSuccessfulCreate()
                                 }
                             }
@@ -166,7 +173,7 @@ class User {
         task.resume()
     }
     
-    func getInfo(){
+    func getInfo(viewController:TabController?){
         print("getting info!")
         let scheme = "http"
         let host = "35.193.85.182"
@@ -235,7 +242,11 @@ class User {
                     let dorm = dic["dorm"] as? String
                     
                     self.dorm = dorm
-                    
+                    if let viewController = viewController{
+                        DispatchQueue.main.async{
+                            viewController.handleInfo()
+                        }
+                    }
                 }
                 //reload the table with the new values
                 //Response not in JSON format
@@ -516,7 +527,7 @@ class User {
                     let approve = dic["approve"] as! Bool
                     let paid = dic["paid"] as! Bool
                     let description = dic["p_description"] as! String
-                    
+                    print(pid, seller, buyer, price, approve, paid, description)
                     let purchase = Purchase.init(pid: pid, seller: seller!, buyer: buyer, price: price, approve: approve, paid: paid, description: description)!
                     
                     if purchase.approve { purchases[1].append(purchase)}

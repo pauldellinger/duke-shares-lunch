@@ -11,7 +11,7 @@ import Foundation
 
 class UserPageViewController: UIViewController, UITextFieldDelegate {
     
-    var user:User?
+    var user = User(email:"", password:"")
     
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
@@ -24,7 +24,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
             let pass = passwordInput.text!
             if credentialValidate(email: email, password: pass){
                 print("valid!")
-                user = User.init(email: email, password: pass)
+                self.user = User.init(email: email, password: pass)
                 // print(user?.email, user?.password)
                 user?.login(viewController: self)
                 //sleep(2)
@@ -39,6 +39,21 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let defaults = UserDefaults.standard
+        let token = defaults.string(forKey: "token")
+        print(token)
+        
+        if !(token?.isEmpty ?? true){
+            let defaults = UserDefaults.standard
+            let email = defaults.string(forKey: "email")
+            let password = defaults.string(forKey: "password")
+            let token = defaults.string(forKey: "token")
+            self.user = User(email: email!, password: password!)
+            self.user?.token = token
+            print(self.user?.email, self.user?.password, user?.token)
+            self.performSegue(withIdentifier: "loginSegue", sender: self)
+            
+        }
         self.emailInput.delegate = self
         self.passwordInput.delegate = self
         emailInput.becomeFirstResponder()
@@ -77,7 +92,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
         
         
         let rangePass = NSRange(location: 0, length: password.utf16.count)
-        let regexPass = try! NSRegularExpression(pattern:"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z-_\\d]{6,20}$")
+        let regexPass = try! NSRegularExpression(pattern:"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z-_\\d]{6,30}$")
         if regexPass.firstMatch(in: password, options: [], range: rangePass) == nil { return false }
         
         return true

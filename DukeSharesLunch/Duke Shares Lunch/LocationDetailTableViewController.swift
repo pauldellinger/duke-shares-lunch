@@ -125,12 +125,8 @@ class LocationDetailTableViewController: UITableViewController {
     
     private func updateView() {
         //This function updates the table
-        let hasSellers = sellers.count > 0
-        
-        if hasSellers{
-            tableView.reloadData()
-            self.refreshControl?.endRefreshing()
-        }
+        tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -148,10 +144,10 @@ class LocationDetailTableViewController: UITableViewController {
         
         let seller = sellers[indexPath.row]
         cell.name.text = seller.sellerName
-        cell.rate.text = String(seller.rate)
+        cell.rate.text = "\(Int((1-seller.rate)*100))% off"
         let ordertime = timeUntilOrder(ordertime: seller.ordertime)
         if ordertime > 0 {
-            cell.ordertime.text = "\(ordertime) minutes unil ordering"
+            cell.ordertime.text = "\(ordertime) minutes until ordering"
         }
         else {
             cell.ordertime.text = "Ready Now!"

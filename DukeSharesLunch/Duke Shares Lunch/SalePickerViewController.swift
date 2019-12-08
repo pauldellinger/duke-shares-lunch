@@ -35,7 +35,7 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     
     
-    let ratePickerData = Array(stride(from: 99, through: 0, by: -1))
+    let ratePickerData = Array(stride(from: 95, through: 0, by: -5))
     let timePickerData = Array(stride(from: 0, through: 59, by: 1))
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +58,7 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
            if pickerView == timePicker {
             return 60
            } else {
-               return 100
+               return 20
            }
        }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

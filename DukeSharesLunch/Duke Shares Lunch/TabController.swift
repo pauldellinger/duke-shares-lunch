@@ -8,12 +8,15 @@
 
 import UIKit
 
-class TabController: UITabBarController {
+class TabController: UITabBarController{
     var user: User?
     override func viewDidLoad() {
         super.viewDidLoad()
         // print(user?.token)
-        user?.getInfo()
+        user?.getInfo(viewController:self)
+        
+    }
+    func handleInfo(){
         let userPage = self.viewControllers![2] as! UserDetailViewController
         userPage.user = user
         
@@ -24,13 +27,14 @@ class TabController: UITabBarController {
         let sellNav = self.viewControllers![1] as! UINavigationController
         let sellPage = sellNav.children[0] as! MySalesViewController
         sellPage.user = user
+        let _ = sellPage.view
+    }
         
         
         
         
         //print(self.viewControllers)
         // Do any additional setup after loading the view.
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -40,18 +44,8 @@ class TabController: UITabBarController {
         super.viewWillDisappear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let nextController = segue.destination as? UserDetailViewController
-            else {
-                return
-        }
-        nextController.user = user
-    }
- */
     
-
+    
 }
+
+
