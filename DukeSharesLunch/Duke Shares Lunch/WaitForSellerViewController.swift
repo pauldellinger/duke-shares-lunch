@@ -48,6 +48,24 @@ class WaitForSellerViewController: UIViewController {
         //go back to root view controller.
         navigationController?.popToRootViewController(animated: true)
     }
+    func handleDeletion(){
+        let alert = UIAlertController(title: "Purchase Declined", message: "Sorry, please try again", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+              switch action.style{
+              case .default:
+                self.navigationController?.popToRootViewController(animated: true)
+
+              case .cancel:
+                    print("cancel")
+
+              case .destructive:
+                    print("destructive")
+
+
+        }}))
+        self.present(alert, animated: true, completion: nil)
+        //navigationController?.popToRootViewController(animated: true)
+    }
     
     // MARK: - Navigation
 

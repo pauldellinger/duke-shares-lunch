@@ -15,16 +15,16 @@ class ActiveSalesTableViewController: UITableViewController {
     var user: User?
     //var unapprovedPurchases = [Purchase]()
     var approvedPurchases = [Purchase]()
+    var activeSales = [Seller]()
     var sales = [[Purchase](), [Purchase]()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
-        if user?.activeSales?.isEmpty ?? true{
+        if user?.allSales?.isEmpty ?? true{
             //add refresh spinner
             refresh(sender: self)
         }
-        user?.getPurchases(viewController: self)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,23 +41,29 @@ class ActiveSalesTableViewController: UITableViewController {
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0{
-            return user?.activeSales?.count ?? 0
+        if section == 2{
+            return user?.allSales?.count ?? 0
+        }
+        if section == 1{
+            return sales[0].count
         }
         else { return sales[1].count }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {return "Your Sales"}
+        
+        if section == 2 { return "Your Sales"}
+        if section == 1 { return "Waiting for Approval"}
         else { return "Waiting for Venmo"}
     }
     
     func handleSuccessfulGetSales(){
         print("calling get purchases")
+        activeSales = getActivated(allSales: user?.allSales)
         user?.getPurchases(viewController: self)
         //stop refresh spinner
     }
@@ -74,12 +80,21 @@ class ActiveSalesTableViewController: UITableViewController {
             if badgeCount > 0{
                 tabItem.badgeValue = String(sales[0].count + sales[1].count)
             }
-            else {tabItem.badgeValue = ""}
+            else {tabItem.badgeValue = nil}
         }
         self.refreshControl?.endRefreshing()
         tableView.reloadData()
         //stop refresh spinner
         
+    }
+    func getActivated(allSales:[Seller]?) -> [Seller]{
+        var active = [Seller]()
+        for sale in allSales ?? []{
+            if sale.status{
+                active.append(sale)
+            }
+        }
+        return active
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -92,8 +107,8 @@ class ActiveSalesTableViewController: UITableViewController {
         
         
         //Copy the location from the array locations into a table cell
-        if indexPath.section == 0{
-            if let sale = user?.activeSales?[indexPath.row]{
+        if indexPath.section == 2{
+            if let sale = user?.allSales?[indexPath.row]{
                 cell.locationLabel.text = sale.locationName
                 cell.rateLabel.text = "\(Int(sale.rate*100))%"
                 
@@ -122,8 +137,26 @@ class ActiveSalesTableViewController: UITableViewController {
                     cell.notifyCircle.alpha = 0
                 }
             }
+            
         }
-        if indexPath.section == 1 {
+        if indexPath.section == 1{
+            let sale = sales[0][indexPath.row]
+            cell.locationLabel.text = sale.buyer.name
+            cell.rateLabel.text = String(format: "%.2f", sale.price)
+            cell.timeLabel.text = sale.seller.locationName
+//            let ordertime = timeUntilOrder(ordertime: sale.seller.ordertime)
+//            if ordertime > 0 {
+//                cell.timeLabel.text = "\(ordertime) minutes until ordering"
+//            }
+//            else {
+//                cell.timeLabel.text = "\(ordertime * -1) minutes past ordertime"
+//            }
+//            // cell.timeLabel.text = sale.seller.ordertime
+//            cell.buyerCountLabel.text = ""
+//            cell.notifyCircle.alpha = 0
+        }
+        
+        if indexPath.section == 0 {
             //the labels don't match up because I want to reuse the cell class
             let sale = sales[1][indexPath.row]
             cell.locationLabel.text = sale.buyer.name
@@ -137,6 +170,7 @@ class ActiveSalesTableViewController: UITableViewController {
             }
             // cell.timeLabel.text = sale.seller.ordertime
             cell.buyerCountLabel.text = ""
+            cell.notifyCircle.alpha = 0
             
         }
 
@@ -144,8 +178,8 @@ class ActiveSalesTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // print(indexPath)
-        if indexPath.section == 0 {
-            if let sale = user?.activeSales?[indexPath.row]{
+        if indexPath.section == 2{
+            if let sale = user?.allSales?[indexPath.row]{
                 print(sale.saleid)
                 //print(sales[0][0].seller.saleid)
                 for purchase in sales[0]{
@@ -158,6 +192,10 @@ class ActiveSalesTableViewController: UITableViewController {
             }
         }
         if indexPath.section == 1 {
+            let parent = self.parent as! MySalesViewController
+            parent.showPurchaseDetail(purchase: sales[0][indexPath.row])
+        }
+        if indexPath.section == 0{
             let sale = sales[1][indexPath.row]
             let parent = self.parent as! MySalesViewController
             parent.showPurchaseDetail(purchase: sale)
@@ -184,12 +222,17 @@ class ActiveSalesTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if indexPath[0] == 0{
+            if indexPath.section == 2{
                 // Delete the row from the data source
-                if let sale = user?.activeSales?[indexPath.row]{
+                if let sale = user?.allSales?[indexPath.row]{
                     sale.remove(token:user?.token ?? "", viewController:self)
                 }
-            }else{
+            }
+            if indexPath.section == 1 {
+                let sale = sales[0][indexPath.row]
+                sale.decline(user: self.user!, viewController: self)
+            }
+            if indexPath.section == 0{
                 let sale = sales[1][indexPath.row]
                 sale.decline(user: self.user!, viewController: self)
             }
@@ -202,7 +245,6 @@ class ActiveSalesTableViewController: UITableViewController {
         refresh(sender:self)
     }
     func timeUntilOrder(ordertime: String) -> Int{
-        print(ordertime)
         if ordertime.isEmpty { return 0 }
         let ordertimeFixed = ordertime.replacingOccurrences(of: "T", with: " ")
         print(ordertimeFixed)
@@ -212,7 +254,6 @@ class ActiveSalesTableViewController: UITableViewController {
         let current = Date()
         // print(current)
         let time = formatter.date(from: ordertimeFixed)
-        print("from psql:", time)
         if let interval = (time?.timeIntervalSince(current)){
             let minuteDifference = Int((interval/60).rounded(.up))
             return minuteDifference

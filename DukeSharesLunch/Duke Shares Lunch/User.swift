@@ -20,7 +20,7 @@ class User {
     var venmo: String?
     var major: String?
     var dorm: String?
-    var activeSales:[Seller]?
+    var allSales:[Seller]?
     
     init? (email:String, password:String ){
         
@@ -46,7 +46,7 @@ class User {
         self.dorm = dorm ?? ""
     }
     
-        
+    
     func createUser(viewController: CreateProfileViewController?){
         var parameters : String
         if self.dorm!.isEmpty || self.major!.isEmpty{
@@ -76,7 +76,7 @@ class User {
                         print(value)
                         if value==1{
                             print("User Creation Successful")
-                                self.login(viewController:viewController)
+                            self.login(viewController:viewController)
                         } else{
                             print("User Creation Unsuccessul")
                         }
@@ -86,21 +86,21 @@ class User {
                 } else {
                     print("data is not in UTF-8")
                 }
-                    
+                
                 //reload the table with the new values
                 //Response not in JSON format
             }
         }
         //We have to call the task here because it's asynchronous
         task.resume()
-
-    }
         
+    }
+    
     func login(viewController: Any?){
         let email = self.email!
         let password = self.password!
         let parameters = "{ \"email\": \"\(email)\", \"pass\": \"\(password)\" }"
-    
+        
         let postData = parameters.data(using: .utf8)
         var request = URLRequest(url: URL(string: "http://35.193.85.182/rpc/login")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -114,7 +114,7 @@ class User {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
-                if httpResponse.statusCode != 403 &&  !(viewController==nil){
+                if httpResponse.statusCode != 200 &&  !(viewController==nil){
                     DispatchQueue.main.async{
                         if let viewController = viewController as? UserPageViewController{
                             viewController.showError()
@@ -184,14 +184,14 @@ class User {
         urlComponents.host = host
         urlComponents.path = path
         urlComponents.queryItems = [queryItem]
-
+        
         guard let url = urlComponents.url else { return }
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)
         // print(url)
-
+        
         //specify type of request
         request.httpMethod = "GET"
-
+        
         //authorization
         request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
         
@@ -218,7 +218,7 @@ class User {
                 print(jsonArray)
                 //iterate over JSON, adding each to location
                 for dic in jsonArray{
-                  
+                    
                     guard let name = dic["name"] else {
                         fatalError("no name in json")
                     }
@@ -236,7 +236,7 @@ class User {
                     self.uid = uid as? Int
                     
                     let major = dic["major"] as? String
-            
+                    
                     self.major = major
                     
                     let dorm = dic["dorm"] as? String
@@ -378,13 +378,14 @@ class User {
         let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
         let uidEquality = "eq.\(self.uid!)"
         let queryItem2 = URLQueryItem(name: "uid", value: uidEquality)
-        
+        //let queryItem3 = URLQueryItem(name: "status", value: "eq.true")
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
         urlComponents.path = path
         urlComponents.queryItems = [queryItem]
         urlComponents.queryItems! += [queryItem2]
+        //urlComponents.queryItems! += [queryItem3]
         
         guard let url = urlComponents.url else { return }
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)
@@ -425,13 +426,13 @@ class User {
                 }
                 print(jsonArray)
                 //iterate over JSON, adding each to location
-//                var sales = [Seller]()
-                self.activeSales = [Seller]()
+                //                var sales = [Seller]()
+                self.allSales = [Seller]()
                 for dic in jsonArray{
                     guard let sale = Seller(json:dic) else {
                         fatalError("Unable to instantiate seller")
                     }
-                    self.activeSales?.append(sale)
+                    self.allSales?.append(sale)
                     
                 }
                 DispatchQueue.main.async{
@@ -442,7 +443,7 @@ class User {
                         viewcontroller.handleSuccessfulGetSales()
                     }
                 }
-            
+                
                 //reload the table with the new values
                 //Response not in JSON format
             } catch let parsingError {
@@ -464,7 +465,7 @@ class User {
         urlComponents.host = host
         urlComponents.path = path
         urlComponents.queryItems = [queryItem]
-
+        
         guard let url = urlComponents.url else { return }
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)
         print(url)
@@ -514,8 +515,8 @@ class User {
                     let pid = dic["pid"] as! Int
                     
                     var seller : Seller?
-                    print(self.activeSales)
-                    for sale in self.activeSales ?? [] {
+                    print(self.allSales)
+                    for sale in self.allSales ?? [] {
                         print(sale.saleid)
                         if sale.saleid == dic["saleid"] as! Int{
                             seller = sale
@@ -528,10 +529,12 @@ class User {
                     let paid = dic["paid"] as! Bool
                     let description = dic["p_description"] as! String
                     print(pid, seller, buyer, price, approve, paid, description)
-                    let purchase = Purchase.init(pid: pid, seller: seller!, buyer: buyer, price: price, approve: approve, paid: paid, description: description)!
+                    if let seller = seller{
+                        let purchase = Purchase.init(pid: pid, seller: seller, buyer: buyer, price: price, approve: approve, paid: paid, description: description)!
+                        if purchase.approve { purchases[1].append(purchase)}
+                        else {purchases[0].append(purchase)}
+                    }
                     
-                    if purchase.approve { purchases[1].append(purchase)}
-                    else {purchases[0].append(purchase)}
                     
                 }
                 //print(purchases[0].seller.locationName)
@@ -541,7 +544,7 @@ class User {
                         viewController.handleSuccessfulGetPurchase(purchases:purchases)
                     }
                 }
-                 
+                
                 
                 //reload the table with the new values
                 //Response not in JSON format
@@ -563,7 +566,7 @@ class User {
         urlComponents.host = host
         urlComponents.path = path
         urlComponents.queryItems = [queryItem]
-
+        
         guard let url = urlComponents.url else { return }
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)
         print(url)
@@ -606,18 +609,25 @@ class User {
                 print(jsonArray)
                 //iterate over JSON, adding each to location
                 //                var sales = [Seller]()
-                for dic in jsonArray{
-                    let approved = dic["approve"] as? Bool
-                    
-                        DispatchQueue.main.async{
-                            if let viewController = viewController{
-                                if approved ?? false{
-                                    viewController.handleApproval(approved: true)
-                                } else { viewController.handleApproval(approved: false) }
+                if jsonArray.count == 0{
+                    DispatchQueue.main.async{
+                        if let viewController = viewController{
+                            viewController.handleDeletion()
                         }
                     }
                 }
-                 
+                for dic in jsonArray{
+                    let approved = dic["approve"] as? Bool
+                    
+                    DispatchQueue.main.async{
+                        if let viewController = viewController{
+                            if approved ?? false{
+                                viewController.handleApproval(approved: true)
+                            } else { viewController.handleApproval(approved: false) }
+                        }
+                    }
+                }
+                
                 
                 //reload the table with the new values
                 //Response not in JSON format
@@ -665,6 +675,113 @@ class User {
                 else{
                     print("Did not get 204 code, something went wrong")
                 }
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
+    func removeSales(viewController: MySalesViewController?){
+        print("pausing active sales!")
+        let scheme = "http"
+        let host = "35.193.85.182"
+        let path = "/activeseller"
+        let uidEquality = "eq.\(self.uid!)"
+        let queryItem = URLQueryItem(name: "uid", value: uidEquality)
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        print(url)
+        
+        //specify type of request
+        request.httpMethod = "DELETE"
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        
+        //make request to addresss in parameter
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 204 {
+                    print("Paused the Sales!")
+                }
+                else{
+                    print("Did not get 204 code, something went wrong")
+                }
+            }
+            do{
+
+                DispatchQueue.main.async{
+                    if let viewController = viewController{
+                        viewController.handlePausedSales()
+                    }
+                }
+                
+                //reload the table with the new values
+                //Response not in JSON format
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
+    
+    func pauseSales(viewController: MySalesViewController?){
+        print("pausing active sales!")
+        let scheme = "http"
+        let host = "35.193.85.182"
+        let path = "/activeseller"
+        let queryItem = URLQueryItem(name: "select", value: "uid,status,location")
+        let uidEquality = "eq.\(self.uid!)"
+        let queryItem2 = URLQueryItem(name: "uid", value: uidEquality)
+        let queryItem3 = URLQueryItem(name: "status", value: "eq.true")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        urlComponents.queryItems! += [queryItem2]
+        urlComponents.queryItems! += [queryItem3]
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        print(url)
+        
+        //specify type of request
+        request.httpMethod = "PATCH"
+        let parameters = "{\"status\":false}"
+        let postData =  parameters.data(using: .utf8)
+        request.httpBody = postData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        
+        //make request to addresss in parameter
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 204 {
+                    print("Paused the Sales!")
+                }
+                else{
+                    print("Did not get 204 code, something went wrong")
+                }
+            }
+            do{
+
+                DispatchQueue.main.async{
+                    if let viewController = viewController{
+                        viewController.handlePausedSales()
+                    }
+                }
+                
+                //reload the table with the new values
+                //Response not in JSON format
             }
         }
         //We have to call the task here because it's asynchronous

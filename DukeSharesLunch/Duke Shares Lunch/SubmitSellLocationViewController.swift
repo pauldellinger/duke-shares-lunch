@@ -56,7 +56,7 @@ class SubmitSellLocationViewController: UIViewController {
     
 
     func handleSuccessfulGetSales(){
-        if !(user?.activeSales?.isEmpty ?? true){
+        if !(user?.allSales?.isEmpty ?? true){
             self.performSegue(withIdentifier: "hasActiveSalesSegue", sender: self)
         }
     }

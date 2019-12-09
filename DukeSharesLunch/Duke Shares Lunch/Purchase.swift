@@ -178,4 +178,47 @@ class Purchase {
         task.resume()
         
     }
+    func complete(user: User, viewController: BuyFoodViewController?){
+        print("Approving purchase!")
+        let scheme = "http"
+        let host = "35.193.85.182"
+        let path = "/purchase"
+        let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        print(url)
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "DELETE"
+        //specify type of request
+        
+        //authorization
+        request.setValue("Bearer \(user.token!)", forHTTPHeaderField: "Authorization")
+        
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 204 {
+                    print("Purchase Deleted!")
+                    //call handle function in main queue
+                    if let viewController = viewController{
+                        DispatchQueue.main.async{
+                            viewController.handleComplete()
+                        }
+                    }
+                }
+                else{
+                    print("Did not get 204 code, something went wrong")
+                }
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
 }

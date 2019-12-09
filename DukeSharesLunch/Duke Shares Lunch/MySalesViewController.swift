@@ -12,10 +12,17 @@ class MySalesViewController: UIViewController {
     var user: User?
     var selected: Purchase?
     
+    @IBAction func pauseSalesAction(_ sender: Any) {
+        user?.removeSales(viewController: self)
+
+    }
     @IBAction func moreLocationsAction(_ sender: Any) {
         performSegue(withIdentifier: "sellAtMoreSegue", sender: self)
     }
-    
+  
+    func handlePausedSales(){
+        navigationController?.popToRootViewController(animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

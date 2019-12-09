@@ -10,6 +10,9 @@ import UIKit
 
 class BuyFoodViewController: UIViewController {
     
+    @IBAction func completePurchaseAction(_ sender: Any) {
+        self.purchase?.complete(user: self.user!, viewController:self)
+    }
     var purchase: Purchase?
     var user: User?
     @IBOutlet weak var buyerNameLabel: UILabel!
@@ -36,6 +39,9 @@ class BuyFoodViewController: UIViewController {
             // Do any additional setup after loading the view.
         }
         // Do any additional setup after loading the view.
+    }
+    func handleComplete(){
+        navigationController?.popToRootViewController(animated: true)
     }
     
 
