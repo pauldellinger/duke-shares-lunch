@@ -20,7 +20,7 @@ CREATE TYPE jwt_token AS (
   token text
 );
 
-CREATE FUNCTION jwt_test() RETURNS public.jwt_token AS $$
+CREATE OR REPLACE FUNCTION jwt_test() RETURNS public.jwt_token AS $$
  -- function that tests if a token is valid, based on our secret key
  SELECT public.sign(
     row_to_json(r), 'zOTMma3rOGRey8y4prnnxt08P52DXWZ5'
@@ -30,7 +30,7 @@ CREATE FUNCTION jwt_test() RETURNS public.jwt_token AS $$
     SELECT
       'my_role'::text as role,
 	-- have the token expire in 300 seconds
-      extract(epoch from now())::integer + 300 AS exp
+      extract(epoch from now())::integer + 86400 AS exp
   ) r;
 $$ LANGUAGE sql;
 
@@ -106,7 +106,7 @@ begin
     ) as token
     from (
       select _role as role, login.email as email,
-         extract(epoch from now())::integer + 60*60 as exp
+         extract(epoch from now())::integer + 60*1440 as exp
     ) r
     into result;
   return result;
@@ -150,8 +150,12 @@ language plpgsql security definer;
 
 
 -- anyone can log in
-
+revoke all from web_anon;
 grant execute on function login(text,text) to web_anon;
 
+
 -- only authenticated can make a new user
-grant execute on function make_user(text,text,text,text,text,text) to authenticator;
+revoke all on function make_user(text,text,text,text,text,text) from web_anon;
+grant execute on function make_user(text,text,text,text,text,text) to todo_user;
+
+INSERT INTO basic_auth.users VALUES('pd88@duke.edu','Password1','todo_user');

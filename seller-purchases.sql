@@ -19,6 +19,7 @@ AS $$
 	on PURCHASE.saleid = ACTIVESELLER.saleid
 	LEFT JOIN REGISTEREDUSER as seller
 	on ACTIVESELLER.uid = seller.uid
-	WHERE seller.uid = sellerid;
+	WHERE seller.uid = sellerid
+	AND PURCHASE.complete = FALSE;
 $$
 LANGUAGE 'sql';
