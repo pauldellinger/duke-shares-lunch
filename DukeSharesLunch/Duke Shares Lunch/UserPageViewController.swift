@@ -114,7 +114,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
             else {
                 return
         }
-        nextController.user = user
+        nextController.user = self.user
     }
     
     func showError() {

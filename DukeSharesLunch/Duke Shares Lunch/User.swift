@@ -316,7 +316,7 @@ class User {
         
         //authorization
         request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
-        
+    
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let httpResponse = response as? HTTPURLResponse {
