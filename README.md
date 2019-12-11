@@ -1,5 +1,5 @@
 # Duke Shares Lunch
-### An iOS to help Duke students sell their food points
+### An iOS app to help Duke students sell their food points
 
 ## Code Structure
 
