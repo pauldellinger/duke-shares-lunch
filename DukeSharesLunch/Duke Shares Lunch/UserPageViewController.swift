@@ -41,6 +41,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         let defaults = UserDefaults.standard
         let email = defaults.string(forKey: "email")
+        print(email)
         
         if !(email?.isEmpty ?? true){ //if email has already been set
             let defaults = UserDefaults.standard

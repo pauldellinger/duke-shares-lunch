@@ -74,12 +74,18 @@ class User {
                     //And then into Int
                     if let value = Int(text) {
                         print(value)
+                        
                         if value==1{
+                            DispatchQueue.main.async{
                             print("User Creation Successful")
+                            
                             self.login(viewController:viewController)
+                            }
                         } else{
+                            DispatchQueue.main.async{
                             viewController?.handleDatabaseCreateFail()
                             print("User Creation Unsuccessul")
+                            }
                         }
                     } else {
                         print("text cannot be converted to Int")
