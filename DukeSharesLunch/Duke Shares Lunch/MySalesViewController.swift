@@ -21,7 +21,9 @@ class MySalesViewController: UIViewController {
     }
   
     func handlePausedSales(){
-        navigationController?.popToRootViewController(animated: true)
+        // navigationController?.popToRootViewController(animated: true)
+        let child = self.children[0] as! ActiveSalesTableViewController
+        child.refresh(sender: self)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

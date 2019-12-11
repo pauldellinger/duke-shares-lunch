@@ -142,7 +142,7 @@ class ActiveSalesTableViewController: UITableViewController {
         if indexPath.section == 1{
             let sale = sales[0][indexPath.row]
             cell.locationLabel.text = sale.buyer.name
-            cell.rateLabel.text = String(format: "%.2f", sale.price)
+            cell.rateLabel.text = "$\(String(format: "%.2f", sale.price))"
             cell.timeLabel.text = sale.seller.locationName
 //            let ordertime = timeUntilOrder(ordertime: sale.seller.ordertime)
 //            if ordertime > 0 {
@@ -152,15 +152,15 @@ class ActiveSalesTableViewController: UITableViewController {
 //                cell.timeLabel.text = "\(ordertime * -1) minutes past ordertime"
 //            }
 //            // cell.timeLabel.text = sale.seller.ordertime
-//            cell.buyerCountLabel.text = ""
-//            cell.notifyCircle.alpha = 0
+            cell.buyerCountLabel.text = ""
+            cell.notifyCircle.alpha = 0
         }
         
         if indexPath.section == 0 {
             //the labels don't match up because I want to reuse the cell class
             let sale = sales[1][indexPath.row]
             cell.locationLabel.text = sale.buyer.name
-            cell.rateLabel.text = String(format: "%.2f", sale.price)
+            cell.rateLabel.text = "$\(String(format: "%.2f", sale.price))"
             let ordertime = timeUntilOrder(ordertime: sale.seller.ordertime)
             if ordertime > 0 {
                 cell.timeLabel.text = "\(ordertime) minutes until ordering"

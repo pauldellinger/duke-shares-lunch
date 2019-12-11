@@ -78,6 +78,7 @@ class User {
                             print("User Creation Successful")
                             self.login(viewController:viewController)
                         } else{
+                            viewController?.handleDatabaseCreateFail()
                             print("User Creation Unsuccessul")
                         }
                     } else {
@@ -146,6 +147,7 @@ class User {
                     }
                     self.token = jwtToken as? String
                     if !(viewController==nil){
+                        
                         DispatchQueue.main.async{
                             if !(self.token?.isEmpty ?? false){
                                 let defaults = UserDefaults.standard
@@ -153,6 +155,7 @@ class User {
                                 defaults.set(password, forKey: "password")
                                 defaults.set(self.token, forKey: "token")
                                 if let viewController = viewController as? UserPageViewController{
+                                    //print("calling tokenUpdated",self.email, self.password, self.token)
                                     viewController.tokenUpdated(user:self)
                                 }
                                 if let viewController = viewController as? CreateProfileViewController{
@@ -321,7 +324,7 @@ class User {
         
         //authorization
         request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
-    
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let httpResponse = response as? HTTPURLResponse {
@@ -720,7 +723,7 @@ class User {
                 }
             }
             do{
-
+                
                 DispatchQueue.main.async{
                     if let viewController = viewController{
                         viewController.handlePausedSales()
@@ -778,7 +781,7 @@ class User {
                 }
             }
             do{
-
+                
                 DispatchQueue.main.async{
                     if let viewController = viewController{
                         viewController.handlePausedSales()

@@ -47,7 +47,7 @@ class VenmoSellerViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        instructionLabel.text = "Venmo \(seller!.sellerName) \n \(String(format: "%.2f", cost!))"
+        instructionLabel.text = "Venmo \(seller!.sellerName) \n $\(String(format: "%.2f", cost!))"
         // Do any additional setup after loading the view.
     }
     

@@ -10,6 +10,9 @@ import UIKit
 
 class CreateProfileViewController: UIViewController {
     
+    @IBOutlet weak var invalidLabel: UILabel!
+    
+    
     var user: User?
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
@@ -25,7 +28,7 @@ class CreateProfileViewController: UIViewController {
             user?.createUser(viewController: self)
         }
         else{
-            print("invalid fields")
+            showError(error: "Invalid fields\nDo you have an uppercase letter and digit in your password?")
         }
     }
     
@@ -94,6 +97,27 @@ class CreateProfileViewController: UIViewController {
     func handleSuccessfulCreate(){
         //print(user?.token, "Token create page received")
         performSegue(withIdentifier: "createProfileSegue", sender: self)
+    }
+    func handleDatabaseCreateFail(){
+        showError(error: "Couldn't create user in database")
+    }
+        
+    func showError(error: String) {
+        let animationDuration = 0.25
+
+        // Fade in the view
+        self.invalidLabel.text = error
+        UIView.animate(withDuration: animationDuration, animations: { () -> Void in
+            self.invalidLabel.alpha = 1
+            }) { (Bool) -> Void in
+
+                // After the animation completes, fade out the view after a delay
+
+                UIView.animate(withDuration: animationDuration, delay: 5, animations: { () -> Void in
+                    self.invalidLabel.alpha = 0
+                    },
+                    completion: nil)
+        }
     }
 
     

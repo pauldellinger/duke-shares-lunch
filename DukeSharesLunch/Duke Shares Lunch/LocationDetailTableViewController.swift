@@ -57,15 +57,15 @@ class LocationDetailTableViewController: UITableViewController {
         let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
         let restaurantEquality = "eq." + restaurant!.name
         let queryItem2 = URLQueryItem(name: "location", value: restaurantEquality)
-
+        let queryItem3 = URLQueryItem(name: "order", value: "percent")
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
         urlComponents.path = path
         urlComponents.queryItems = [queryItem]
         urlComponents.queryItems! += [queryItem2]
+        urlComponents.queryItems! += [queryItem3]
         
-
         guard let url = urlComponents.url else { return }
         //make request to addresss in parameter
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)

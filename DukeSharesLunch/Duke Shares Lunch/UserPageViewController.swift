@@ -40,39 +40,40 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let defaults = UserDefaults.standard
-        let token = defaults.string(forKey: "token")
-        print(token)
+        let email = defaults.string(forKey: "email")
         
-        if !(token?.isEmpty ?? true){
+        if !(email?.isEmpty ?? true){ //if email has already been set
             let defaults = UserDefaults.standard
             let email = defaults.string(forKey: "email")
             let password = defaults.string(forKey: "password")
-            let token = defaults.string(forKey: "token")
+            //let token = defaults.string(forKey: "token")
             self.user = User(email: email!, password: password!)
-            self.user?.token = token
-            print(self.user?.email, self.user?.password, user?.token)
-            self.performSegue(withIdentifier: "loginSegue", sender: self)
             
-        }
+            //login with saved email and password
+            
+            self.user?.login(viewController: self)
+            
+        } else{
         self.emailInput.delegate = self
         self.passwordInput.delegate = self
         emailInput.becomeFirstResponder()
         emailInput.placeholder = "email"
         passwordInput.placeholder = "password"
+        
+        //get rid of keyboard on tap
         let tap = UITapGestureRecognizer(target:self.view, action: #selector(self.view.endEditing))
         view.addGestureRecognizer(tap)
+        }
         // Do any additional setup after loading the view.
     }
     func tokenUpdated(user:User){
-           self.performSegue(withIdentifier: "loginSegue", sender: self)
-           
-       }
+        //segue to main app
+        self.performSegue(withIdentifier: "loginSegue", sender: self)
+        
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if (textField == emailInput) {
-           emailInput.text = ""
-        }
-        else if (textField == passwordInput) {
+        if (textField == passwordInput) {
            passwordInput.text = ""
         }
     }
@@ -85,6 +86,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
         }
         return false
     }
+    
     private func credentialValidate(email:String, password:String) ->Bool{
         let range = NSRange(location: 0, length: email.utf16.count)
         let regex = try! NSRegularExpression(pattern: "^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\\.[a-zA-Z](-?[a-zA-Z0-9])*)+$")
@@ -96,6 +98,22 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
         if regexPass.firstMatch(in: password, options: [], range: rangePass) == nil { return false }
         
         return true
+    }
+    func showError() {
+        let animationDuration = 0.25
+
+        // Fade in the view
+        UIView.animate(withDuration: animationDuration, animations: { () -> Void in
+            self.invalidLabel.alpha = 1
+            }) { (Bool) -> Void in
+
+                // After the animation completes, fade out the view after a delay
+
+                UIView.animate(withDuration: animationDuration, delay: 5, animations: { () -> Void in
+                    self.invalidLabel.alpha = 0
+                    },
+                    completion: nil)
+        }
     }
 
     /*
@@ -115,23 +133,6 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
                 return
         }
         nextController.user = self.user
-    }
-    
-    func showError() {
-        let animationDuration = 0.25
-
-        // Fade in the view
-        UIView.animate(withDuration: animationDuration, animations: { () -> Void in
-            self.invalidLabel.alpha = 1
-            }) { (Bool) -> Void in
-
-                // After the animation completes, fade out the view after a delay
-
-                UIView.animate(withDuration: animationDuration, delay: 5, animations: { () -> Void in
-                    self.invalidLabel.alpha = 0
-                    },
-                    completion: nil)
-        }
     }
 
 }

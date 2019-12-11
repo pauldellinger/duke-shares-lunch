@@ -128,6 +128,8 @@ class MealSelectorTableViewController: UITableViewController {
                             for item in menu {
                                 // print(item["name"]!, item["price"]!)
                                 let meal = Meal(name:item["name"] as! String, price: item["price"] as! Double)
+                                meal?.price *= 1.075 //Durham tax at WU
+                                print(meal)
                                 meals += [meal!]
                             }
                         }

@@ -23,6 +23,7 @@ class WaitForVenmoViewController: UIViewController {
     var purchase: Purchase?
     override func viewDidLoad() {
         super.viewDidLoad()
+        if purchase?.paid ?? false{ performSegue(withIdentifier: "buyFoodSegue", sender: self) }
         contentLabel.text = "Did \(purchase!.buyer.name!) (\(purchase!.buyer.venmo!)) venmo you?"
         // Do any additional setup after loading the view.
     }
