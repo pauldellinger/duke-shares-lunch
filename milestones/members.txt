@@ -1,3 +1,3 @@
-Josh Romine - Spent time learning Swift/X-Code and assisted with database setup
-AJ Eckmann - Worked on endpoints and database setup
-Paul Dellinger - Made the REST API and worked on endpoints
+Josh Romine - Spent time learning Swift/X-Code and assisted with database setup.  Helped design Login, Buy and Sell TableViews on XCode and facilitate connections to JSON
+AJ Eckmann - Worked on endpoints and database setup. Sample Seller Data, creation of JSON data for West Union menus 
+Paul Dellinger - Made the REST API and worked on endpoints. Set up the three tabs and all their view controllers. 
