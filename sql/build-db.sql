@@ -32,19 +32,27 @@ CREATE TABLE Purchase
                 paid BOOLEAN NOT NULL,
                 p_description VARCHAR(1000));
 
+--CREATE FUNCTION trg_buyernotseller_check()
+--  RETURNS trigger AS
+--$func$
+--BEGIN
+--   IF (SELECT uid from NEW)
+--   = = (SELECT uid  FROM activeseller  WHERE activerseller.saleid = NEW.saleid) THEN
+--      RAISE EXCEPTION 'buyer is seller';
+--   END IF;
+--   RETURN NEW;
+--END
+--$func$  LANGUAGE plpgsql;
 
-CREATE TABLE Meals
-            (mid serial NOT NULL PRIMARY KEY,
-            price DECIMAL(5,2) CHECK(price > 0),
-            location VARCHAR(20) NOT NULL,
-            description VARCHAR(200));
+
+--CREATE TRIGGER buyernotseller_check
+--BEFORE INSERT ON PURCHASE
+--FOR EACH ROW EXECUTE PROCEDURE trg_buyernotseller_check();
 
 
-
-
-INSERT INTO RegisteredUser VALUES(1, 'pd88@duke.edu',  'Paul Dellinger', 'paul_dellinger', 'Computer Science', 'Kilgo');
-INSERT INTO RegisteredUser VALUES(2, 'jcr34@duke.edu',  'Josh Romine', 'joshielikescash');
-INSERT INTO RegisteredUser VALUES(3, 'aje11@duke.edu',  'AJ Eckmann', 'AJs Venmo');
+INSERT INTO RegisteredUser VALUES(-1, 'pd88@duke.edu',  'Paul Dellinger', 'paul_dellinger', 'Computer Science', 'Kilgo');
+INSERT INTO RegisteredUser VALUES(-2, 'jcr74@duke.edu',  'Josh Romine', 'jcromine');
+INSERT INTO RegisteredUser VALUES(-3, 'aje11@duke.edu',  'AJ Eckmann', 'AJs Venmo');
 --INSERT INTO basic_auth.users VALUES('pd88@duke.edu', 'Password1', 'todo_user');
 --Three example users
 
@@ -63,19 +71,22 @@ INSERT INTO SellPreferences VALUES(1, 'Ginger and Soy');
 --Paul is going to buy something for Josh at il forno
 --Josh will venmo Paul based on the price
 
-INSERT INTO Meals VALUES(4001, 8.85, 'Il Forno', 'Make your own pasta bowl');
-INSERT INTO Meals VALUES(4002, 1.50, 'Il Forno', 'Extra Chicken');
+--INSERT INTO Meals VALUES(4001, 8.85, 'Il Forno', 'Make your own pasta bowl');
+--INSERT INTO Meals VALUES(4002, 1.50, 'Il Forno', 'Extra Chicken');
 
 
 CREATE VIEW ActiveRestaurants as (
 SELECT location, count(*)
 From Activeseller
 GROUP BY location
-ORDER BY count(*) DESC);
+ORDER BY count(*) DESC, location);
 
-CREATE ROLE web_anon nologin;
+DROP ROLE IF EXISTS web_anon;
+DROP ROLE IF EXISTS authenticator;
+DROP ROLE IF EXISTS todo_user;
+CREATE  ROLE web_anon nologin;
 
-create role authenticator noinherit login password 'mysecretpassword';
+create ROLE authenticator noinherit login password 'rFKC4RbY3S7j9VGz';
 grant web_anon to authenticator;
 
 create role todo_user nologin;

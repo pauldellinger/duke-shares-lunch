@@ -150,7 +150,7 @@ language plpgsql security definer;
 
 
 -- anyone can log in
-revoke all from web_anon;
+revoke all on schema basic_auth from web_anon;
 grant execute on function login(text,text) to web_anon;
 
 
@@ -158,4 +158,7 @@ grant execute on function login(text,text) to web_anon;
 revoke all on function make_user(text,text,text,text,text,text) from web_anon;
 grant execute on function make_user(text,text,text,text,text,text) to todo_user;
 
+
+--don't make josh and paul create an account every time
 INSERT INTO basic_auth.users VALUES('pd88@duke.edu','Password1','todo_user');
+Insert into basic_auth.users Values('jcr74@duke.edu', 'Password1', 'todo_user');

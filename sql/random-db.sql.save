@@ -1,0 +1,8 @@
+INSERT INTO registereduser(email,name,venmo)
+SELECT CONCAT(g.id,'@duke.edu'), g.id, CONCAT(g.id,'venmo')
+FROM generate_series(1, 10000) AS g (id);
+
+INSERT INTO activeseller(uid,ordertime,status,percent,location) 
+SELECT g.id, '2019-12-09T21:36:48', true, random(), 
+select (array['Il Forno', 'Ginger and Soy', 'Tandoor', 'Skillet', 'Farmstead', 'Sprout'])[floor(random() * 6 + 1)]
+FROM generate_series(4, 1000) AS g (id) ;
