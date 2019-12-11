@@ -72,6 +72,23 @@ class SubmitFooterViewController: UIViewController, UITextFieldDelegate {
         
         performSegue(withIdentifier: "waitForSellerSegue", sender: self)
     }
+    func handleUnsuccessfulInsert(){
+        let alert = UIAlertController(title: "Error Creating Purchase", message: "Are you buying from yourself?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                self.navigationController?.popToRootViewController(animated: true)
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

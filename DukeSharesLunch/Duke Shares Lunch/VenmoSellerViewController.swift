@@ -14,6 +14,7 @@ class VenmoSellerViewController: UIViewController {
     var cost: Double?
     
     @IBAction func goVenmoAction(_ sender: Any) {
+        tabBarController?.tabBar.isHidden = false
         let venmoHooks = "venmo://paycharge?txn=pay&recipients=\(seller!.sellerVenmo)&amount=\(cost!)&note=DukeSharesLunch"
         print(venmoHooks)
         let venmoUrl = URL(string: venmoHooks)
@@ -23,11 +24,27 @@ class VenmoSellerViewController: UIViewController {
         } else {
             //redirect to safari because the user doesn't have Instagram
             print("Venmo not installed")
+            let alert = UIAlertController(title: "Venmo Not Installed", message: "Please Intstall Venmo", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                switch action.style{
+                case .default:
+                    print("default")
+                    
+                case .cancel:
+                    print("cancel")
+                    
+                case .destructive:
+                    print("destructive")
+                    
+                    
+                }}))
+            self.present(alert, animated: true, completion: nil)
+            
         }
     }
     
     @IBOutlet weak var instructionLabel: UILabel!
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         instructionLabel.text = "Venmo \(seller!.sellerName) \n \(String(format: "%.2f", cost!))"

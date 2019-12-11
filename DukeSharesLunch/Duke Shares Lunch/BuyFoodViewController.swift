@@ -33,8 +33,8 @@ class BuyFoodViewController: UIViewController {
                 descriptionLabel.text = descriptionLabel.text! + "\n\(item)"
             }
             descriptionLabel.text = (descriptionLabel!.text ?? "") + "\n"+"Notes:\(description.last!)"
-            foodPointCostLabel.text = String(format: "%.2f", purchase!.price * (1.0/(purchase?.seller.rate)!))
-            realMoneyLabel.text = String(format: "%.2f",purchase!.price)
+            foodPointCostLabel.text = "$\(String(format: "%.2f", purchase!.price * (1.0/(purchase?.seller.rate)!)))"
+            realMoneyLabel.text = "$\(String(format: "%.2f",purchase!.price))"
             
             // Do any additional setup after loading the view.
         }

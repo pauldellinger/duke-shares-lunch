@@ -277,6 +277,11 @@ class User {
             if let httpResponse = response as? HTTPURLResponse {
                 
                 print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode != 201 {
+                    DispatchQueue.main.async{
+                        viewController?.handleUnsuccessfulInsert()
+                    }
+                }
                 if httpResponse.statusCode == 201 {
                     let locationHeader = httpResponse.allHeaderFields["Location"] as! String
                     let pid = locationHeader.components(separatedBy: ".")[1]
