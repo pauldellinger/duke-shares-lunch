@@ -1,4 +1,0 @@
-db-uri = "postgres://authenticator:mysecretpassword@localhost/postgres"
-db-schema = "lunches"
-db-anon-role = "web_anon"
-jwt-secret = "zOTMma3rOGRey8y4prnnxt08P52DXWZ5"
