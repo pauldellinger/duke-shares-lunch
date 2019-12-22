@@ -6,6 +6,7 @@
 - In the root directory you'll find our database set up files
 - The sql files are in the sql directory
 - The DukeShareLunch directory contains the iOS app
+- flask directory contains a small python app to convert firebase tokens
 
 ## Setup
 ### If you just want to see the iOS app:
@@ -19,23 +20,19 @@
   - do the above then for the backend:
   - Install psql version 10
   - Install nginx with `apt-get install nginx`
-  - type the following:
-  - `cp test.pauldellinger.com /etc/nginx/sites-available`
-
-  - `sudo ln -s /etc/nginx/sites-available/test.pauldellinger.com /etc/nginx/sites-enabled/`
-
-
-   - Open the nginx.conf file with
-   `nano etc/nginx/nginx.conf`
-
-  - Change the line `include /etc/nginx/sites-enabled/*;"`  &rarr;  `include /etc/nginx/sites-enabled/test.pauldellinger.com;`
-  - now run
-  `sudo systemctl restart nginx`
+  - Configure domain name and certification: [tutorial](https://medium.com/@nishankjaintdk/serving-a-website-on-a-registered-domain-with-https-using-nginx-and-lets-encrypt-8d482e01a682)
+  - set up [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup/?authuser=0)
+  - not sure if the flask app is going to carry over so you may have to [configure it](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uswgi-and-nginx-on-ubuntu-18-04)
+  - type `cp nginx.conf /etc/nginx/nginx.conf` (say yes to overwrite)
+  - now run `sudo systemctl restart nginx`
+  - run `gunicorn --bind 0.0.0.0:5000 wsgi:app`
 
 #### If you're fine with no authentication you should be able to stop here
 - just change build.sh so it doesn't run sql/auth.sql
 - type `./build.sh`
 - access the database with psql lunches
+- serve the database on port 3000 with ./postgrest database-server.conf
+  - remember to configure a secret key in database-server.key
 #### Configure auth:
 - follow instructions in link to clone this repository and set up pgcrypto
 https://github.com/michelp/pgjwt
@@ -43,10 +40,6 @@ https://github.com/michelp/pgjwt
 #### Add the randomly generated database:
 - `psql lunches -af sql/random-db.sql`
   - run `./build.sh` again if you want to overwrite it with empty db
-#### Configure the app for your IP address:
-- find your external IP address
-- replace every instance of '35.193.85.182' in xcode project with your IP
-  - in the works: a little script that would do this automatically
 
 ## Limitations to Current Implementation 12/10
 - Details in last section of milestones/final_report.pdf
