@@ -149,6 +149,34 @@ $BODY$
 language plpgsql security definer;
 
 
+
+drop function make_user_role;
+create or replace function
+make_user_role(id TEXT)
+  RETURNS smallint AS -- return 1 if successful, else 0
+$BODY$
+DECLARE
+BEGIN
+    -- create role for user
+      EXECUTE FORMAT (
+        'Create role %I', id);
+                  -- insert into basic_auth.users values('test2@gmail.com', 'mypassword', 'basic_user');
+    EXECUTE FORMAT (
+        'GRANT todo_user to %I',id);
+        RETURN 1;
+    -- Simple Exception
+EXCEPTION
+    WHEN others THEN
+-- give the errors in console if unsuccessful
+        raise notice 'The transaction is in an uncommittable state. '
+                 'Transaction was rolled back';
+        raise notice '% %', SQLERRM, SQLSTATE;
+        RETURN 0;
+END;
+$BODY$
+language plpgsql security definer;
+
+
 -- anyone can log in
 revoke all on schema basic_auth from web_anon;
 grant execute on function login(text,text) to web_anon;
@@ -157,7 +185,7 @@ grant execute on function login(text,text) to web_anon;
 -- only authenticated can make a new user
 revoke all on function make_user(text,text,text,text,text,text) from web_anon;
 grant execute on function make_user(text,text,text,text,text,text) to todo_user;
-
+grant execute on function make_user_role(text) to todo_user;
 
 --don't make josh and paul create an account every time
 INSERT INTO basic_auth.users VALUES('pd88@duke.edu','Password1','todo_user');
