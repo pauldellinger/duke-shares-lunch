@@ -2,23 +2,26 @@
 //  AppDelegate.swift
 //  Duke Shares Lunch
 //
-//  Created by Chris Theodore on 11/12/19.
-//  Copyright © 2019 July Boys. All rights reserved.
+//  Created by Paul Dellinger on 11/12/19.
+//  Copyright © 2019 July Guys. All rights reserved.
 //
 
 import UIKit
 import UserNotifications
+import Firebase
+import FirebaseUI
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
     let notificationCenter = UNUserNotificationCenter.current()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //FirebaseApp.configure()
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
         notificationCenter.requestAuthorization(options: options) {
             (didAllow, error) in

@@ -2,8 +2,8 @@
 //  Duke_Shares_LunchTests.swift
 //  Duke Shares LunchTests
 //
-//  Created by Chris Theodore on 11/12/19.
-//  Copyright © 2019 July Boys. All rights reserved.
+//  Created by Paul Dellinger on 11/12/19.
+//  Copyright © 2019 July Guys. All rights reserved.
 //
 
 import XCTest
@@ -88,6 +88,10 @@ class Duke_Shares_LunchTests: XCTestCase {
         print(exampleUser?.name)
         XCTAssertNotNil(exampleUser?.name)
     }
+//    func testUserGetInfo2(){
+//        
+//        let exampleUser = User.init(email: "pd88@duke.edu", password: "Password1")
+//    }
     func testloadMeals() {
         if let path = Bundle.main.path(forResource: "restaurants", ofType: "json") {
             do {

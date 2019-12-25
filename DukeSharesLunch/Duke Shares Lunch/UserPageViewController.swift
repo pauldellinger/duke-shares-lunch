@@ -9,10 +9,20 @@
 import UIKit
 import Foundation
 
-class UserPageViewController: UIViewController, UITextFieldDelegate {
+import Firebase
+import FirebaseUI
+import FirebaseAuth
+
+@objc(UserPageViewController)
+class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDelegate{
     
-    var user = User(email:"", password:"")
+    var user: User?
     
+    /** @var handle
+        @brief The handler for the auth state listener, to allow cancelling later.
+     */
+    var handle: AuthStateDidChangeListenerHandle?
+
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var invalidLabel: UILabel!
@@ -24,11 +34,13 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
             let pass = passwordInput.text!
             if credentialValidate(email: email, password: pass){
                 print("valid!")
-                self.user = User.init(email: email, password: pass)
-                // print(user?.email, user?.password)
-                user?.login(viewController: self)
-                //sleep(2)
-                // print(user?.token)
+                Auth.auth().signIn(withEmail: email, password: pass) { [weak self] authResult, error in
+                  guard let strongSelf = self else { return }
+                  // ...
+                }
+                self.user?.email = email
+                self.user?.password = pass
+                self.user?.login(viewController: self)
                 
             }
             else{
@@ -43,6 +55,9 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
         let email = defaults.string(forKey: "email")
         print(email)
         
+        FirebaseApp.configure()
+        
+        
         if !(email?.isEmpty ?? true){ //if email has already been set
             let defaults = UserDefaults.standard
             let email = defaults.string(forKey: "email")
@@ -52,7 +67,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
             
             //login with saved email and password
             
-            self.user?.login(viewController: self)
+            // self.user?.login(viewController: self)
             
         } else{
         self.emailInput.delegate = self
@@ -65,13 +80,65 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
         let tap = UITapGestureRecognizer(target:self.view, action: #selector(self.view.endEditing))
         view.addGestureRecognizer(tap)
         }
-        // Do any additional setup after loading the view.
     }
-    func tokenUpdated(user:User){
-        //segue to main app
-        self.performSegue(withIdentifier: "loginSegue", sender: self)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.handle = Auth.auth().addStateDidChangeListener { auth, signedInUser in
+            if let signedInUser = signedInUser {
+                print(signedInUser.email)
+                signedInUser.getIDTokenForcingRefresh(true) { idToken, error in
+                    if let error = error {
+                        print(error)
+                        return;
+                    }
+                    print(idToken)
+                    self.user = User(email: signedInUser.email ?? "", password: "")
+                    self.user?.token = idToken
+                    print("got here")
+                    print(self.user?.email, self.user?.password, self.user?.token)
+                    self.user?.getInfo2(completion:{user, error in
+                        if let error = error{
+                            print("get info error: ", error)
+                        }
+                        print("user's venmo: ", self.user?.venmo)
+                        if self.user?.venmo?.isEmpty ?? true{
+                            self.user?.createRole(uid: signedInUser.uid, completion: {user, error in
+                                if let error = error{
+                                    print(error)
+                                }
+                                print("user role creation successful")
+                                DispatchQueue.main.async{
+                                    self.performSegue(withIdentifier: "createProfileSegue", sender: self)
+                                }
+                            })
+                        } else{
+                            DispatchQueue.main.async{
+                                self.performSegue(withIdentifier: "loginSegue", sender: self)
+                            }
+                        }
+                        })
+                    }
+                } else {
+                let authUI = FUIAuth.defaultAuthUI()
+                // You need to adopt a FUIAuthDelegate protocol to receive callback
+                authUI?.delegate = self as FUIAuthDelegate
+                let providers: [FUIAuthProvider] = [
+                    FUIGoogleAuth(),
+                    FUIEmailAuth()
+                ]
+                authUI?.providers = providers
+                let authViewController = authUI?.authViewController()
+                self.present(authViewController!, animated: true)
+            }
+        }
         
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        Auth.auth().removeStateDidChangeListener(handle!)
+    }
+    
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if (textField == passwordInput) {
@@ -100,6 +167,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
+    
     func showError() {
         let animationDuration = 0.25
 
@@ -129,11 +197,53 @@ class UserPageViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        guard let nextController = segue.destination as? TabController
-            else {
-                return
+        if let nextController = segue.destination as? TabController{
+            nextController.user = self.user
         }
-        nextController.user = self.user
+        if let nextController = segue.destination as? CreateProfileViewController{
+            nextController.user = self.user
+        }
     }
-
+    func tokenUpdated(user:User){
+        //segue to main app
+        self.performSegue(withIdentifier: "loginSegue", sender: self)
+        
+    }
+    func authUI(_ authUI: FUIAuth, didSignInWith firebaseUser: FirebaseUI.User?, additionalInfo: AdditionalUserInfo?, error: Error?) {
+      // handle user and error as necessary
+        print("Signed in with Firebase!!!")
+        if let error = error{
+            print(error)
+            return
+        }
+        
+        firebaseUser?.getIDToken(completion: {idToken, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            print(firebaseUser?.email)
+            self.user?.token = idToken
+            self.user?.email = firebaseUser?.email
+            if (additionalInfo?.isNewUser ?? false){
+                self.user?.createRole(uid: firebaseUser?.uid ?? "", completion: {user, error in
+                    if let error = error{
+                        print(error)
+                    }
+                    print("user role creation successful")
+                    self.performSegue(withIdentifier: "createProfileSegue", sender: self)
+                })
+            } else{
+                self.user?.getInfo2(completion:{user, error in
+                    if let error = error{
+                        print(error)
+                    }
+                    print(user)
+                })
+                
+            self.performSegue(withIdentifier: "loginSegue", sender: self)
+            }
+        })
+        
+    }
 }

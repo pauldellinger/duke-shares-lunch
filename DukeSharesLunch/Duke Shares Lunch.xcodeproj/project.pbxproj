@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C4CA6966DC117164BD3296B /* Pods_Duke_Shares_LunchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43408B4C4D7554792E46BB6E /* Pods_Duke_Shares_LunchTests.framework */; };
+		7F996DE7889E6C5BDDE155E2 /* Pods_Duke_Shares_Lunch_Duke_Shares_LunchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59860C1E743C7D193EFCCE92 /* Pods_Duke_Shares_Lunch_Duke_Shares_LunchUITests.framework */; };
 		DA04220F237B697800864DEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04220E237B697800864DEE /* AppDelegate.swift */; };
 		DA042211237B697800864DEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042210237B697800864DEE /* SceneDelegate.swift */; };
-		DA042218237B697800864DEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042216237B697800864DEE /* Main.storyboard */; };
 		DA04221A237B697B00864DEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA042219237B697B00864DEE /* Assets.xcassets */; };
 		DA04221D237B697B00864DEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA04221B237B697B00864DEE /* LaunchScreen.storyboard */; };
 		DA042228237B697B00864DEE /* Duke_Shares_LunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042227237B697B00864DEE /* Duke_Shares_LunchTests.swift */; };
@@ -35,11 +36,16 @@
 		DA6AE0B0238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */; };
 		DA6AE0B1238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */; };
 		DA6AE0B2238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */; };
-		DA958254239442C200F10973 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042216237B697800864DEE /* Main.storyboard */; };
-		DA958255239442C300F10973 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042216237B697800864DEE /* Main.storyboard */; };
+		DA833A2223AD394F0064583D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA833A2123AD394F0064583D /* Main.storyboard */; };
+		DA833A2323AD394F0064583D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA833A2123AD394F0064583D /* Main.storyboard */; };
+		DA833A2423AD394F0064583D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA833A2123AD394F0064583D /* Main.storyboard */; };
 		DA958257239443BF00F10973 /* VenmoSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA958256239443BF00F10973 /* VenmoSellerViewController.swift */; };
 		DA958258239443BF00F10973 /* VenmoSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA958256239443BF00F10973 /* VenmoSellerViewController.swift */; };
 		DA958259239443BF00F10973 /* VenmoSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA958256239443BF00F10973 /* VenmoSellerViewController.swift */; };
+		DA9D8BC523AC14A400DD0C04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04220E237B697800864DEE /* AppDelegate.swift */; };
+		DA9D8BC623AC14A400DD0C04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA04220E237B697800864DEE /* AppDelegate.swift */; };
+		DA9D8BCC23AC15E600DD0C04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042210237B697800864DEE /* SceneDelegate.swift */; };
+		DA9D8BCD23AC15E600DD0C04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042210237B697800864DEE /* SceneDelegate.swift */; };
 		DABA3C9F2389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
 		DABA3CA02389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
 		DABA3CA12389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
@@ -100,9 +106,13 @@
 		DAD1E9D52393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
 		DAD1E9D62393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
 		DAD1E9D72393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
+		DADBAD4F23A71CD000337097 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DADBAD4E23A71CD000337097 /* GoogleService-Info.plist */; };
+		DADBAD5023A71CD000337097 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DADBAD4E23A71CD000337097 /* GoogleService-Info.plist */; };
+		DADBAD5123A71CD000337097 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DADBAD4E23A71CD000337097 /* GoogleService-Info.plist */; };
 		DAFBC9F8238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
 		DAFBC9F9238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
 		DAFBC9FA238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
+		E474510FF696679D292887A1 /* Pods_Duke_Shares_Lunch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5224FADDC5C1E65B4003AB /* Pods_Duke_Shares_Lunch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,10 +133,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		108FC0ED2BB33A408386061E /* Pods-Duke Shares Lunch-Duke Shares LunchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares Lunch-Duke Shares LunchUITests.debug.xcconfig"; path = "Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		19B7A068FE1786B50EEE7A72 /* Pods-Duke Shares Lunch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares Lunch.release.xcconfig"; path = "Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch.release.xcconfig"; sourceTree = "<group>"; };
+		43408B4C4D7554792E46BB6E /* Pods_Duke_Shares_LunchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duke_Shares_LunchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59860C1E743C7D193EFCCE92 /* Pods_Duke_Shares_Lunch_Duke_Shares_LunchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duke_Shares_Lunch_Duke_Shares_LunchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BA0AB29DB50CC338AC7ECFB /* Pods-Duke Shares LunchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares LunchTests.release.xcconfig"; path = "Target Support Files/Pods-Duke Shares LunchTests/Pods-Duke Shares LunchTests.release.xcconfig"; sourceTree = "<group>"; };
+		69939EE8A88DF988C8CAD6B4 /* Pods-Duke Shares Lunch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares Lunch.debug.xcconfig"; path = "Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch.debug.xcconfig"; sourceTree = "<group>"; };
+		785AFB0C4B12E68EF09E5C4B /* Pods-Duke Shares Lunch-Duke Shares LunchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares Lunch-Duke Shares LunchUITests.release.xcconfig"; path = "Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9603D1B35CB08898AA5A7EC8 /* Pods-Duke Shares LunchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares LunchTests.debug.xcconfig"; path = "Target Support Files/Pods-Duke Shares LunchTests/Pods-Duke Shares LunchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA04220B237B697800864DEE /* Duke Shares Lunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duke Shares Lunch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA04220E237B697800864DEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA042210237B697800864DEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DA042217237B697800864DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA042219237B697B00864DEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA04221C237B697B00864DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA04221E237B697B00864DEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,9 +157,12 @@
 		DA042246237B966700864DEE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		DA2FB73B237F46F800323AED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DA41213723AC172A00BEDFCE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSelectorTableViewController.swift; sourceTree = "<group>"; };
+		DA833A2123AD394F0064583D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
+		DA833A2623AD39600064583D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
 		DA958256239443BF00F10973 /* VenmoSellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenmoSellerViewController.swift; sourceTree = "<group>"; };
 		DABA3C9E2389CB3700576315 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		DABA3CAB238A070000576315 /* restaurants.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
@@ -164,7 +184,10 @@
 		DAD1E9CC23934F8700FE55E7 /* WaitForVenmoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForVenmoViewController.swift; sourceTree = "<group>"; };
 		DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyFoodViewController.swift; sourceTree = "<group>"; };
 		DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForSellerViewController.swift; sourceTree = "<group>"; };
+		DADBAD4D23A7139300337097 /* Duke Shares Lunch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Duke Shares Lunch.entitlements"; sourceTree = "<group>"; };
+		DADBAD4E23A71CD000337097 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSelectorTableViewCell.swift; sourceTree = "<group>"; };
+		EB5224FADDC5C1E65B4003AB /* Pods_Duke_Shares_Lunch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duke_Shares_Lunch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E474510FF696679D292887A1 /* Pods_Duke_Shares_Lunch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C4CA6966DC117164BD3296B /* Pods_Duke_Shares_LunchTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,12 +211,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F996DE7889E6C5BDDE155E2 /* Pods_Duke_Shares_Lunch_Duke_Shares_LunchUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24B3274E1AC5B7ED2BE5594F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				69939EE8A88DF988C8CAD6B4 /* Pods-Duke Shares Lunch.debug.xcconfig */,
+				19B7A068FE1786B50EEE7A72 /* Pods-Duke Shares Lunch.release.xcconfig */,
+				108FC0ED2BB33A408386061E /* Pods-Duke Shares Lunch-Duke Shares LunchUITests.debug.xcconfig */,
+				785AFB0C4B12E68EF09E5C4B /* Pods-Duke Shares Lunch-Duke Shares LunchUITests.release.xcconfig */,
+				9603D1B35CB08898AA5A7EC8 /* Pods-Duke Shares LunchTests.debug.xcconfig */,
+				5BA0AB29DB50CC338AC7ECFB /* Pods-Duke Shares LunchTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5AFE1217B6704B8BA2D0FEA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB5224FADDC5C1E65B4003AB /* Pods_Duke_Shares_Lunch.framework */,
+				59860C1E743C7D193EFCCE92 /* Pods_Duke_Shares_Lunch_Duke_Shares_LunchUITests.framework */,
+				43408B4C4D7554792E46BB6E /* Pods_Duke_Shares_LunchTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DA042202237B697800864DEE = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +248,8 @@
 				DA042226237B697B00864DEE /* Duke Shares LunchTests */,
 				DA042231237B697B00864DEE /* Duke Shares LunchUITests */,
 				DA04220C237B697800864DEE /* Products */,
+				24B3274E1AC5B7ED2BE5594F /* Pods */,
+				5AFE1217B6704B8BA2D0FEA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -215,41 +266,11 @@
 		DA04220D237B697800864DEE /* Duke Shares Lunch */ = {
 			isa = PBXGroup;
 			children = (
-				DA2FB73B237F46F800323AED /* User.swift */,
-				DAD1E991238F317700FE55E7 /* Meal.swift */,
-				DAD1E9C42391D1CC00FE55E7 /* Purchase.swift */,
-				DACE3C92237C7AA80030804C /* Seller.swift */,
-				DA042246237B966700864DEE /* Location.swift */,
-				DA04220E237B697800864DEE /* AppDelegate.swift */,
-				DA042210237B697800864DEE /* SceneDelegate.swift */,
-				DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */,
-				DAD1E9CC23934F8700FE55E7 /* WaitForVenmoViewController.swift */,
-				DAD1E9C82393249700FE55E7 /* PurchaseApprovalViewController.swift */,
-				DAD1E9C02391C35E00FE55E7 /* ActiveSalesTableViewCell.swift */,
-				DAD1E9BC23917DB600FE55E7 /* ActiveSalesTableViewController.swift */,
-				DAD1E9B42390AB4200FE55E7 /* MySalesViewController.swift */,
-				DAD1E9B023905DCE00FE55E7 /* SalePickerViewController.swift */,
-				DAD1E9A8238F656500FE55E7 /* SubmitSellLocationViewController.swift */,
-				DAD1E99C238F584500FE55E7 /* SellLocationTableViewController.swift */,
-				DAD1E9A0238F58AC00FE55E7 /* SellLocationTableViewCell.swift */,
-				DA958256239443BF00F10973 /* VenmoSellerViewController.swift */,
-				DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */,
-				DAD1E98D238F196E00FE55E7 /* SubmitFooterViewController.swift */,
-				DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */,
-				DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */,
-				DACE3CDC237CC5060030804C /* LocationDetailTableViewController.swift */,
-				DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */,
-				DA042242237B8D9400864DEE /* LocationTableViewController.swift */,
-				DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */,
-				DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */,
-				DABA3C9E2389CB3700576315 /* TabController.swift */,
-				DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */,
-				DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */,
-				DA042216237B697800864DEE /* Main.storyboard */,
-				DA04221B237B697B00864DEE /* LaunchScreen.storyboard */,
-				DABA3CAB238A070000576315 /* restaurants.json */,
-				DA04221E237B697B00864DEE /* Info.plist */,
-				DA042219237B697B00864DEE /* Assets.xcassets */,
+				DA9D8BCB23AC15DA00DD0C04 /* Application */,
+				DA9D8BC223AC11FD00DD0C04 /* Models */,
+				DA9D8BC923AC151A00DD0C04 /* Views */,
+				DA9D8BC823AC14EE00DD0C04 /* Controllers */,
+				DADBAD4E23A71CD000337097 /* GoogleService-Info.plist */,
 			);
 			path = "Duke Shares Lunch";
 			sourceTree = "<group>";
@@ -272,6 +293,104 @@
 			path = "Duke Shares LunchUITests";
 			sourceTree = "<group>";
 		};
+		DA9D8BC223AC11FD00DD0C04 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DA2FB73B237F46F800323AED /* User.swift */,
+				DAD1E991238F317700FE55E7 /* Meal.swift */,
+				DAD1E9C42391D1CC00FE55E7 /* Purchase.swift */,
+				DACE3C92237C7AA80030804C /* Seller.swift */,
+				DA042246237B966700864DEE /* Location.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		DA9D8BC323AC144800DD0C04 /* BuyerFlow */ = {
+			isa = PBXGroup;
+			children = (
+				DA958256239443BF00F10973 /* VenmoSellerViewController.swift */,
+				DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */,
+				DAD1E98D238F196E00FE55E7 /* SubmitFooterViewController.swift */,
+				DA6AE0AF238A0D5A00429075 /* MealSelectorTableViewController.swift */,
+				DACE3CDC237CC5060030804C /* LocationDetailTableViewController.swift */,
+				DA042242237B8D9400864DEE /* LocationTableViewController.swift */,
+			);
+			name = BuyerFlow;
+			sourceTree = "<group>";
+		};
+		DA9D8BC423AC145F00DD0C04 /* SellerFlow */ = {
+			isa = PBXGroup;
+			children = (
+				DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */,
+				DAD1E9CC23934F8700FE55E7 /* WaitForVenmoViewController.swift */,
+				DAD1E9C82393249700FE55E7 /* PurchaseApprovalViewController.swift */,
+				DAD1E9BC23917DB600FE55E7 /* ActiveSalesTableViewController.swift */,
+				DAD1E9B42390AB4200FE55E7 /* MySalesViewController.swift */,
+				DAD1E9B023905DCE00FE55E7 /* SalePickerViewController.swift */,
+				DAD1E9A8238F656500FE55E7 /* SubmitSellLocationViewController.swift */,
+				DAD1E99C238F584500FE55E7 /* SellLocationTableViewController.swift */,
+			);
+			name = SellerFlow;
+			sourceTree = "<group>";
+		};
+		DA9D8BC723AC14D100DD0C04 /* UserFlow */ = {
+			isa = PBXGroup;
+			children = (
+				DA5AABBE23878F2500CB1B5C /* UserDetailViewController.swift */,
+				DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */,
+				DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */,
+			);
+			name = UserFlow;
+			sourceTree = "<group>";
+		};
+		DA9D8BC823AC14EE00DD0C04 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DA41213723AC172A00BEDFCE /* GoogleService-Info.plist */,
+				DABA3C9E2389CB3700576315 /* TabController.swift */,
+				DA9D8BC323AC144800DD0C04 /* BuyerFlow */,
+				DA9D8BC423AC145F00DD0C04 /* SellerFlow */,
+				DA9D8BC723AC14D100DD0C04 /* UserFlow */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		DA9D8BC923AC151A00DD0C04 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DA833A2123AD394F0064583D /* Main.storyboard */,
+				DA9D8BCA23AC158300DD0C04 /* Cells */,
+				DA04221B237B697B00864DEE /* LaunchScreen.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		DA9D8BCA23AC158300DD0C04 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DA833A2623AD39600064583D /* Main.storyboard */,
+				DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */,
+				DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */,
+				DAD1E9C02391C35E00FE55E7 /* ActiveSalesTableViewCell.swift */,
+				DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */,
+				DAD1E9A0238F58AC00FE55E7 /* SellLocationTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		DA9D8BCB23AC15DA00DD0C04 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				DA04220E237B697800864DEE /* AppDelegate.swift */,
+				DA042210237B697800864DEE /* SceneDelegate.swift */,
+				DADBAD4D23A7139300337097 /* Duke Shares Lunch.entitlements */,
+				DABA3CAB238A070000576315 /* restaurants.json */,
+				DA04221E237B697B00864DEE /* Info.plist */,
+				DA042219237B697B00864DEE /* Assets.xcassets */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -279,9 +398,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA042237237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares Lunch" */;
 			buildPhases = (
+				068E2ED62427A764D64F43B6 /* [CP] Check Pods Manifest.lock */,
 				DA042207237B697800864DEE /* Sources */,
 				DA042208237B697800864DEE /* Frameworks */,
 				DA042209237B697800864DEE /* Resources */,
+				CAB4CFC0D4309848848A0D98 /* [CP] Embed Pods Frameworks */,
+				84D4A093864A53FE857BE08D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -296,6 +418,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA04223A237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares LunchTests" */;
 			buildPhases = (
+				D6965D502432053F3376A169 /* [CP] Check Pods Manifest.lock */,
 				DA04221F237B697B00864DEE /* Sources */,
 				DA042220237B697B00864DEE /* Frameworks */,
 				DA042221237B697B00864DEE /* Resources */,
@@ -314,9 +437,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA04223D237B697B00864DEE /* Build configuration list for PBXNativeTarget "Duke Shares LunchUITests" */;
 			buildPhases = (
+				49E94A4E57388E4758F80D5D /* [CP] Check Pods Manifest.lock */,
 				DA04222A237B697B00864DEE /* Sources */,
 				DA04222B237B697B00864DEE /* Frameworks */,
 				DA04222C237B697B00864DEE /* Resources */,
+				3EC06C59ADFE042B01634AD4 /* [CP] Embed Pods Frameworks */,
+				55EF1F180CE9E459E6423590 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -377,9 +503,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DABA3CAC238A070000576315 /* restaurants.json in Resources */,
+				DA833A2223AD394F0064583D /* Main.storyboard in Resources */,
 				DA04221D237B697B00864DEE /* LaunchScreen.storyboard in Resources */,
+				DADBAD4F23A71CD000337097 /* GoogleService-Info.plist in Resources */,
 				DA04221A237B697B00864DEE /* Assets.xcassets in Resources */,
-				DA042218237B697800864DEE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,8 +514,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA833A2323AD394F0064583D /* Main.storyboard in Resources */,
 				DABA3CAD238A070000576315 /* restaurants.json in Resources */,
-				DA958254239442C200F10973 /* Main.storyboard in Resources */,
+				DADBAD5023A71CD000337097 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,12 +524,150 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA833A2423AD394F0064583D /* Main.storyboard in Resources */,
 				DABA3CAE238A070000576315 /* restaurants.json in Resources */,
-				DA958255239442C300F10973 /* Main.storyboard in Resources */,
+				DADBAD5123A71CD000337097 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		068E2ED62427A764D64F43B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Duke Shares Lunch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3EC06C59ADFE042B01634AD4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49E94A4E57388E4758F80D5D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Duke Shares Lunch-Duke Shares LunchUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		55EF1F180CE9E459E6423590 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		84D4A093864A53FE857BE08D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CAB4CFC0D4309848848A0D98 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6965D502432053F3376A169 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Duke Shares LunchTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DA042207237B697800864DEE /* Sources */ = {
@@ -447,6 +713,7 @@
 			files = (
 				DAD1E99E238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */,
 				DA958258239443BF00F10973 /* VenmoSellerViewController.swift in Sources */,
+				DA9D8BCD23AC15E600DD0C04 /* SceneDelegate.swift in Sources */,
 				DAD1E98F238F196E00FE55E7 /* SubmitFooterViewController.swift in Sources */,
 				DAD1E9D62393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */,
 				DAD1E9B223905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
@@ -463,6 +730,7 @@
 				DA2FB73D237F46F800323AED /* User.swift in Sources */,
 				DA1D7F03239B200E00B042F4 /* CreateProfileViewController.swift in Sources */,
 				DA5AABC023878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
+				DA9D8BC623AC14A400DD0C04 /* AppDelegate.swift in Sources */,
 				DAD1E9D2239357F000FE55E7 /* BuyFoodViewController.swift in Sources */,
 				DAD1E9C22391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
 				DAD1E9BE23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */,
@@ -483,6 +751,7 @@
 			files = (
 				DAD1E99F238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */,
 				DA958259239443BF00F10973 /* VenmoSellerViewController.swift in Sources */,
+				DA9D8BCC23AC15E600DD0C04 /* SceneDelegate.swift in Sources */,
 				DAD1E990238F196E00FE55E7 /* SubmitFooterViewController.swift in Sources */,
 				DAD1E9D72393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */,
 				DAD1E9B323905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
@@ -499,6 +768,7 @@
 				DA2FB73E237F46F800323AED /* User.swift in Sources */,
 				DA1D7F04239B200E00B042F4 /* CreateProfileViewController.swift in Sources */,
 				DA5AABC123878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
+				DA9D8BC523AC14A400DD0C04 /* AppDelegate.swift in Sources */,
 				DAD1E9D3239357F000FE55E7 /* BuyFoodViewController.swift in Sources */,
 				DAD1E9C32391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
 				DAD1E9BF23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */,
@@ -529,14 +799,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		DA042216237B697800864DEE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA042217237B697800864DEE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DA04221B237B697B00864DEE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -664,8 +926,10 @@
 		};
 		DA042238237B697B00864DEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69939EE8A88DF988C8CAD6B4 /* Pods-Duke Shares Lunch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Duke Shares Lunch/Duke Shares Lunch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6GH5DL24KD;
 				INFOPLIST_FILE = "Duke Shares Lunch/Info.plist";
@@ -683,8 +947,10 @@
 		};
 		DA042239237B697B00864DEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19B7A068FE1786B50EEE7A72 /* Pods-Duke Shares Lunch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Duke Shares Lunch/Duke Shares Lunch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6GH5DL24KD;
 				INFOPLIST_FILE = "Duke Shares Lunch/Info.plist";
@@ -702,6 +968,7 @@
 		};
 		DA04223B237B697B00864DEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9603D1B35CB08898AA5A7EC8 /* Pods-Duke Shares LunchTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -724,6 +991,7 @@
 		};
 		DA04223C237B697B00864DEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BA0AB29DB50CC338AC7ECFB /* Pods-Duke Shares LunchTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -746,6 +1014,7 @@
 		};
 		DA04223E237B697B00864DEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 108FC0ED2BB33A408386061E /* Pods-Duke Shares Lunch-Duke Shares LunchUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -766,6 +1035,7 @@
 		};
 		DA04223F237B697B00864DEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 785AFB0C4B12E68EF09E5C4B /* Pods-Duke Shares Lunch-Duke Shares LunchUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

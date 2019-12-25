@@ -26,7 +26,7 @@ class User {
         
         self.email = email
         self.password = password
-        if email.isEmpty || password.isEmpty {
+        if email.isEmpty {
             return nil
         }
     }
@@ -48,22 +48,24 @@ class User {
     
     
     func createUser(viewController: CreateProfileViewController?){
+        print("creating user!")
         var parameters : String
-        if self.dorm!.isEmpty || self.major!.isEmpty{
+        if self.dorm?.isEmpty ?? true || self.major?.isEmpty ?? true{
             // don't send empty dorm and major, default is null
             parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\" }"
         } else{
             parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\", \"major\": \"\(self.major ?? "")\", \"dorm\": \"\(self.dorm ?? "")\" }"
         }
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "http://35.193.85.182/rpc/make_user")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://www.pdellinger.com/rpc/make_user")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
         request.httpBody = postData
         //make request to addresss in parameter
         //This token will work for everyone  - need a way to generate and have them expire after one use
-        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidG9kb191c2VyIn0.IWnJCBgXAYfPGA-zB4JPlcAGfDYkwTwCTmQM-boguV8", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        print(request.allHTTPHeaderFields)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 print(String(describing: error))
@@ -109,7 +111,7 @@ class User {
         let parameters = "{ \"email\": \"\(email)\", \"pass\": \"\(password)\" }"
         
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "http://35.193.85.182/rpc/login")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://www.pdellinger.com/rpc/login")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -184,8 +186,8 @@ class User {
     
     func getInfo(viewController:TabController?){
         print("getting info!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/registereduser"
         let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
         var urlComponents = URLComponents()
@@ -272,7 +274,7 @@ class User {
         let parameters = "{  \"saleid\": \(seller.saleid), \"bid\": \(self.uid!), \"price\": \(price), \"approve\": false, \"paid\": false, \"p_description\": \"\(description)\"}"
         print(parameters)
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "http://35.193.85.182/purchase")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://www.pdellinger.com/purchase")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -321,7 +323,7 @@ class User {
         // postBody = genPostBody(locations)
         
         let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
-        var request = URLRequest(url: URL(string: "http://35.193.85.182/activeseller")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://www.pdellinger.com/activeseller")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("resolution=merge-duplicates", forHTTPHeaderField: "Prefer")
         
@@ -386,8 +388,8 @@ class User {
     
     func getUserSales(viewcontroller: Any?){
         print("getting active sales!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
         let uidEquality = "eq.\(self.uid!)"
@@ -470,8 +472,8 @@ class User {
     
     func getPurchases(viewController: Any?){
         print("getting purchases!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/rpc/seller_purchases"
         let queryItem = URLQueryItem(name: "sellerid", value: String(self.uid!))
         var urlComponents = URLComponents()
@@ -571,8 +573,8 @@ class User {
     }
     func checkPurchase(pid:Int, viewController: WaitForSellerViewController?){
         print("looking for purchase!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(pid)")
         var urlComponents = URLComponents()
@@ -654,8 +656,8 @@ class User {
     }
     func removePurchase(pid: Int, viewController: WaitForSellerViewController?){
         print("Removing purchase!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(pid)")
         var urlComponents = URLComponents()
@@ -696,8 +698,8 @@ class User {
     }
     func removeSales(viewController: MySalesViewController?){
         print("pausing active sales!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/activeseller"
         let uidEquality = "eq.\(self.uid!)"
         let queryItem = URLQueryItem(name: "uid", value: uidEquality)
@@ -746,8 +748,8 @@ class User {
     
     func pauseSales(viewController: MySalesViewController?){
         print("pausing active sales!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "select", value: "uid,status,location")
         let uidEquality = "eq.\(self.uid!)"
@@ -801,6 +803,209 @@ class User {
         //We have to call the task here because it's asynchronous
         task.resume()
     }
+    
+    func createRole(uid: String, completion: @escaping (_ user: User, _ error: String?)-> ()){
+        
+        print("pausing active sales!")
+        let scheme = "https"
+        let host = "www.pdellinger.com"
+        let path = "/rpc/make_user_role"
+
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        print(url)
+        let parameters = "{ \"id\": \"\(uid)\"}"
+        
+        let postData = parameters.data(using: .utf8)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.httpMethod = "POST"
+
+        //specify type of request
+        request.httpBody = postData
+
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        
+        //make request to addresss in parameter
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode == 200 {
+                    print("Paused the Sales!")
+                }
+                else{
+                    print("Did not get 204 code, something went wrong")
+                    completion(self, String(httpResponse.statusCode))
+                    return
+                }
+            }
+            do{
+                if let data = data{
+                    let stringInt = String.init(data: data, encoding: String.Encoding.utf8)
+                    let responseInt = Int.init(stringInt ?? "")
+                    if responseInt == 1 { completion(self,nil)}
+                    else{
+                        completion(self, "User Creation Failed")
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    
+    func getInfo2( completion: @escaping (_ user: User, _ error: String?)-> ()){
+        print("getting info!")
+        let scheme = "https"
+        let host = "www.pdellinger.com"
+        let path = "/registereduser"
+        let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        // print(url)
+        
+        //specify type of request
+        request.httpMethod = "GET"
+        
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        //make request to addresss in parameter
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200{
+                    completion(self, String(httpResponse.statusCode))
+                    return
+                }
+                
+            }
+            guard let data = data else {
+                completion(self, String(describing: error))
+                return
+            }
+            do{
+                //print(data)
+                
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+                
+                //print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    completion(self, "Couldn't convert to JSON")
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+                for dic in jsonArray{
+                    
+                    guard let name = dic["name"] else {
+                        fatalError("no name in json")
+                    }
+                    
+                    self.name = name as? String
+                    guard let venmo = dic["venmo"] else {
+                        fatalError("no venmo in json")
+                    }
+                    
+                    self.venmo = venmo as? String
+                    
+                    self.uid = dic["uid"] as? Int
+                    
+                    self.name = dic["name"] as? String
+                    
+                    self.venmo = dic["venmo"] as? String
+                    
+                    self.major = dic["major"] as? String
+                    
+                    self.dorm = dic["dorm"] as? String
+                    
+                    print("set the existing user values")
+                }
+                completion(self, nil)
+                return
+                //reload the table with the new values
+                //Response not in JSON format
+            } catch let parsingError {
+                completion(self, String(describing: parsingError))
+                return
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
+    
+    func addUser( completion: @escaping (_ user: User, _ error: String?)-> ()){
+        print("getting info!")
+        let scheme = "https"
+        let host = "www.pdellinger.com"
+        let path = "/registereduser"
+        let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        
+        var parameters: String
+        
+        if self.dorm?.isEmpty ?? true || self.major?.isEmpty ?? true{
+            // don't send empty dorm and major, default is null
+            parameters = "{ \"email\": \"\(self.email!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\" }"
+        } else{
+            parameters = "{ \"email\": \"\(self.email!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\", \"major\": \"\(self.major ?? "")\", \"dorm\": \"\(self.dorm ?? "")\" }"
+        }
+        
+        let postData = parameters.data(using: .utf8)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        
+        //make request to addresss in parameter
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode != 201 {
+                    completion(self, String(httpResponse.statusCode))
+                    return
+                }
+                if httpResponse.statusCode == 201 {
+                    let locationHeader = httpResponse.allHeaderFields["Location"] as! String
+                    self.uid = Int(locationHeader.components(separatedBy: ".")[1])
+                    completion(self, nil)
+                    return
+                }
+                else{
+                    print("Did not get 201 code, row not inserted")
+                }
+            }
+            
+        }
+        
+        task.resume()
+    }
+    
 }
 
 

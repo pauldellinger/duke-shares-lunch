@@ -2,7 +2,7 @@
 //  TabController.swift
 //  Duke Shares Lunch
 //
-//  Created by Chris Theodore on 11/23/19.
+//  Created by Paul Dellinger on 11/23/19.
 //  Copyright © 2019 July Guys. All rights reserved.
 //
 

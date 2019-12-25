@@ -2,8 +2,8 @@
 //  LocationTableViewController.swift
 //  Duke Shares Lunch
 //
-//  Created by Chris Theodore on 11/12/19.
-//  Copyright © 2019 July Boys. All rights reserved.
+//  Created by Paul Dellinger on 11/12/19.
+//  Copyright © 2019 July Guys. All rights reserved.
 //
 
 import UIKit
@@ -31,6 +31,9 @@ class LocationTableViewController: UITableViewController {
         }
         locations += [location1,location2,location3]
     }
+    override func viewDidAppear(_ animated: Bool) {
+        getDataFromUrl(website: "https://www.pdellinger.com/activerestaurants")
+    }
     
     override func viewDidLoad() {
         //required function for controller
@@ -46,11 +49,11 @@ class LocationTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         //Make request for data, add it to locations (global variable)
-        getDataFromUrl(website: "http://35.193.85.182/activerestaurants")
+        // getDataFromUrl(website: "https://www.pdellinger.com/activerestaurants")
         
     }
     @objc func refresh(){
-        getDataFromUrl(website: "http://35.193.85.182/activerestaurants")
+        getDataFromUrl(website: "https://www.pdellinger.com/activerestaurants")
     }
 
     // MARK: - Table view data source
@@ -98,7 +101,7 @@ class LocationTableViewController: UITableViewController {
         request.httpMethod = "GET"
         
         //authorization
-        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidG9kb191c2VyIn0.IWnJCBgXAYfPGA-zB4JPlcAGfDYkwTwCTmQM-boguV8", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(user?.token ?? "")", forHTTPHeaderField: "Authorization")
         
         //Use the URLSession built in to make a dataTask (basically a request)
         

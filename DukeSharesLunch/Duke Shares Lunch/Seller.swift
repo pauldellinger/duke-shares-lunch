@@ -2,7 +2,7 @@
 //  Seller.swift
 //  Duke Shares Lunch
 //
-//  Created by Chris Theodore on 11/13/19.
+//  Created by Paul Dellinger on 11/13/19.
 //  Copyright © 2019 July Guys. All rights reserved.
 //
 
@@ -86,8 +86,8 @@ class Seller{
     
     func remove(token: String, viewController: Any?){
         print("Removing from ActiveSeller!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "saleid", value: "eq.\(self.saleid)")
         var urlComponents = URLComponents()

@@ -2,8 +2,8 @@
 //  Duke_Shares_LunchUITests.swift
 //  Duke Shares LunchUITests
 //
-//  Created by Chris Theodore on 11/12/19.
-//  Copyright © 2019 July Boys. All rights reserved.
+//  Created by Paul Dellinger on 11/12/19.
+//  Copyright © 2019 July Guys. All rights reserved.
 //
 
 import XCTest

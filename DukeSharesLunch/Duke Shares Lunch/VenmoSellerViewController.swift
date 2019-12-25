@@ -2,7 +2,7 @@
 //  VenmoSellerViewController.swift
 //  Duke Shares Lunch
 //
-//  Created by Chris Theodore on 12/1/19.
+//  Created by Paul Dellinger on 12/1/19.
 //  Copyright © 2019 July Guys. All rights reserved.
 //
 

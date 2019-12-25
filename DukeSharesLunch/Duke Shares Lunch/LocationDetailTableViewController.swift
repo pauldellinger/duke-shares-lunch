@@ -51,8 +51,8 @@ class LocationDetailTableViewController: UITableViewController {
     private func getDataFromUrl(){
         
         
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
         let restaurantEquality = "eq." + restaurant!.name
