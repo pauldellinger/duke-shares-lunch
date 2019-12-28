@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseUI
 
 class UserDetailViewController: UIViewController {
 
@@ -19,6 +20,9 @@ class UserDetailViewController: UIViewController {
  
     
     @IBAction func logoutAction(_ sender: Any) {
+        let authUI = FUIAuth.defaultAuthUI()
+        
+        do {try authUI?.signOut() }catch { print("no user to sign out")}
         let defaults = UserDefaults.standard
         defaults.set("", forKey: "email")
         defaults.set("", forKey: "password")
@@ -34,8 +38,6 @@ class UserDetailViewController: UIViewController {
         venmoLabel.text = user?.venmo
         dormLabel.text = user?.dorm
         majorLabel.text = user?.major
-        
-        // Do any additional setup after loading the view.
     }
     
 

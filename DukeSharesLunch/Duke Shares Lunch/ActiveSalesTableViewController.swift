@@ -2,7 +2,7 @@
 //  ActiveSalesTableViewController.swift
 //  Duke Shares Lunch
 //
-//  Created by Chris Theodore on 11/29/19.
+//  Created by Paul Dellinger on 11/29/19.
 //  Copyright © 2019 July Guys. All rights reserved.
 //
 
@@ -54,11 +54,46 @@ class ActiveSalesTableViewController: UITableViewController {
         else { return sales[1].count }
     }
     
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        // view.title
+        view.backgroundColor = .lightText
+        view.tintColor = UIColor.lightText.withAlphaComponent(1)
+      
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont.systemFont(ofSize: 26)
+        
+
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 2 { return "Your Sales"}
         if section == 1 { return "Waiting for Approval"}
         else { return "Waiting for Venmo"}
+    }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+        if section == 2 {
+            if user?.allSales?.count ?? 0 > 0{
+                return 50
+            }else{
+                return 0
+            }
+        }
+        if section == 1{
+            if sales[0].count > 0{
+                return 50
+            }else{
+                return 0
+            }
+        }
+        else{
+            if sales[1].count > 0 {
+                return 50
+            }else{
+                return 0
+            }
+        }
     }
     
     func handleSuccessfulGetSales(){
@@ -239,6 +274,13 @@ class ActiveSalesTableViewController: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // this will turn on `masksToBounds` just before showing the cell
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
     func handleSaleRemoval(){

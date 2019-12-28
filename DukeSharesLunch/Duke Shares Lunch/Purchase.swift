@@ -2,7 +2,7 @@
 //  Purchase.swift
 //  Duke Shares Lunch
 //
-//  Created by Chris Theodore on 11/29/19.
+//  Created by Paul Dellinger on 11/29/19.
 //  Copyright © 2019 July Guys. All rights reserved.
 //
 
@@ -31,8 +31,8 @@ class Purchase {
     
     func approve(user: User,viewController: PurchaseApprovalViewController?){
         print("Approving purchase!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()
@@ -79,8 +79,8 @@ class Purchase {
     }
     func decline(user: User, viewController: Any?){
         print("Removing purchase!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()
@@ -133,8 +133,8 @@ class Purchase {
     
     func markPaid(user: User, viewController: WaitForVenmoViewController?){
         print("Approving purchase!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()
@@ -180,8 +180,8 @@ class Purchase {
     }
     func complete(user: User, viewController: BuyFoodViewController?){
         print("Approving purchase!")
-        let scheme = "http"
-        let host = "35.193.85.182"
+        let scheme = "https"
+        let host = "www.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()

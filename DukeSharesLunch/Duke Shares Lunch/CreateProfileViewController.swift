@@ -2,7 +2,7 @@
 //  CreateProfileViewController.swift
 //  Duke Shares Lunch
 //
-//  Created by Chris Theodore on 12/6/19.
+//  Created by Paul Dellinger on 12/6/19.
 //  Copyright © 2019 July Guys. All rights reserved.
 //
 
@@ -15,17 +15,36 @@ class CreateProfileViewController: UIViewController {
     
     var user: User?
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passwordConfirmField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var venmoField: UITextField!
     @IBOutlet weak var majorField: UITextField!
     @IBOutlet weak var dormField: UITextField!
     
     @IBAction func submitAction(_ sender: Any) {
         if validate(){
-            user = User(name: nameField.text!, email: emailField.text!, password: passwordField.text!, venmo: venmoField.text!, major: majorField.text, dorm: dormField.text)
-            user?.createUser(viewController: self)
+            // user = User(name: nameField.text!, email: emailField.text!, password: passwordField.text!, venmo: venmoField.text!, major: majorField.text, dorm: dormField.text)
+            user?.venmo = venmoField.text
+            user?.name = nameField.text
+            user?.major = majorField.text
+            user?.dorm = dormField.text
+            
+            
+            user?.addUser(completion: { user, error in
+                if let error = error{
+                    print(error)
+                    return
+                }
+                
+                self.user = user
+                if (self.user?.uid) != nil{
+                    DispatchQueue.main.async{
+                        self.handleSuccessfulCreate()
+                    }
+                } else{
+                    DispatchQueue.main.async{
+                        self.showError(error: error ?? "Error creating user in database")
+                    }
+                }
+            })
         }
         else{
             showError(error: "Invalid fields\nDo you have an uppercase letter and digit in your password?")
@@ -40,17 +59,19 @@ class CreateProfileViewController: UIViewController {
     }
     func validate()->Bool{
         let name = nameField.text ?? ""
-        let email = emailField.text ?? ""
-        let password = passwordField.text ?? ""
-        let passwordConfirm = passwordField.text ?? ""
+        //let email = emailField.text ?? ""
+        //let password = passwordField.text ?? ""
+        //let passwordConfirm = passwordField.text ?? ""
         let venmo = venmoField.text ?? ""
         let dorm = dormField.text ?? "No dorm"
         let major = majorField.text ?? "No Major"
+        /*
         if password != passwordConfirm {
             return false
         }
+        */
         
-
+        /*
         if !regexIt(text: email, regex: try! NSRegularExpression(pattern: "^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\\.[a-zA-Z](-?[a-zA-Z0-9])*)+$")){
             //invalid email
             return false
@@ -59,6 +80,7 @@ class CreateProfileViewController: UIViewController {
             //invalid password
             return false
         }
+        */
         if !regexIt(text: venmo, regex: try! NSRegularExpression(pattern:"^(?=.*[a-z])[a-zA-Z-_\\d]{6,30}$")){
             //invalid venmo
             return false

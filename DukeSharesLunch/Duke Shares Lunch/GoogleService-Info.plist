@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>867010623555-0gtve1o1e0og32l2fd4887bthi4ta59q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.867010623555-0gtve1o1e0og32l2fd4887bthi4ta59q</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC-pwdu49hgkWvq-LmT-RcgtpzZm1FJWoU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>867010623555</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>July-Guys.Duke-Shares-Lunch</string>
+	<key>PROJECT_ID</key>
+	<string>duke-shares-lunch</string>
+	<key>STORAGE_BUCKET</key>
+	<string>duke-shares-lunch.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:867010623555:ios:7292757ef1f2474124fcf6</string>
+	<key>DATABASE_URL</key>
+	<string>https://duke-shares-lunch.firebaseio.com</string>
+</dict>
+</plist>
