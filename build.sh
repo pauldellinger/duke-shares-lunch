@@ -2,6 +2,7 @@
 echo "This should set up the psql database with some sample data,"
 echo "and allow you to run the API"
 dropdb lunches; createdb lunches; psql lunches -af sql/build-db.sql
+psql lunches -af sql/rls.sql
 psql lunches -af sql/seller-purchases.sql
 psql lunches -af sql/no-rate-change.sql
 psql lunches -af sql/auth.sql

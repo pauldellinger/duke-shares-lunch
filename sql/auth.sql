@@ -159,11 +159,13 @@ DECLARE
 BEGIN
     -- create role for user
       EXECUTE FORMAT (
-        'Create role %I', id);
+        'Create role "%I"', id);
                   -- insert into basic_auth.users values('test2@gmail.com', 'mypassword', 'basic_user');
     EXECUTE FORMAT (
-        'GRANT todo_user to %I',id);
-        RETURN 1;
+        'GRANT todo_user to "%I"',id);
+    EXECUTE FORMAT (
+	'GRANT "%I" to authenticator', id);
+    RETURN 1;
     -- Simple Exception
 EXCEPTION
     WHEN others THEN
@@ -186,7 +188,16 @@ grant execute on function login(text,text) to web_anon;
 revoke all on function make_user(text,text,text,text,text,text) from web_anon;
 grant execute on function make_user(text,text,text,text,text,text) to todo_user;
 grant execute on function make_user_role(text) to todo_user;
-
+grant execute on function make_user_role(text) to web_anon;
 --don't make josh and paul create an account every time
 INSERT INTO basic_auth.users VALUES('pd88@duke.edu','Password1','todo_user');
 Insert into basic_auth.users Values('jcr74@duke.edu', 'Password1', 'todo_user');
+
+CREATE ROLE 'mdunjgus6vajor81brexd3dse7f2';
+GRANT todo_user to mdunjgus6vajor81brexd3dse7f2;
+Grant mdunjgus6vajor81brexd3dse7f2 to authenticator;
+
+CREATE ROLE "-2";
+CREATE ROLE "-3";
+GRANT todo_user to "-2";
+GRANT todo_user to "-3";

@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION seller_purchases(sellerid integer)
+CREATE OR REPLACE FUNCTION seller_purchases(sellerid text)
 	RETURNS TABLE (
 	pid integer,
 	saleid integer,
