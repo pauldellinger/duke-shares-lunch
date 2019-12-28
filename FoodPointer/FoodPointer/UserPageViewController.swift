@@ -95,8 +95,9 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                     print(idToken)
                     self.user = User(email: signedInUser.email ?? "", password: "")
                     self.user?.token = idToken
+                    self.user?.uid = signedInUser.uid
                     print("got here")
-                    print(self.user?.email, self.user?.password, self.user?.token)
+                    print(self.user?.email, self.user?.password, self.user?.token, self.user?.uid)
                     self.user?.getInfo2(completion:{user, error in
                         if let error = error{
                             print("get info error: ", error)
@@ -225,6 +226,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
             print(firebaseUser?.email)
             self.user?.token = idToken
             self.user?.email = firebaseUser?.email
+            self.user?.uid = firebaseUser?.uid
             if (additionalInfo?.isNewUser ?? false){
                 self.user?.createRole(uid: firebaseUser?.uid ?? "", completion: {user, error in
                     if let error = error{

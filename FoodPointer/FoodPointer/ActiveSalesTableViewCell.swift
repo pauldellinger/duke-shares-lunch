@@ -21,15 +21,15 @@ class ActiveSalesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // add shadow on cell
-        backgroundColor = .lightText // very important
+        backgroundColor = .clear // very important
         layer.masksToBounds = false
-        layer.shadowOpacity = 0.3
-        layer.shadowRadius = 10
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 50 // this seems high but it looks good
         layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = UIColor.secondaryLabel.cgColor
 
         // add corner radius on `contentView`
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .quaternarySystemFill
         contentView.layer.cornerRadius = 20
         // Initialization code
         

@@ -141,7 +141,7 @@
 		69939EE8A88DF988C8CAD6B4 /* Pods-Duke Shares Lunch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares Lunch.debug.xcconfig"; path = "Target Support Files/Pods-Duke Shares Lunch/Pods-Duke Shares Lunch.debug.xcconfig"; sourceTree = "<group>"; };
 		785AFB0C4B12E68EF09E5C4B /* Pods-Duke Shares Lunch-Duke Shares LunchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares Lunch-Duke Shares LunchUITests.release.xcconfig"; path = "Target Support Files/Pods-Duke Shares Lunch-Duke Shares LunchUITests/Pods-Duke Shares Lunch-Duke Shares LunchUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9603D1B35CB08898AA5A7EC8 /* Pods-Duke Shares LunchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duke Shares LunchTests.debug.xcconfig"; path = "Target Support Files/Pods-Duke Shares LunchTests/Pods-Duke Shares LunchTests.debug.xcconfig"; sourceTree = "<group>"; };
-		DA04220B237B697800864DEE /* Duke Shares Lunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duke Shares Lunch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA04220B237B697800864DEE /* Share Lunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Share Lunch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA04220E237B697800864DEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA042210237B697800864DEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DA042219237B697B00864DEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 		DA04220C237B697800864DEE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA04220B237B697800864DEE /* Duke Shares Lunch.app */,
+				DA04220B237B697800864DEE /* Share Lunch.app */,
 				DA042223237B697B00864DEE /* Duke Shares LunchTests.xctest */,
 				DA04222E237B697B00864DEE /* Duke Shares LunchUITests.xctest */,
 			);
@@ -411,7 +411,7 @@
 			);
 			name = "Duke Shares Lunch";
 			productName = "Duke Shares Lunch";
-			productReference = DA04220B237B697800864DEE /* Duke Shares Lunch.app */;
+			productReference = DA04220B237B697800864DEE /* Share Lunch.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA042222237B697B00864DEE /* Duke Shares LunchTests */ = {
@@ -938,8 +938,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "July-Guys.Duke-Shares-Lunch";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "July-Guys.Share-Lunch";
+				PRODUCT_NAME = "Share Lunch";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -959,8 +959,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "July-Guys.Duke-Shares-Lunch";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "July-Guys.Share-Lunch";
+				PRODUCT_NAME = "Share Lunch";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

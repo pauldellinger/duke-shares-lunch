@@ -179,7 +179,7 @@ class Purchase {
         
     }
     func complete(user: User, viewController: BuyFoodViewController?){
-        print("Approving purchase!")
+        print("completing purchase!")
         let scheme = "https"
         let host = "www.pdellinger.com"
         let path = "/purchase"
