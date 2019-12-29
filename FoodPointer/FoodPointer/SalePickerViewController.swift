@@ -13,8 +13,14 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
     var locations: [String]?
     var user: User?
    
+    @IBOutlet var rateSlider: UISlider!
+    @IBOutlet var rateLabel: UILabel!
+    @IBOutlet var orderTimeSlider: UISlider!
     @IBOutlet weak var noTimeSwitch: UISwitch!
     
+    @IBAction func rateSliderChanged(_ sender: Any) {
+        rateLabel.text = "\(String(format: "%2.f",rateSlider.value*100))%"
+    }
     @IBAction func submitSellerAction(_ sender: Any) {
         //insert into active sellers
         //if successful segue
@@ -23,10 +29,10 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
             ordertime = timePickerData[timePicker.selectedRow(inComponent: 0)]
         }
         
-        let rate = Double(ratePickerData[ratePicker.selectedRow(inComponent: 0)])/100.0
+        let rate = Double(String(format: "%.2f", rateSlider.value))
         
         print(locations, ordertime, rate)
-            user?.createSales(locations: locations, ordertime: ordertime, rate:rate, viewController:self)
+            user?.createSales(locations: locations, ordertime: ordertime, rate:rate!, viewController:self)
     }
     
     
@@ -43,7 +49,7 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
         self.ratePicker.dataSource = self
         self.timePicker.delegate = self
         self.timePicker.dataSource = self
-
+        self.rateSlider.value = 0.5
         print(String(format: "%.2f", timePickerData[4]))
         
         // Input the data into the array

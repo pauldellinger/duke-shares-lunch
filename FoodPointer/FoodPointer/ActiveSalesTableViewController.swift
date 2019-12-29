@@ -56,8 +56,8 @@ class ActiveSalesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         // view.title
-        view.backgroundColor = .lightText
-        view.tintColor = UIColor.lightText.withAlphaComponent(1)
+        //view.backgroundColor = .white
+        view.tintColor = UIColor.white.withAlphaComponent(1)
       
         
         let header = view as! UITableViewHeaderFooterView

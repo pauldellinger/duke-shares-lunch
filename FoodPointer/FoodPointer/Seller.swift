@@ -12,7 +12,7 @@ class Seller{
     
     //MARK: Properties
     var saleid: Int
-    var sellerId: Int
+    var sellerId: String
     var status: Bool
     var locationName: String
     var sellerName : String
@@ -21,7 +21,7 @@ class Seller{
     var ordertime: String
     
     
-    init?(saleid: Int, sellerId: Int, status: Bool, locationName: String, sellerName : String, sellerVenmo: String, rate: Double, ordertime: String) {
+    init?(saleid: Int, sellerId: String, status: Bool, locationName: String, sellerName : String, sellerVenmo: String, rate: Double, ordertime: String) {
         self.saleid = saleid
         self.sellerId = sellerId
         self.status = status
@@ -52,7 +52,7 @@ class Seller{
             print("Problem with sellerName statement or data input")
             return nil
         }
-        guard let sellerId = json["uid"] as? Int else {
+        guard let sellerId = json["uid"] as? String else {
             print("Problem with sellerId statement or data input")
             return nil
         }
