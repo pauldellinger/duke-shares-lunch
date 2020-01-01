@@ -1,3 +1,6 @@
+DROP ROLE notifier;
+CREATE ROLE notifier login password 'verysecret';
+
 DROP TABLE DeviceToken;
 DROP TABLE NotificationQueue;
 CREATE TABLE DeviceToken(
@@ -16,43 +19,86 @@ CREATE TABLE NotificationQueue(
 	);
 
 grant INSERT on NotificationQueue to todo_user;
-grant all on DeviceToken to todo_user;
+grant INSERT,SELECT on DeviceToken to todo_user;
+GRANT ALL on NotificationQueue to notifier;
+GRANT ALL ON NotificationQueue to notifier;
+
+
+insert into devicetoken values ('mdUNjgUS6Vajor81BrExd3Dse7F2', 'aeba7e4439967cb7aba6b1e5bfae9fddb0e73fc54b6a383dc67e3ce3e3cc4b24', True);
+
+
 CREATE OR REPLACE FUNCTION process_update_queue() RETURNS TRIGGER AS
 	$update_queue$
 	BEGIN
 	IF (TG_OP = 'DELETE') THEN
             IF user = OLD.bid THEN -- buyer cancelled purchase
-	    INSERT INTO NotificationQueue VALUES(
-		(SELECT uid from ActiveSeller where ActiveSeller.saleid = OLD.saleid),
-		OLD.pid,
-		'BUYER CANCEL',
-		now(),
-		NULL);
-	    ELSE -- seller cancelled purchase
 	    INSERT INTO NotificationQueue SELECT
-		OLD.bid,
+		dt.token,
 		OLD.pid,
-		'SELLER CANCEL',
+		CONCAT((SELECT name from registereduser as RU where RU.uid = OLD.bid),' cancelled the purchase.'),
 		now(),
-		NULL;
+		NULL
+		FROM devicetoken as dt
+			WHERE dt.uid = (SELECT uid FROM ActiveSeller WHERE ActiveSeller.saleid = OLD.saleid) AND dt.status;
+	    ELSE -- seller cancelled purchase
+	    	IF OLD.paid AND OLD.approve THEN -- purchase was paid so it's complete
+			INSERT INTO NotificationQueue SELECT
+                        dt.token,
+                        OLD.pid,
+                        CONCAT((select name from registereduser as RU where RU.uid
+                                = (SELECT uid from ActiveSeller where ActiveSeller.saleid = OLD.saleid)),
+                                ' marked your purchase as complete.'),
+                        now(),
+                        NULL
+			FROM devicetoken as dt where dt.uid = OLD.bid AND dt.status;
+		ELSE -- approve or paid not true, seller declined
+			INSERT INTO NotificationQueue SELECT
+			dt.token,
+			OLD.pid,
+			CONCAT((select name from registereduser as RU where RU.uid
+				= (SELECT uid from ActiveSeller where ActiveSeller.saleid = OLD.saleid)),
+				' declined the purchase.'),
+			now(),
+			NULL
+			FROM devicetoken as dt where dt.uid = OLD.bid AND dt.status;
+		END IF;
 	    END IF;
 
             RETURN OLD;
         ELSIF (TG_OP = 'UPDATE') THEN -- seller updating purchase
-            INSERT INTO NotificationQueue SELECT
-		NEW.bid,
-		NEW.pid,
-		'SELLER UPDATE',
-		now(),
-		NULL;
+	    IF NEW.approve and NEW.paid  THEN-- seller marked paid
+            	INSERT INTO NotificationQueue SELECT
+			dt.token,
+			NEW.pid,
+			CONCAT((select name from registereduser as RU where RU.uid
+                                = (SELECT uid from ActiveSeller where ActiveSeller.saleid = OLD.saleid)),
+				' marked your purchase as Paid'),
+			now(),
+			NULL
+			FROM devicetoken as dt WHERE dt.uid = NEW.bid AND dt.status;
+
+	    ELSE -- seller approved
+	    	INSERT INTO NotificationQueue SELECT
+                        dt.token,
+                        NEW.pid,
+                        CONCAT((select name from registereduser as RU where RU.uid
+                                = (SELECT uid from ActiveSeller where ActiveSeller.saleid = OLD.saleid)),
+                                ' approved your purchase.'),
+                        now(),
+                        NULL
+			FROM devicetoken as dt WHERE dt.uid = NEW.bid AND dt.status;
+	    END IF;
             RETURN NEW;
         ELSIF (TG_OP = 'INSERT') THEN -- buyer inserting purchase
             INSERT INTO NotificationQueue SELECT
-		(SELECT uid from ActiveSeller where ActiveSeller.saleid = NEW.saleid),
+		dt.token,
 		NEW.pid,
-		'BUYER INSERT',
+		CONCAT('You have a purchase for ', NEW.price, ' awaiting approval at ',
+			(SELECT location from activeseller where activeseller.saleid = NEW.saleid)),
 		now(),
-		NULL;
+		NULL
+		FROM devicetoken as dt
+                        WHERE dt.uid = (SELECT uid FROM ActiveSeller WHERE ActiveSeller.saleid = NEW.saleid) AND dt.status;
             RETURN NEW;
         END IF;
         RETURN NULL; -- result is ignored since this is an AFTER trigger
@@ -64,3 +110,15 @@ $update_queue$ LANGUAGE plpgsql;
 CREATE TRIGGER update_queue
 AFTER INSERT OR UPDATE OR DELETE ON Purchase
     FOR EACH ROW EXECUTE PROCEDURE process_update_queue();
+
+
+CREATE OR REPLACE FUNCTION send_to_python() RETURNS TRIGGER AS
+$send$
+BEGIN
+	NOTIFY NotificationQueue, 'new row';
+	RETURN NEW;
+END
+$send$ LANGUAGE plpgsql;
+
+CREATE TRIGGER notify AFTER INSERT ON NotificationQueue
+    FOR EACH ROW EXECUTE PROCEDURE send_to_python();

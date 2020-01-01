@@ -51,20 +51,20 @@ CREATE TABLE Purchase
 --FOR EACH ROW EXECUTE PROCEDURE trg_buyernotseller_check();
 
 
-INSERT INTO RegisteredUser VALUES('mdunjgus6vajor81brexd3dse7f2', 'pd88@duke.edu',  'Paul Dellinger', 'paul_dellinger', 'Computer Science', 'Kilgo');
+INSERT INTO RegisteredUser VALUES('mdUNjgUS6Vajor81BrExd3Dse7F2', 'pd88@duke.edu',  'Paul Dellinger', 'paul_dellinger', 'Computer Science', 'Kilgo');
 INSERT INTO RegisteredUser VALUES('-2', 'jcr74@duke.edu',  'Josh Romine', 'jcromine');
 INSERT INTO RegisteredUser VALUES('-3', 'aje11@duke.edu',  'AJ Eckmann', 'AJs Venmo');
 --INSERT INTO basic_auth.users VALUES('pd88@duke.edu', 'Password1', 'todo_user');
 --Three example users
 
-INSERT INTO ActiveSeller VALUES(2001, 'mdunjgus6vajor81brexd3dse7f2','2019-10-25 02:36:00', TRUE, 0.60, 'Il Forno');
-INSERT INTO ActiveSeller VALUES(2002, 'mdunjgus6vajor81brexd3dse7f2', '2019-10-25 02:36:00', TRUE, 0.60, 'Ginger and Soy');
+INSERT INTO ActiveSeller VALUES(2001, 'mdUNjgUS6Vajor81BrExd3Dse7F2','2019-10-25 02:36:00', TRUE, 0.60, 'Il Forno');
+INSERT INTO ActiveSeller VALUES(2002, 'mdUNjgUS6Vajor81BrExd3Dse7F2', '2019-10-25 02:36:00', TRUE, 0.60, 'Ginger and Soy');
 --Paul has said he wants to sell food points at Ginger and Soy and Il Forno
 --He has different price conversion for each because he is already getting Forno
 --and would prefer that restaurant
 
-INSERT INTO SellPreferences VALUES('mdunjgus6vajor81brexd3dse7f2', 'Il Forno');
-INSERT INTO SellPreferences VALUES('mdunjgus6vajor81brexd3dse7f2', 'Ginger and Soy');
+INSERT INTO SellPreferences VALUES('mdUNjgUS6Vajor81BrExd3Dse7F2', 'Il Forno');
+INSERT INTO SellPreferences VALUES('mdUNjgUS6Vajor81BrExd3Dse7F2', 'Ginger and Soy');
 --Paul Likes to sell his food points at il forno and ginger and soy
 --because he eats at those restaurants a lot
 
