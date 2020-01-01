@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>867010623555-0gtve1o1e0og32l2fd4887bthi4ta59q.apps.googleusercontent.com</string>
+	<string>867010623555-ljhmsnhujcc2n34uhao2kmc3kll882bn.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.867010623555-0gtve1o1e0og32l2fd4887bthi4ta59q</string>
+	<string>com.googleusercontent.apps.867010623555-ljhmsnhujcc2n34uhao2kmc3kll882bn</string>
 	<key>API_KEY</key>
 	<string>AIzaSyC-pwdu49hgkWvq-LmT-RcgtpzZm1FJWoU</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>July-Guys.Duke-Shares-Lunch</string>
+	<string>July-Guys.FoodPointer</string>
 	<key>PROJECT_ID</key>
 	<string>duke-shares-lunch</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:867010623555:ios:7292757ef1f2474124fcf6</string>
+	<string>1:867010623555:ios:7239f55d1398d97d24fcf6</string>
 	<key>DATABASE_URL</key>
 	<string>https://duke-shares-lunch.firebaseio.com</string>
 </dict>

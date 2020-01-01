@@ -32,7 +32,7 @@ class LocationTableViewController: UITableViewController {
         locations += [location1,location2,location3]
     }
     override func viewDidAppear(_ animated: Bool) {
-        getDataFromUrl(website: "https://www.pdellinger.com/activerestaurants")
+        getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
     }
     
     override func viewDidLoad() {
@@ -49,11 +49,11 @@ class LocationTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         //Make request for data, add it to locations (global variable)
-        // getDataFromUrl(website: "https://www.pdellinger.com/activerestaurants")
+        // getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
         
     }
     @objc func refresh(){
-        getDataFromUrl(website: "https://www.pdellinger.com/activerestaurants")
+        getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
     }
 
     // MARK: - Table view data source

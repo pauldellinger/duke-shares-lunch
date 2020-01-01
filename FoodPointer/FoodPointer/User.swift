@@ -57,7 +57,7 @@ class User {
             parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\", \"major\": \"\(self.major ?? "")\", \"dorm\": \"\(self.dorm ?? "")\" }"
         }
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "https://www.pdellinger.com/rpc/make_user")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/rpc/make_user")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -111,7 +111,7 @@ class User {
         let parameters = "{ \"email\": \"\(email)\", \"pass\": \"\(password)\" }"
         
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "https://www.pdellinger.com/rpc/login")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/rpc/login")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -187,7 +187,7 @@ class User {
     func getInfo(viewController:TabController?){
         print("getting info!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/registereduser"
         let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
         var urlComponents = URLComponents()
@@ -274,7 +274,7 @@ class User {
         let parameters = "{  \"saleid\": \(seller.saleid), \"bid\": \"\(self.uid!)\", \"price\": \(price), \"p_description\": \"\(description)\"}"
         print(parameters)
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "https://www.pdellinger.com/purchase")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/purchase")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -323,7 +323,7 @@ class User {
         // postBody = genPostBody(locations)
         
         let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
-        var request = URLRequest(url: URL(string: "https://www.pdellinger.com/activeseller")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/activeseller")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("resolution=merge-duplicates", forHTTPHeaderField: "Prefer")
         
@@ -389,7 +389,7 @@ class User {
     func getUserSales(viewcontroller: Any?){
         print("getting active sales!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
         let uidEquality = "eq.\(self.uid!)"
@@ -473,14 +473,14 @@ class User {
     func getPurchases(viewController: Any?){
         print("getting purchases!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
-        let path = "/purchase"
-        //let queryItem = URLQueryItem(name: "sellerid", value: String(self.uid!))
+        let host = "pdellinger.com"
+        let path = "/rpc/seller_purchases"
+        let queryItem = URLQueryItem(name: "sellerid", value: String(self.uid!))
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
         urlComponents.path = path
-        //urlComponents.queryItems = [queryItem]
+        urlComponents.queryItems = [queryItem]
         
         guard let url = urlComponents.url else { return }
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)
@@ -574,7 +574,7 @@ class User {
     func checkPurchase(pid:Int, viewController: WaitForSellerViewController?){
         print("looking for purchase!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(pid)")
         var urlComponents = URLComponents()
@@ -657,7 +657,7 @@ class User {
     func removePurchase(pid: Int, viewController: WaitForSellerViewController?){
         print("Removing purchase!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(pid)")
         var urlComponents = URLComponents()
@@ -699,7 +699,7 @@ class User {
     func removeSales(viewController: MySalesViewController?){
         print("deleting active sales!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/activeseller"
         let uidEquality = "eq.\(self.uid!)"
         let queryItem = URLQueryItem(name: "uid", value: uidEquality)
@@ -749,7 +749,7 @@ class User {
     func pauseSales(viewController: MySalesViewController?){
         print("pausing active sales!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "select", value: "uid,status,location")
         let uidEquality = "eq.\(self.uid!)"
@@ -808,7 +808,7 @@ class User {
         
         print("pausing active sales!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/roles"
 
         var urlComponents = URLComponents()
@@ -861,7 +861,7 @@ class User {
     func getInfo2( completion: @escaping (_ user: User, _ error: String?)-> ()){
         print("getting info!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/registereduser"
         let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
         var urlComponents = URLComponents()
@@ -881,6 +881,7 @@ class User {
         request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
         
         //make request to addresss in parameter
+        print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200{
@@ -948,7 +949,7 @@ class User {
     func addUser( completion: @escaping (_ user: User, _ error: String?)-> ()){
         print("adding user!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/registereduser"
         let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
         var urlComponents = URLComponents()

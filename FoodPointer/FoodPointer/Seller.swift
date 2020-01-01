@@ -87,7 +87,7 @@ class Seller{
     func remove(token: String, viewController: Any?){
         print("Removing from ActiveSeller!")
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "saleid", value: "eq.\(self.saleid)")
         var urlComponents = URLComponents()
