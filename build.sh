@@ -6,6 +6,7 @@ psql lunches -af sql/rls.sql
 psql lunches -af sql/seller-purchases.sql
 psql lunches -af sql/no-rate-change.sql
 psql lunches -af sql/auth.sql
+psql lunches -af sql/notifications.sql
 echo "Database should be made now, access by typing 'psql lunches'"
 echo "API should be set up. Open a new window of terminal"
 echo "and run the line './postgrest database-server.conf' "
