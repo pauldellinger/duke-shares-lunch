@@ -4,9 +4,9 @@ CREATE ROLE notifier login password 'verysecret';
 DROP TABLE DeviceToken;
 DROP TABLE NotificationQueue;
 CREATE TABLE DeviceToken(
-	uid text references REGISTEREDUSER(uid),
-	token text,
-	status boolean,
+	uid text NOT NULL references REGISTEREDUSER(uid),
+	token text NOT NULL,
+	status boolean default TRUE,
 	PRIMARY KEY (uid,token)
 	);
 

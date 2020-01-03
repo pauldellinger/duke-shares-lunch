@@ -28,8 +28,17 @@ GRANT UPDATE (approve, paid, p_description) on PURCHASE  TO todo_user;
 GRANT SELECT ON ACTIVERESTAURANTS to todo_user;
 grant usage, select on sequence ActiveSeller_saleid_seq to todo_user;
 grant usage, select on sequence Purchase_pid_seq to todo_user;
+GRANT usage, select on sequence history_hid_seq to todo_user;
+GRANT usage, select on sequence history_rid_seq to todo_user;
+
+GRANT INSERT ON REPORTS to todo_user;
+GRANT INSERT ON History to todo_user;
 
 
+GRANT todo_user to "mdUNjgUS6Vajor81BrExd3Dse7F2";
+GRANT "mdUNjgUS6Vajor81BrExd3Dse7F2" to authenticator;
+GRANT todo_user to "hAvLFWziP7bh77DMqwBxUcJlPjS2";
+GRANT "hAvLFWziP7bh77DMqwBxUcJlPjS2" to authenticator;
 -- Role level security:
   -- once we enable RLS for a table that table needs policies for every
   -- action in addition to the GRANT statements
