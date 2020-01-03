@@ -52,7 +52,7 @@ class LocationDetailTableViewController: UITableViewController {
         
         
         let scheme = "https"
-        let host = "www.pdellinger.com"
+        let host = "pdellinger.com"
         let path = "/activeseller"
         let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
         let restaurantEquality = "eq." + restaurant!.name

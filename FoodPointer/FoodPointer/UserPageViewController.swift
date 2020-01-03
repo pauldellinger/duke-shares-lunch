@@ -57,7 +57,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
         
         FirebaseApp.configure()
         
-        
+        /*
         if !(email?.isEmpty ?? true){ //if email has already been set
             let defaults = UserDefaults.standard
             let email = defaults.string(forKey: "email")
@@ -80,6 +80,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
         let tap = UITapGestureRecognizer(target:self.view, action: #selector(self.view.endEditing))
         view.addGestureRecognizer(tap)
         }
+    */
     }
     
     override func viewWillAppear(_ animated: Bool) {
