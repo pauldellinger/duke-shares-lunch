@@ -1006,6 +1006,119 @@ class User {
         task.resume()
     }
     
+    func registerDevice( deviceToken: String, completion: @escaping (_ user: User, _ error: Int?)-> ()){
+        let parameters = "{\"uid\":\"\(self.uid ?? "")\", \"token\":\"\(deviceToken)\" }"
+        let postData = parameters.data(using: .utf8)
+        
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/devicetoken")!,timeoutInterval: Double.infinity)
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        print(request)
+        print(parameters)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode != 201 {
+                    completion(self, httpResponse.statusCode)
+                    return
+                }else{
+                    completion(self,nil)
+                    return
+                }
+            }
+        }
+        task.resume()
+        
+    }
+    func removeDeviceTokens(completion: @escaping (_ user: User, _ error: Int?)-> ()){
+        
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/devicetoken")!,timeoutInterval: Double.infinity)
+        request.httpMethod = "DELETE"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode != 204 {
+                    completion(self, httpResponse.statusCode)
+                    return
+                }else{
+                    completion(self,nil)
+                    return
+                }
+            }
+        }
+        task.resume()
+        
+    }
+    
+    func getActiveRestaurants(completion: @escaping (_ locations: [Location]?, _ error: Int?)->Void){
+        
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/activerestaurants")!,timeoutInterval: Double.infinity)
+        
+        //specify type of request
+        request.httpMethod = "GET"
+        
+        //authorization
+        request.setValue("Bearer \(self.token ?? "")", forHTTPHeaderField: "Authorization")
+        
+        //Use the URLSession built in to make a dataTask (basically a request)
+        
+        //Initialize three vars  - data, response and error
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                print("status code \(httpResponse.statusCode)")
+                if httpResponse.statusCode != 200 {
+                    completion(nil, httpResponse.statusCode)
+                    return
+                }
+            }
+            guard let data = data else {
+                print(String(describing: error))
+                return
+            }
+            do{
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+                
+                //print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    return
+                }
+                //iterate over JSON, adding each to location
+                var locations = [Location]()
+                for dic in jsonArray{
+                    guard let name = dic["location"] as? String else { return }
+                    guard let count = dic["count"] as? Int else { return }
+                    //print(name, count) //Output
+                    guard let location = Location(name: name, count: count) else {
+                        completion(nil, 400)
+                        return
+                    }
+                    locations += [location]
+                    
+                }
+                //reload the table with the new values
+                completion(locations,nil)
+                //Response not in JSON format
+            } catch let parsingError {
+                print("Error", parsingError)
+                completion(nil, 400)
+                return
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
 }
 
 

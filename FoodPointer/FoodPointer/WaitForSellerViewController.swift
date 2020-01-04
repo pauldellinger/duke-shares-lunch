@@ -27,6 +27,7 @@ class WaitForSellerViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         scrollView.refreshControl = UIRefreshControl()
         scrollView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl),for: .valueChanged)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRefreshControl), name: .didReceivePush, object:nil)
     }
     override func viewDidDisappear(_ animated: Bool) {
         print("wait for seller disappeared")

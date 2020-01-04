@@ -15,14 +15,14 @@ class VenmoSellerViewController: UIViewController {
     
     @IBAction func goVenmoAction(_ sender: Any) {
         tabBarController?.tabBar.isHidden = false
-        let venmoHooks = "venmo://paycharge?txn=pay&recipients=\(seller!.sellerVenmo)&amount=\(cost!)&note=DukeSharesLunch"
+        let venmoHooks = "venmo://paycharge?txn=pay&recipients=\(seller!.sellerVenmo)&amount=\(cost!)&note=FoodPointer"
         print(venmoHooks)
         let venmoUrl = URL(string: venmoHooks)
         if UIApplication.shared.canOpenURL(venmoUrl!){
             UIApplication.shared.open(venmoUrl!)
             
         } else {
-            //redirect to safari because the user doesn't have Instagram
+            //redirect to safari because the user doesn't have Venmo
             print("Venmo not installed")
             let alert = UIAlertController(title: "Venmo Not Installed", message: "Please Intstall Venmo", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in

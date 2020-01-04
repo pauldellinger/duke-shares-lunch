@@ -21,6 +21,7 @@ class ActiveSalesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .didReceivePush, object:nil)
         if user?.allSales?.isEmpty ?? true{
             //add refresh spinner
             refresh(sender: self)
@@ -114,9 +115,13 @@ class ActiveSalesTableViewController: UITableViewController {
             let badgeCount = sales[0].count + sales[1].count
             if badgeCount > 0{
                 tabItem.badgeValue = String(sales[0].count + sales[1].count)
+                UIApplication.shared.applicationIconBadgeNumber = badgeCount
             }
             else {tabItem.badgeValue = nil}
+            UIApplication.shared.applicationIconBadgeNumber = 0
         }
+        
+        
         self.refreshControl?.endRefreshing()
         tableView.reloadData()
         //stop refresh spinner

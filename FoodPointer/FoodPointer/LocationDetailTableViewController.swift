@@ -217,7 +217,7 @@ class LocationDetailTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-
+        
         guard let detailViewController = segue.destination as? SubmitFooterViewController,
             let index = tableView.indexPathForSelectedRow?.row
             else {
@@ -225,7 +225,7 @@ class LocationDetailTableViewController: UITableViewController {
         }
         print("handing over seller: ", sellers[index])
         detailViewController.seller = sellers[index]
-        detailViewController.user = user
+        detailViewController.user = self.user
     
         
     }

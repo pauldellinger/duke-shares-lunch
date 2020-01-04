@@ -32,13 +32,26 @@ class LocationTableViewController: UITableViewController {
         locations += [location1,location2,location3]
     }
     override func viewDidAppear(_ animated: Bool) {
-        getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
+        self.user?.getActiveRestaurants(completion: { restaurants, error in
+            if let error = error{
+                print("error getting locations: ", error)
+            }
+            if restaurants != nil{
+                self.locations = restaurants!
+                DispatchQueue.main.async{
+                    self.updateView()
+                }
+            }
+        })
+        //getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
     }
     
     override func viewDidLoad() {
         //required function for controller
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .didReceivePush, object:nil)
         //self.navigationController?.setNavigationBarHidden(true, animated:true);
         // print(self.tabBarController.user)
 
@@ -53,7 +66,21 @@ class LocationTableViewController: UITableViewController {
         
     }
     @objc func refresh(){
-        getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
+        print("refreshing")
+        //self.updateView()
+        
+        self.user?.getActiveRestaurants(completion: { restaurants, error in
+            if let error = error{
+                print("error getting locations: ", error)
+            }
+            if restaurants != nil{
+                self.locations = restaurants!
+                DispatchQueue.main.async{
+                    self.updateView()
+                }
+            }
+        })
+        // getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
     }
 
     // MARK: - Table view data source
@@ -93,7 +120,6 @@ class LocationTableViewController: UITableViewController {
     
     private func getDataFromUrl(website: String){
         //clear existing locations, before updated ones
-        self.locations = [Location]()
         //make request to addresss in parameter
         var request = URLRequest(url: URL(string: website)!,timeoutInterval: Double.infinity)
         
@@ -122,6 +148,7 @@ class LocationTableViewController: UITableViewController {
                     return
                 }
                 //iterate over JSON, adding each to location
+                self.locations = [Location]()
                 for dic in jsonArray{
                     guard let name = dic["location"] as? String else { return }
                     guard let count = dic["count"] as? Int else { return }
@@ -147,8 +174,22 @@ class LocationTableViewController: UITableViewController {
     
     private func updateView() {
         //This function updates the table
-        self.refreshControl?.endRefreshing()
+        /*
+        tableView.performBatchUpdates({ () -> Void in
+            self.user?.getActiveRestaurants(completion: { restaurants, error in
+                if let error = error{
+                    print("error getting locations: ", error)
+                    return
+                }
+                if restaurants != nil{
+                    self.locations = restaurants!
+                    return
+                }
+            })}, completion: { success in
+                self.refreshControl?.endRefreshing()
+        })*/
         tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
 
     /*
