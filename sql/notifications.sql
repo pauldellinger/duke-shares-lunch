@@ -4,9 +4,9 @@ CREATE ROLE notifier login password 'verysecret';
 DROP TABLE DeviceToken;
 DROP TABLE NotificationQueue;
 CREATE TABLE DeviceToken(
-	uid text references REGISTEREDUSER(uid),
-	token text,
-	status boolean,
+	uid text NOT NULL references REGISTEREDUSER(uid),
+	token text NOT NULL,
+	status boolean default TRUE,
 	PRIMARY KEY (uid,token)
 	);
 
@@ -19,12 +19,23 @@ CREATE TABLE NotificationQueue(
 	);
 
 grant INSERT on NotificationQueue to todo_user;
-grant INSERT,SELECT on DeviceToken to todo_user;
+grant INSERT,SELECT, DELETE on DeviceToken to todo_user;
 GRANT ALL on NotificationQueue to notifier;
 GRANT ALL ON NotificationQueue to notifier;
 
+ALTER TABLE DeviceToken ENABLE ROW LEVEL SECURITY;
 
-insert into devicetoken values ('mdUNjgUS6Vajor81BrExd3Dse7F2', 'aeba7e4439967cb7aba6b1e5bfae9fddb0e73fc54b6a383dc67e3ce3e3cc4b24', True);
+--only insert tokens for yourself
+CREATE POLICY token_insert on DeviceToken FOR INSERT to todo_user
+	WITH CHECK (uid = current_user);
+
+-- let any user see the tokens (buyer sending notification to seller)
+CREATE POLICY token_select on DeviceToken FOR SELECT to todo_user USING(true);
+
+CREATE POLICY token_delete on DeviceToken FOR DELETE
+	USING(uid = current_user);
+
+--insert into devicetoken values ('mdUNjgUS6Vajor81BrExd3Dse7F2', 'aeba7e4439967cb7aba6b1e5bfae9fddb0e73fc54b6a383dc67e3ce3e3cc4b24', True);
 
 
 CREATE OR REPLACE FUNCTION process_update_queue() RETURNS TRIGGER AS

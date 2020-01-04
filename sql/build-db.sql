@@ -33,6 +33,25 @@ CREATE TABLE Purchase
                 paid BOOLEAN NOT NULL DEFAULT FALSE,
                 p_description text);
 
+CREATE TABLE HISTORY
+		(hid serial NOT NULL PRIMARY KEY,
+		bid text NOT NULL REFERENCES RegisteredUser(uid),
+		sid text NOT NULL REFERENCES RegisteredUser(uid),
+		price DECIMAL(5,2) CHECK(price > 0) NOT NULL,
+		approve BOOLEAN NOT NULL DEFAULT FALSE,
+                paid BOOLEAN NOT NULL DEFAULT FALSE,
+		description text);
+
+CREATE TABLE REPORTS(
+		rid serial NOT NULL PRIMARY KEY,
+		filer text NOT NULL references RegisteredUser(uid),
+		hid integer REFERENCES History(hid),
+		note text,
+		resolved boolean NOT NULL default FALSE);
+
+
+
+
 --CREATE FUNCTION trg_buyernotseller_check()
 --  RETURNS trigger AS
 --$func$
