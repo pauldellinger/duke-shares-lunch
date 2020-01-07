@@ -27,7 +27,7 @@
   - type `cp nginx.conf /etc/nginx/nginx.conf` (say yes to overwrite)
   - now run `sudo systemctl restart nginx`
   - run `gunicorn --bind 0.0.0.0:5000 wsgi:app`
-
+  - Now there are three daemons, `flask`, `postgrest`, and `notifications`
 #### If you're fine with no authentication you should be able to stop here
 - just change build.sh so it doesn't run sql/auth.sql
 - type `./build.sh`
