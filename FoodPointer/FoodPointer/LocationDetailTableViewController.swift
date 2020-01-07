@@ -29,7 +29,18 @@ class LocationDetailTableViewController: UITableViewController {
         //let website = "http://35.194.58.92/activeseller?select=saleid,uid,registereduser(name,venmo),ordertime,status,percent,location"
         //print(restaurant)
         //self.refreshControl?.beginRefreshing()
-        getDataFromUrl()
+        self.user?.getRestaurantSales(restaurant: self.restaurant!, completion: { agents, error in
+            if let error = error{
+                print("error getting sellers: ", error)
+            }
+            if agents != nil{
+                self.sellers = agents!
+                DispatchQueue.main.async{
+                    self.updateView()
+                }
+            }
+        })
+        //getDataFromUrl()
         
     }
 
@@ -37,7 +48,18 @@ class LocationDetailTableViewController: UITableViewController {
     @objc func refresh(sender:AnyObject)
     {
         // Updating your data here...
-        getDataFromUrl()
+        self.user?.getRestaurantSales(restaurant: self.restaurant!, completion: { agents, error in
+            if let error = error{
+                print("error getting sellers: ", error)
+            }
+            if agents != nil{
+                self.sellers = agents!
+                DispatchQueue.main.async{
+                    self.updateView()
+                }
+            }
+        })
+        //getDataFromUrl()
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -54,8 +76,8 @@ class LocationDetailTableViewController: UITableViewController {
         let scheme = "https"
         let host = "pdellinger.com"
         let path = "/activeseller"
-        let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
-        let restaurantEquality = "eq." + restaurant!.name
+        let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,locations(name)")
+        let restaurantEquality = "eq." + "\(restaurant!.id)"
         let queryItem2 = URLQueryItem(name: "location", value: restaurantEquality)
         let queryItem3 = URLQueryItem(name: "order", value: "percent")
         var urlComponents = URLComponents()

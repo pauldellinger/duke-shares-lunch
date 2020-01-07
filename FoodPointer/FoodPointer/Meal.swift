@@ -20,4 +20,16 @@ class Meal {
             return nil
         }
     }
+    init?(json:[String:Any]){
+        guard let mealName = json["name"] as? String else{
+            print("bad name in meal")
+            return nil
+        }
+        guard let mealPrice = json["price"] as? Double else{
+            print("bad price in meal")
+            return nil
+        }
+        self.name = mealName
+        self.price = mealPrice
+    }
 }

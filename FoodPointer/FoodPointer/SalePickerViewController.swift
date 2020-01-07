@@ -10,7 +10,7 @@ import UIKit
 
 class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    var locations: [String]?
+    var locations: [Location]?
     var user: User?
    
     @IBOutlet var rateSlider: UISlider!
@@ -32,7 +32,16 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
         let rate = Double(String(format: "%.2f", rateSlider.value))
         
         print(locations, ordertime, rate)
-            user?.createSales(locations: locations, ordertime: ordertime, rate:rate!, viewController:self)
+        user?.createSales(locations: locations, ordertime: ordertime, rate:rate!, completion: { error in
+            if let error = error{
+                print("create sale error: ", error)
+            } else{
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "showMyActiveSalesSegue", sender: self)
+                }
+            }
+        }
+        )
     }
     
     

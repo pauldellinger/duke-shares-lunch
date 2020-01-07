@@ -21,10 +21,19 @@ class LocationDetailTableViewCell: UITableViewCell {
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 50 // this seems high but it looks good
         layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowColor = UIColor.black.cgColor
+        if #available(iOS 13.0, *) {
+            layer.shadowColor = UIColor.secondaryLabel.cgColor
+        } else {
+            // Fallback on earlier versions
+            layer.shadowColor = UIColor.lightGray.cgColor
+        }
 
         // add corner radius on `contentView`
-        contentView.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            contentView.backgroundColor = .quaternarySystemFill
+        } else {
+            contentView.backgroundColor = .white
+        }
         contentView.layer.cornerRadius = 20
         // Initialization code
         

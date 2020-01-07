@@ -24,6 +24,12 @@
 		DA1D7F02239B200E00B042F4 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */; };
 		DA1D7F03239B200E00B042F4 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */; };
 		DA1D7F04239B200E00B042F4 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */; };
+		DA1F35A723C112BD009EC30F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F35A623C112BD009EC30F /* ReportViewController.swift */; };
+		DA1F35A823C112BD009EC30F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F35A623C112BD009EC30F /* ReportViewController.swift */; };
+		DA1F35A923C112BD009EC30F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F35A623C112BD009EC30F /* ReportViewController.swift */; };
+		DA1F35AB23C113BC009EC30F /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F35AA23C113BC009EC30F /* HistoryTableViewController.swift */; };
+		DA1F35AC23C113BC009EC30F /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F35AA23C113BC009EC30F /* HistoryTableViewController.swift */; };
+		DA1F35AD23C113BC009EC30F /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F35AA23C113BC009EC30F /* HistoryTableViewController.swift */; };
 		DA2FB73C237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
 		DA2FB73D237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
 		DA2FB73E237F46F800323AED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2FB73B237F46F800323AED /* User.swift */; };
@@ -156,6 +162,8 @@
 		DA042242237B8D9400864DEE /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		DA042246237B966700864DEE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		DA1D7F01239B200E00B042F4 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		DA1F35A623C112BD009EC30F /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		DA1F35AA23C113BC009EC30F /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		DA2FB73B237F46F800323AED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DA41213723AC172A00BEDFCE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA5AABBA2387738000CB1B5C /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +173,7 @@
 		DA833A2123AD394F0064583D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
 		DA833A2623AD39600064583D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
 		DA958256239443BF00F10973 /* VenmoSellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenmoSellerViewController.swift; sourceTree = "<group>"; };
+		DAAE652423C105BD0070A973 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DABA3C9E2389CB3700576315 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		DABA3CAB238A070000576315 /* restaurants.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 		DACE3C92237C7AA80030804C /* Seller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
@@ -348,6 +357,8 @@
 			children = (
 				DA41213723AC172A00BEDFCE /* GoogleService-Info.plist */,
 				DABA3C9E2389CB3700576315 /* TabController.swift */,
+				DA1F35A623C112BD009EC30F /* ReportViewController.swift */,
+				DA1F35AA23C113BC009EC30F /* HistoryTableViewController.swift */,
 				DA9D8BC323AC144800DD0C04 /* BuyerFlow */,
 				DA9D8BC423AC145F00DD0C04 /* SellerFlow */,
 				DA9D8BC723AC14D100DD0C04 /* UserFlow */,
@@ -386,6 +397,7 @@
 				DADBAD4D23A7139300337097 /* FoodPointer.entitlements */,
 				DABA3CAB238A070000576315 /* restaurants.json */,
 				DA04221E237B697B00864DEE /* Info.plist */,
+				DAAE652423C105BD0070A973 /* GoogleService-Info.plist */,
 				DA042219237B697B00864DEE /* Assets.xcassets */,
 			);
 			name = Application;
@@ -675,12 +687,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAD1E9CD23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */,
+				DA1F35A723C112BD009EC30F /* ReportViewController.swift in Sources */,
 				DAD1E9C12391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
 				DABA3C9F2389CB3700576315 /* TabController.swift in Sources */,
 				DAD1E9A9238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */,
 				DA6AE0B0238A0D5A00429075 /* MealSelectorTableViewController.swift in Sources */,
 				DACE3CDD237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,
 				DAD1E992238F317700FE55E7 /* Meal.swift in Sources */,
+				DA1F35AB23C113BC009EC30F /* HistoryTableViewController.swift in Sources */,
 				DA042243237B8D9400864DEE /* LocationTableViewController.swift in Sources */,
 				DAD1E9C92393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */,
 				DA5AABBF23878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
@@ -719,6 +733,7 @@
 				DAD1E9B223905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
 				DACE3C94237C7AA80030804C /* Seller.swift in Sources */,
 				DACE3C9C237C811A0030804C /* LocationTableViewCell.swift in Sources */,
+				DA1F35AC23C113BC009EC30F /* HistoryTableViewController.swift in Sources */,
 				DAD1E9C62391D1CC00FE55E7 /* Purchase.swift in Sources */,
 				DAD1E9CA2393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */,
 				DAD1E9AA238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */,
@@ -727,6 +742,7 @@
 				DABA3CA02389CB3700576315 /* TabController.swift in Sources */,
 				DA042249237BA5CD00864DEE /* Location.swift in Sources */,
 				DAD1E9CE23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */,
+				DA1F35A823C112BD009EC30F /* ReportViewController.swift in Sources */,
 				DA2FB73D237F46F800323AED /* User.swift in Sources */,
 				DA1D7F03239B200E00B042F4 /* CreateProfileViewController.swift in Sources */,
 				DA5AABC023878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
@@ -757,6 +773,7 @@
 				DAD1E9B323905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
 				DACE3C95237C7AA80030804C /* Seller.swift in Sources */,
 				DACE3C9D237C811A0030804C /* LocationTableViewCell.swift in Sources */,
+				DA1F35AD23C113BC009EC30F /* HistoryTableViewController.swift in Sources */,
 				DAD1E9C72391D1CC00FE55E7 /* Purchase.swift in Sources */,
 				DAD1E9CB2393249700FE55E7 /* PurchaseApprovalViewController.swift in Sources */,
 				DAD1E9AB238F656500FE55E7 /* SubmitSellLocationViewController.swift in Sources */,
@@ -765,6 +782,7 @@
 				DABA3CA12389CB3700576315 /* TabController.swift in Sources */,
 				DA042248237BA5CD00864DEE /* Location.swift in Sources */,
 				DAD1E9CF23934F8700FE55E7 /* WaitForVenmoViewController.swift in Sources */,
+				DA1F35A923C112BD009EC30F /* ReportViewController.swift in Sources */,
 				DA2FB73E237F46F800323AED /* User.swift in Sources */,
 				DA1D7F04239B200E00B042F4 /* CreateProfileViewController.swift in Sources */,
 				DA5AABC123878F2500CB1B5C /* UserDetailViewController.swift in Sources */,
@@ -933,7 +951,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6GH5DL24KD;
 				INFOPLIST_FILE = FoodPointer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -954,7 +972,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6GH5DL24KD;
 				INFOPLIST_FILE = FoodPointer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

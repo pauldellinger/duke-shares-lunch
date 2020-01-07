@@ -24,10 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        if FirebaseApp.app() == nil {
-            FirebaseApp.configure()
-        }
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
+        FirebaseApp.configure()
 //        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
 //        notificationCenter.requestAuthorization(options: options) {
 //            (didAllow, error) in
@@ -36,6 +34,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 //                //TODO: mark token as inactive in database
 //            }
 //        }
+        // Check if launched from notification
+        let notificationOption = launchOptions?[.remoteNotification]
+
+        // 1
+        if let notification = notificationOption as? [String: AnyObject],
+          let aps = notification["aps"] as? [String: AnyObject] {
+          application.applicationIconBadgeNumber = 0
+
+          
+        }
         return true
     }
 //    func signIn(){
@@ -125,6 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         fetchCompletionHandler completionHandler:
         @escaping (UIBackgroundFetchResult) -> Void
     ) {
+        application.applicationIconBadgeNumber = 0
         guard let aps = userInfo["aps"] as? [String: AnyObject] else {
             completionHandler(.failed)
             return
@@ -142,6 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         */
         
     }
+    
 }
 
 extension Notification.Name {

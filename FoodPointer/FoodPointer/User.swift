@@ -315,13 +315,7 @@ class User {
         
         task.resume()
     }
-    
-    func createSales(locations: [String]?, ordertime:Int, rate:Double, viewController: SalePickerViewController){
-        // TODO: http://postgrest.org/en/v6.0/api.html#upsert
-        //let parameters = "{  \"saleid\": \(seller.saleid), \"bid\": \"\(self.uid!)\", \"price\": \(price), \"approve\": false, \"paid\": false, \"p_description\": \"\(description)\"}"
-        // print(parameters)
-        // postBody = genPostBody(locations)
-        
+    func createSales(locations: [Location]?, ordertime: Int, rate: Double, completion: @escaping (_ error: Int?)->Void){
         let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
         var request = URLRequest(url: URL(string: "https://pdellinger.com/activeseller")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -337,16 +331,14 @@ class User {
             
             if let httpResponse = response as? HTTPURLResponse {
                 
-                print("status code \(httpResponse.statusCode)")
+                //print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 201 {
                     print("Successfully inserted sales!")
-                    DispatchQueue.main.async{
-                        viewController.handleSuccessfulInsert()
-                    }
-                    
-                }
-                else{
+                    completion(nil)
+                    return
+                } else{
                     print("Did not get 201 code, row not inserted")
+                    completion(httpResponse.statusCode)
                 }
             }
             guard let data = data else {
@@ -358,9 +350,52 @@ class User {
         }
         
         task.resume()
-        
     }
-    func genPostBody(locations:[String], ordertime:Int, rate: Double) -> Data{
+//    func createSales(locations: [Location]?, ordertime:Int, rate:Double, viewController: SalePickerViewController){
+//        // TODO: http://postgrest.org/en/v6.0/api.html#upsert
+//        //let parameters = "{  \"saleid\": \(seller.saleid), \"bid\": \"\(self.uid!)\", \"price\": \(price), \"approve\": false, \"paid\": false, \"p_description\": \"\(description)\"}"
+//        // print(parameters)
+//        // postBody = genPostBody(locations)
+//
+//        let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
+//        var request = URLRequest(url: URL(string: "https://pdellinger.com/activeseller")!,timeoutInterval: Double.infinity)
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("resolution=merge-duplicates", forHTTPHeaderField: "Prefer")
+//
+//        request.httpMethod = "POST"
+//        request.httpBody = postData
+//
+//        //authorization
+//        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+//
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//
+//            if let httpResponse = response as? HTTPURLResponse {
+//
+//                print("status code \(httpResponse.statusCode)")
+//                if httpResponse.statusCode == 201 {
+//                    print("Successfully inserted sales!")
+//                    DispatchQueue.main.async{
+//                        viewController.handleSuccessfulInsert()
+//                    }
+//
+//                }
+//                else{
+//                    print("Did not get 201 code, row not inserted")
+//                }
+//            }
+//            guard let data = data else {
+//                print(String(describing: error))
+//                return
+//            }
+//            print(String(data: data, encoding: .utf8)!)
+//
+//        }
+//
+//        task.resume()
+//
+//    }
+    func genPostBody(locations:[Location], ordertime:Int, rate: Double) -> Data{
         var sales = [[String:Any]]()
         for location in locations{
             print(location)
@@ -373,7 +408,7 @@ class User {
             
             sale["status"] = true
             sale["percent"] = String(format: "%.2f", rate)
-            sale["location"] = location
+            sale["location"] = location.id
             sales.append(sale)
         }
         let JSON = try? JSONSerialization.data(withJSONObject: sales, options: [])
@@ -386,12 +421,92 @@ class User {
         return formatter.string(from: date)
     }
     
+    func loadLocations(completion: @escaping (_ locations: [Location]?, _ error: Int?)->Void){
+        
+        let scheme = "https"
+        let host = "pdellinger.com"
+        let path = "/locations"
+        let regionEquality = "eq." + "West Union"
+        let regionQuery = URLQueryItem(name: "region", value: regionEquality)
+        let select = "id:lid,name"
+        let projection = URLQueryItem(name: "select", value: select)
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [projection] + [regionQuery]
+        
+        guard let url = urlComponents.url else { return }
+        //make request to addresss in parameter
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        
+        //specify type of request
+        request.httpMethod = "GET"
+        
+        //authorization
+        request.setValue("Bearer \(self.token ?? "")", forHTTPHeaderField: "Authorization")
+        
+        //Use the URLSession built in to make a dataTask (basically a request)
+        
+        //Initialize three vars  - data, response and error
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200{
+                    completion(nil, httpResponse.statusCode)
+                    return
+                }
+            }
+            guard let data = data else {
+                print(String(describing: error))
+                completion(nil, 400)
+                return
+            }
+            do{
+                print(data)
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+                
+                print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    completion (nil, 400)
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+                
+                
+                var restaurants = [Location]()
+                for dic in jsonArray{
+                    
+                    guard let location = Location(name: dic["name"] as! String, count: nil, id: dic["id"] as! Int) else {
+                        fatalError("Unable to instantiate meal")
+                    }
+                    restaurants += [location]
+                    
+                }
+                //reload the table with the new values
+                completion(restaurants, nil)
+                return
+                //Response not in JSON format
+            } catch let parsingError {
+                print("Error", parsingError)
+                completion(nil, 400)
+                return
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+        
+    }
+    
     func getUserSales(viewcontroller: Any?){
         print("getting active sales!")
         let scheme = "https"
         let host = "pdellinger.com"
         let path = "/activeseller"
-        let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,location")
+        let queryItem = URLQueryItem(name: "select", value: "saleid,uid,seller:registereduser(name,venmo),ordertime,status,percent,restaurant:locations(name,id:lid)")
         let uidEquality = "eq.\(self.uid!)"
         let queryItem2 = URLQueryItem(name: "uid", value: uidEquality)
         //let queryItem3 = URLQueryItem(name: "status", value: "eq.true")
@@ -1097,10 +1212,11 @@ class User {
                 //iterate over JSON, adding each to location
                 var locations = [Location]()
                 for dic in jsonArray{
-                    guard let name = dic["location"] as? String else { return }
+                    guard let name = dic["name"] as? String else { return }
                     guard let count = dic["count"] as? Int else { return }
+                    guard let id = dic["id"] as? Int else { return }
                     //print(name, count) //Output
-                    guard let location = Location(name: name, count: count) else {
+                    guard let location = Location(name: name, count: count, id: id) else {
                         completion(nil, 400)
                         return
                     }
@@ -1118,6 +1234,230 @@ class User {
         }
         //We have to call the task here because it's asynchronous
         task.resume()
+    }
+    func getHistory(completion: @escaping (_ transactions: [[String:Any]]?, _ error: Int?)-> ()){
+        let scheme = "https"
+        let host = "pdellinger.com"
+        let path = "/history"
+        let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        // print(url)
+        
+        //specify type of request
+        request.httpMethod = "GET"
+        
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        //make request to addresss in parameter
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200{
+                    completion(nil, httpResponse.statusCode)
+                    return
+                }
+                
+            }
+            guard let data = data else {
+                completion(nil, 400)
+                return
+            }
+            do{
+                //print(data)
+                
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+                
+                //print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    completion(nil, 400)
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+                var transactions = [[String:Any]]()
+                for dic in jsonArray{
+                    transactions.append(dic)
+                    
+                }
+                completion(transactions, nil)
+                return
+                //reload the table with the new values
+                //Response not in JSON format
+            } catch let parsingError {
+                completion(nil, 400)
+                return
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
+    func getRestaurantSales(restaurant: Location, completion: @escaping (_ locations: [Seller]?, _ error: Int?)->Void){
+
+        let scheme = "https"
+        let host = "pdellinger.com"
+        let path = "/activeseller"
+        let queryItem = URLQueryItem(name: "select", value: "uid,saleid, seller:registereduser(name, venmo), ordertime, status, percent,restaurant:locations(name,id:lid)")
+        let restaurantEquality = "eq." + "\(restaurant.id)"
+        let queryItem2 = URLQueryItem(name: "location", value: restaurantEquality)
+        let queryItem3 = URLQueryItem(name: "order", value: "percent")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        urlComponents.queryItems! += [queryItem2]
+        urlComponents.queryItems! += [queryItem3]
+        
+        guard let url = urlComponents.url else { return }
+        //make request to addresss in parameter
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+
+        //specify type of request
+        request.httpMethod = "GET"
+
+        //authorization
+        request.setValue("Bearer \(self.token ?? "")", forHTTPHeaderField: "Authorization")
+
+        //Use the URLSession built in to make a dataTask (basically a request)
+
+        //Initialize three vars  - data, response and error
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200{
+                    completion(nil, httpResponse.statusCode)
+                    return
+                }
+            }
+            guard let data = data else {
+                print(String(describing: error))
+                completion(nil, 400)
+                return
+            }
+            do{
+                print(data)
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+
+                print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    completion (nil, 400)
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+                
+    
+                var sellers = [Seller]()
+                for dic in jsonArray{
+
+                    guard let seller = Seller(json:dic) else {
+                        fatalError("Unable to instantiate seller")
+                    }
+                    sellers += [seller]
+
+                }
+                //reload the table with the new values
+                completion(sellers, nil)
+                return
+            //Response not in JSON format
+            } catch let parsingError {
+                print("Error", parsingError)
+                completion(nil, 400)
+                return
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+        
+    }
+    func loadMeals(restaurant: Location, completion: @escaping (_ items: [Meal]?, _ error: Int?)->Void){
+
+        let scheme = "https"
+        let host = "pdellinger.com"
+        let path = "/menus"
+        let restaurantEquality = "eq." + "\(restaurant.id)"
+        let queryItem = URLQueryItem(name: "location", value: restaurantEquality)
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        
+        guard let url = urlComponents.url else { return }
+        //make request to addresss in parameter
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+
+        //specify type of request
+        request.httpMethod = "GET"
+
+        //authorization
+        request.setValue("Bearer \(self.token ?? "")", forHTTPHeaderField: "Authorization")
+
+        //Use the URLSession built in to make a dataTask (basically a request)
+
+        //Initialize three vars  - data, response and error
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200{
+                    completion(nil, httpResponse.statusCode)
+                    return
+                }
+            }
+            guard let data = data else {
+                print(String(describing: error))
+                completion(nil, 400)
+                return
+            }
+            do{
+                print(data)
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+
+                print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    completion (nil, 400)
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+                
+    
+                var items = [Meal]()
+                for dic in jsonArray{
+
+                    guard let meal = Meal(json: dic) else {
+                        fatalError("Unable to instantiate meal")
+                    }
+                    items += [meal]
+
+                }
+                //reload the table with the new values
+                completion(items, nil)
+                return
+            //Response not in JSON format
+            } catch let parsingError {
+                print("Error", parsingError)
+                completion(nil, 400)
+                return
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+        
     }
 }
 

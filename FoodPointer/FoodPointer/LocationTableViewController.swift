@@ -20,13 +20,13 @@ class LocationTableViewController: UITableViewController {
     private func loadSampleLocations() {
         // Function that loads three sample locations (call when testing)
         
-        guard let location1 = Location(name: "Caprese Salad", count: 4) else {
+        guard let location1 = Location(name: "Caprese Salad", count: 4, id: -1) else {
             fatalError("Unable to instantiate location1")
         }
-        guard let location2 = Location(name: "MarketPlace", count: 20) else {
+        guard let location2 = Location(name: "MarketPlace", count: 20, id:-2) else {
             fatalError("Unable to instantiate location2")
         }
-        guard let location3 = Location(name: "Dominos", count: 2) else {
+        guard let location3 = Location(name: "Dominos", count: 2, id:-3) else {
             fatalError("Unable to instantiate location3")
         }
         locations += [location1,location2,location3]
@@ -111,7 +111,7 @@ class LocationTableViewController: UITableViewController {
         //Copy the location from the array locations into a table cell
         let location = locations[indexPath.row]
         cell.nameLabel.text = location.name
-        cell.numberLabel.text = String(location.count)
+        cell.numberLabel.text = String(location.count!)
         
         // Configure the cell...
 
@@ -152,8 +152,9 @@ class LocationTableViewController: UITableViewController {
                 for dic in jsonArray{
                     guard let name = dic["location"] as? String else { return }
                     guard let count = dic["count"] as? Int else { return }
+                    guard let id = dic["id"] as? Int else { return }
                     //print(name, count) //Output
-                    guard let location = Location(name: name, count: count) else {
+                    guard let location = Location(name: name, count: count, id: id) else {
                         fatalError("Unable to instantiate location")
                     }
                     self.locations += [location]

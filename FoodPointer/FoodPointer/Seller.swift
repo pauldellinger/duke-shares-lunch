@@ -14,34 +14,46 @@ class Seller{
     var saleid: Int
     var sellerId: String
     var status: Bool
-    var locationName: String
+    var location: Location
     var sellerName : String
     var sellerVenmo: String
     var rate: Double
     var ordertime: String
     
     
-    init?(saleid: Int, sellerId: String, status: Bool, locationName: String, sellerName : String, sellerVenmo: String, rate: Double, ordertime: String) {
+    init?(saleid: Int, sellerId: String, status: Bool, location: Location, sellerName : String, sellerVenmo: String, rate: Double, ordertime: String) {
         self.saleid = saleid
         self.sellerId = sellerId
         self.status = status
         self.sellerName = sellerName
-        self.locationName = locationName
+        self.location = location
         self.sellerVenmo = sellerVenmo
         self.rate = rate
         self.ordertime = ordertime
         // Initialization should fail if there is no name or if the rating is negative.
-        if locationName.isEmpty || (rate < 0 || rate>1 ){
+        if location.name.isEmpty || (rate < 0 || rate>1 ){
             return nil
         }
     }
     init?(json: [String: Any]) {
-        guard let locationName = json["location"] as? String else {
-            print("Problem with location  statement or data input")
+        guard let location = json["restaurant"] as? [String:Any] else {
+            print("Problem with location statement or data input")
+            return nil
+        }
+        guard let restaurantName = location["name"] as? String else {
+            print("problem with restaurant name or data input")
+            return nil
+        }
+        guard let restaurantId = location["id"] as? Int else {
+            print("problem with restaurant name or data input")
+            return nil
+        }
+        guard let place = Location(name: restaurantName, count: nil, id: restaurantId) else {
+            print("error instantiating location")
             return nil
         }
         guard let sellerJSON = json["seller"] as? [String: String] else {
-            print("Problem with seller  statement or data input")
+            print("Problem with seller statement or data input")
             return nil
         }
         guard let sellerVenmo = sellerJSON["venmo"] else {
@@ -78,7 +90,7 @@ class Seller{
         self.sellerId = sellerId
         self.status = status
         self.sellerName = sellerName
-        self.locationName = locationName
+        self.location = place
         self.sellerVenmo = sellerVenmo
         self.rate = percent
         self.ordertime = ordertime

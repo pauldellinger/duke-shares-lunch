@@ -13,7 +13,7 @@ class SubmitSellLocationViewController: UIViewController {
     var user:User?
     
     @IBOutlet weak var allOfWUSwitch: UISwitch!
-    var selectedLocations = [String]()
+    var selectedLocations = [Location]()
     
     @IBAction func submitAction(_ sender: Any) {
         //call segue to rate/time pickers here
@@ -29,30 +29,30 @@ class SubmitSellLocationViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    private func loadWU()-> [String]{
-        var locations = [String]()
-        if let path = Bundle.main.path(forResource: "restaurants", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                // print(jsonResult)
-                guard let jsonArray = jsonResult as? [[String: Any]] else {
-                    return []
-                }
-                for dic in jsonArray{
-                    guard let westunion = dic["West Union"] as? [[String:Any]] else { return [] }
-                    for place in westunion{
-                        locations += [place["name"] as! String]
-                    }
-                    
-                }
-            } catch {
-                print("Unable to read json with the meals")
-                return []
-            }
-        }
-        return locations
-    }
+//    private func loadWU()-> [String]{
+//        var locations = [String]()
+//        if let path = Bundle.main.path(forResource: "restaurants", ofType: "json") {
+//            do {
+//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+//                // print(jsonResult)
+//                guard let jsonArray = jsonResult as? [[String: Any]] else {
+//                    return []
+//                }
+//                for dic in jsonArray{
+//                    guard let westunion = dic["West Union"] as? [[String:Any]] else { return [] }
+//                    for place in westunion{
+//                        locations += [place["name"] as! String]
+//                    }
+//
+//                }
+//            } catch {
+//                print("Unable to read json with the meals")
+//                return []
+//            }
+//        }
+//        return locations
+//    }
     
 
     func handleSuccessfulGetSales(){
@@ -71,7 +71,13 @@ class SubmitSellLocationViewController: UIViewController {
             
             if allOfWUSwitch.isOn{
                 
-                destinationController.locations = loadWU()
+                self.user?.loadLocations(completion: { locations, error in
+                    if let error = error{
+                        print("error getting locations: ", error)
+                    }else {
+                        destinationController.locations = locations
+                    }
+                })
             } else{ destinationController.locations = selectedLocations }
             destinationController.user = user
             
@@ -79,6 +85,10 @@ class SubmitSellLocationViewController: UIViewController {
         if let destinationController = segue.destination as? MySalesViewController {
             destinationController.user = user
             
+        }
+        if let destinationController = segue.destination as? SellLocationTableViewController{
+            // loading locations in the tableview requires user capabilities now
+            destinationController.user = user
         }
         
     }

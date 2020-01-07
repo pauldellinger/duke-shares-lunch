@@ -25,7 +25,7 @@ class BuyFoodViewController: UIViewController {
         if let description = purchase?.description.components(separatedBy: ":"){
             print(description)
             if let buyerName = purchase?.buyer.name{
-                buyerNameLabel.text = "Please purchase these items and meet \(buyerName) at \(purchase!.seller.locationName)"
+                buyerNameLabel.text = "Please purchase these items and meet \(buyerName) at \(purchase!.seller.location.name)"
             }
             descriptionLabel.text = ""
             let meals = description[0].components(separatedBy: "#")
