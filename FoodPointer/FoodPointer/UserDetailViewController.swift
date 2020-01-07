@@ -23,10 +23,13 @@ class UserDetailViewController: UIViewController {
         let authUI = FUIAuth.defaultAuthUI()
         
         do {try authUI?.signOut() }catch { print("no user to sign out")}
-        let defaults = UserDefaults.standard
-        defaults.set("", forKey: "email")
-        defaults.set("", forKey: "password")
-        defaults.set("", forKey: "token")
+        self.user?.removeDeviceTokens(completion: { user, error in
+            if let error = error{
+                print("removedevicetoken error: ", error)
+            }else{
+                print("Device Tokens Sucessfully removed")
+            }
+        })
         tabBarController?.navigationController?.popToRootViewController(animated: true)
     }
     var user: User?

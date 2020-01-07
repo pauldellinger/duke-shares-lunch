@@ -73,7 +73,7 @@ class SubmitFooterViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "waitForSellerSegue", sender: self)
     }
     func handleUnsuccessfulInsert(){
-        let alert = UIAlertController(title: "Error Creating Purchase", message: "Are you buying from yourself?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error Creating Purchase", message: "This is probably due to the sale being cancelled while you were ordering. Please try another seller.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             switch action.style{
             case .default:
@@ -85,7 +85,8 @@ class SubmitFooterViewController: UIViewController, UITextFieldDelegate {
             case .destructive:
                 print("destructive")
                 
-                
+            @unknown default:
+                print("unknown default")
             }}))
         self.present(alert, animated: true, completion: nil)
     }

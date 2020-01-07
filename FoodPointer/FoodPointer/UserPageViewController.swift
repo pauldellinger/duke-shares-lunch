@@ -55,7 +55,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
         let email = defaults.string(forKey: "email")
         print(email)
         
-        FirebaseApp.configure()
+        //FirebaseApp.configure()
         
         /*
         if !(email?.isEmpty ?? true){ //if email has already been set
