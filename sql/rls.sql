@@ -32,7 +32,14 @@ GRANT usage, select on sequence history_hid_seq to todo_user;
 GRANT usage, select on sequence history_rid_seq to todo_user;
 
 GRANT INSERT ON REPORTS to todo_user;
-GRANT INSERT ON History to todo_user;
+GRANT INSERT,SELECT ON History to todo_user;
+GRANT SELECT ON LOCATIONS to todo_user;
+GRANT SELECT ON MENUS to todo_user;
+
+GRANT ALL ON LOCATIONS to notifier;
+GRANT ALL on MENUS to notifier;
+GRANT ALL on locations_lid_seq to notifier;
+GRANT ALL on menus_mid_seq to notifier;
 
 
 GRANT todo_user to "mdUNjgUS6Vajor81BrExd3Dse7F2";
@@ -89,4 +96,11 @@ CREATE POLICY purchase_update on PURCHASE FOR UPDATE
 	-- only seller can update rows in purchase
 
 
+DROP TABLE HISTORY;
+ALTER TABLE HISTORY ENABLE ROW LEVEL SECURITY;
 
+CREATE POLICY history_select on HISTORY FOR SELECT
+	USING(bid = current_user OR sid = current_user);
+
+CREATE POLICY history_insert on HISTORY FOR INSERT
+        WITH CHECK(true); -- rls on purchase covers this one

@@ -17,8 +17,9 @@ ON activeseller
 
 CREATE OR REPLACE FUNCTION store_purchase() RETURNS trigger as $$
 	BEGIN
-	INSERT INTO History(bid,sid, price,approve,paid, description)
+	INSERT INTO History(complete_time, bid,sid, price,approve,paid, description)
 	VALUES(
+	now(),
 	OLD.bid,
 	(SELECT uid from activeseller where saleid = old.saleid),
 	OLD.price,

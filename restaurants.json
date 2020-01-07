@@ -1,0 +1,308 @@
+[{
+   "West Union":
+      [
+         {"name": "Il Forno",
+         "menu":
+            [
+        {"name": "Meatballs & Spaghetti", "price": 8.95},
+        {"name": "Chicken Alfredo", "price": 8.95},
+        {"name": "Chicken Basil Pesto", "price": 8.95},
+        {"name": "Spicy Il Forno", "price": 8.95},
+    {"name": "Parma Rosa", "price": 8.95},
+    {"name": "Braised Italian Beef", "price": 8.95},
+    {"name": "Salmon Alfredo", "price": 8.95},
+    {"name": "Pancetta Aglio E Olio", "price": 8.95},
+    {"name": "Garden Pesto", "price": 8.95},
+    {"name": "Make your own pasta", "price": 8.95},
+    {"name": "Add meat (please specify type in the description)", "price": 1.25},
+    {"name": "Extra cheese", "price": 0.00},
+    {"name": "Make your own Pizza (cheese only)", "price": 7.00},
+    {"name": "Make your own 1 topping Pizza (please specify topping in the description)", "price": 7.75},
+    {"name": "Make your own 2-4 topping Pizza (please specify toppings in the description)", "price": 8.95},
+    {"name": "Beccorino Pizza", "price": 8.95},
+    {"name": "Harvest Pizza", "price": 8.95},
+    {"name": "Margherita Pizza", "price": 8.00},
+    {"name": "Blaise Pizza", "price": 8.95},
+    {"name": "PJ's New Yorker Pizza", "price": 8.95},
+    {"name": "Rustic Pizza", "price": 8.95},
+    {"name": "Bianca Rosa Pizza", "price": 8.95},
+    {"name": "Quattro Pizza", "price": 8.95},
+    {"name": "Bruschetta Pizza", "price": 8.95},
+    {"name": "Kyle's BBQ Pizza", "price": 8.95},
+    {"name": "Skadoosh Pizza", "price": 8.95},
+    {"name": "Buffalo Pizza", "price": 8.95},
+    {"name": "5 Bone-in Wings (please specify type in the description)", "price": 4.95},
+    {"name": "10 Bone-in Wings (please specify type in the description)", "price": 9.50},
+    {"name": "4 Boneless Wings (please specify type in the description)", "price": 4.95},
+    {"name": "8 Boneless Wings (please specify type in the description)", "price": 9.50},
+    {"name": "Ranch or Blue Cheese add-on", "price": 0.50},
+    {"name": "Breadstick add-on", "price": 0.50},
+    {"name": "Extra wing sause on side (please specify type in the description)", "price": 0.70},
+    {"name": "Combo: Wings and slice of Pizza (please specify type in the description)", "price": 7.50},
+    {"name": "Combo: 5 Bone-in, 4 Boneless wings (please specify type in the description)", "price": 9.50}
+        ]
+         },
+
+    {"name": "Sazon",
+         "menu":
+            [
+        {"name": "Pollo a la Brasa", "price": 9.00},
+        {"name": "Grouper Tacos", "price": 9.00},
+        {"name": "Chimichurri Steak", "price": 12.00},
+        {"name": "Pollo a la Brasa", "price": 9.00},
+        {"name": "Build your own - arepa bowl (carnitas)", "price": 8.95},
+        {"name": "Build your own - arepa bowl (barbacoa)", "price": 8.95},
+        {"name": "Build your own - arepa bowl (grilled chicken)", "price": 8.75},
+        {"name": "Build your own - arepa bowl (grilled portobello)", "price": 8.95},
+        {"name": "Add extra protenin (please specify in description)", "price": 2.25},
+        {"name": "Build your own - corn tortillas (carnitas)", "price": 8.95},
+        {"name": "Build your own - corn tortillas (barbacoa)", "price": 8.95},
+        {"name": "Build your own - corn tortillas (grilled chicken)", "price": 8.75},
+        {"name": "Build your own - corn tortillas (grilled portobello)", "price": 8.95},
+        {"name": "Build your own - flour tortillas (carnitas)", "price": 8.95},
+        {"name": "Build your own - flour tortillas (barbacoa)", "price": 8.95},
+        {"name": "Build your own - flour tortillas (grilled chicken)", "price": 8.75},
+        {"name": "Build your own - flour tortillas (grilled portobello)", "price": 8.95},
+        {"name": "Build your own - quesadilla (carnitas)", "price": 8.95},
+        {"name": "Build your own - quesadilla (barbacoa)", "price": 8.95},
+        {"name": "Build your own - quesadilla (grilled chicken)", "price": 8.75},
+        {"name": "Build your own - quesadilla (grilled portobello)", "price": 8.95},
+        {"name": "Maduros Sweet Plantains", "price": 2.00},
+        {"name": "Totones", "price": 2.00},
+        {"name": "Lime Coleslaw", "price": 2.00},
+        {"name": "Black Beans", "price": 2.00},
+        {"name": "Brown Rice", "price": 2.00},
+        {"name": "Cilantro Lime Rice", "price": 2.00},
+        {"name": "Guacamole", "price": 2.00},
+        {"name": "Yucca Fries", "price": 2.00},
+        {"name": "Chips and Guacamole", "price": 3.00},
+        {"name": "Chips and Salse", "price": 2.00},
+        {"name": "Chips and Queso", "price": 3.00},
+        {"name": "Horchata", "price": 3.00},
+        {"name": "Churros", "price": 2.50}
+        ]
+         },
+
+
+    {"name": "Cafe",
+         "menu":
+            [
+        {"name": "Brewed Coffee (small)", "price": 2.30},
+        {"name": "Red Eye (small)", "price": 3.15},
+        {"name": "Americano (small)", "price": 3.25},
+        {"name": "Cappuccino (small)", "price": 3.75},
+        {"name": "Caffe Latte (small)", "price": 3.75},
+        {"name": "Mocha Latte (small)", "price": 4.20},
+        {"name": "Caramel Leche (small)", "price": 4.20},
+        {"name": "Vietnamese Coffee (small)", "price": 4.60},
+        {"name": "Organic Matcha Latte (small)", "price": 3.90},
+        {"name": "Organic Masala Chai (small)", "price": 3.90},
+        {"name": "Organic Chaga Chai (small)", "price": 3.90},
+        {"name": "Organic Turmeric Ginger Chai (small)", "price": 3.90},
+        {"name": "Hot Chocolate (small)", "price": 2.90},
+
+        {"name": "Brewed Coffee (large)", "price": 2.60},
+        {"name": "Nitro Brew (large)", "price": 4.75},
+        {"name": "Red Eye (large)", "price": 3.45},
+        {"name": "Americano (large)", "price": 4.00},
+        {"name": "Cappuccino (large)", "price": 4.10},
+        {"name": "Caffe Latte (large)", "price": 4.10},
+        {"name": "Mocha Latte (large)", "price": 4.75},
+        {"name": "Caramel Leche (large)", "price": 4.75},
+        {"name": "Vietnamese Coffee (large)", "price": 5.15},
+        {"name": "Organic Matcha Latte (large)", "price": 4.75},
+        {"name": "Organic Masala Chai (large)", "price": 4.75},
+        {"name": "Organic Chaga Chai (large)", "price": 4.75},
+        {"name": "Organic Turmeric Ginger Chai (large)", "price": 4.75},
+        {"name": "Organic Earl Grey Latte (large)", "price": 4.10},
+        {"name": "Hot Chocolate (large)", "price": 3.50},
+
+        {"name": "Caramel Frappe (small)", "price": 5.00},
+        {"name": "Vanilla Frappe (small)", "price": 5.00},
+        {"name": "Mocha Frappe (small)", "price": 5.00},
+        {"name": "Matcha Frappe (small)", "price": 5.00},
+        {"name": "Chai Frappe (small)", "price": 5.00},
+
+        {"name": "Caramel Frappe (large)", "price": 5.50},
+        {"name": "Vanilla Frappe (large)", "price": 5.50},
+        {"name": "Mocha Frappe (large)", "price": 5.50},
+        {"name": "Matcha Frappe (large)", "price": 5.50},
+        {"name": "Chai Frappe (large)", "price": 5.50},
+
+        {"name": "Protien Shot V+20g", "price": 1.55},
+        {"name": "Dairy substitute - Oat", "price": 1.00},
+        {"name": "Dairy substitute - Almond", "price": 1.00},
+
+        {"name": "French Beef Panini", "price": 8.95},
+        {"name": "Chicken Salad Melt Panini", "price": 8.50},
+        {"name": "Grilled Ratatouille Panini", "price": 7.97},
+        {"name": "Turkey Avacado Panini", "price": 8.50},
+        {"name": "Bacon Bruschetta Panini", "price": 7.99},
+        {"name": "Breakfast Panini", "price": 5.45},
+
+        {"name": "Strawberry Smoothie", "price": 5.50},
+        {"name": "Mango Smoothie", "price": 5.50},
+        {"name": "Rasberry Smoothie", "price": 5.50},
+
+        {"name": "Green Monster Juice", "price": 5.00},
+        {"name": "Healthy Boost Juice", "price": 5.00},
+        {"name": "Delicious Trio Juice", "price": 5.00},
+        {"name": "Orange Juice", "price": 5.00},
+        {"name": "Apple Juice", "price": 5.00},
+
+        {"name": "Cappuccino Gelato (1 scoop)", "price": 4.20},
+        {"name": "Dolce De Leche Gelato (1 scoop)", "price": 4.20},
+        {"name": "Hazelnut Gelato (1 scoop)", "price": 4.20},
+        {"name": "Pistachio Gelato (1 scoop)", "price": 4.20},
+        {"name": "Salted Caramel Gelato (1 scoop)", "price": 4.20},
+        {"name": "Mint Chocolate Chip Gelato (1 scoop)", "price": 4.20},
+        {"name": "Chocolate Gelato (1 scoop)", "price": 4.20},
+        {"name": "Vanilla Gelato (1 scoop)", "price": 4.20},
+        {"name": "Lemon Sorbetto (1 scoop)", "price": 4.20},
+        {"name": "Mango Sorbetto (1 scoop)", "price": 4.20},
+        {"name": "Mixed Berries Sorbetto (1 scoop)", "price": 4.20},
+
+        {"name": "Cappuccino Gelato (2 scoops)", "price": 5.85},
+        {"name": "Dolce De Leche Gelato (2 scoops)", "price": 5.85},
+        {"name": "Hazelnut Gelato (2 scoops)", "price": 5.85},
+        {"name": "Pistachio Gelato (2 scoops)", "price": 5.85},
+        {"name": "Salted Caramel Gelato (2 scoops)", "price": 5.85},
+        {"name": "Mint Chocolate Chip Gelato (2 scoops)", "price": 5.85},
+        {"name": "Chocolate Gelato (2 scoops)", "price": 5.85},
+        {"name": "Vanilla Gelato (2 scoops)", "price": 5.85},
+        {"name": "Lemon Sorbetto (2 scoops)", "price": 5.85},
+        {"name": "Mango Sorbetto (2 scoops)", "price": 5.85},
+        {"name": "Mixed Berries Sorbetto (2 scoops)", "price": 5.85},
+
+        {"name": "Cappuccino Gelato (2 scoops)", "price": 7.50},
+        {"name": "Dolce De Leche Gelato (2 scoops)", "price": 7.50},
+        {"name": "Hazelnut Gelato (2 scoops)", "price": 7.50},
+        {"name": "Pistachio Gelato (2 scoops)", "price": 7.50},
+        {"name": "Salted Caramel Gelato (2 scoops)", "price": 7.50},
+        {"name": "Mint Chocolate Chip Gelato (2 scoops)", "price": 7.50},
+        {"name": "Chocolate Gelato (2 scoops)", "price": 7.50},
+        {"name": "Vanilla Gelato (2 scoops)", "price": 7.50},
+        {"name": "Lemon Sorbetto (2 scoops)", "price": 7.50},
+        {"name": "Mango Sorbetto (2 scoops)", "price": 7.50},
+        {"name": "Mixed Berries Sorbetto (2 scoops)", "price": 7.50},
+
+        {"name": "Add Nutella", "price": 1.00},
+
+        {"name": "Croque Monsieur Crepe", "price": 7.35},
+        {"name": "Add organic arugula to Crepe", "price": 1.05},
+        {"name": "Add vine ripe tomato to Crepe", "price": 1.05},
+        {"name": "Add farm fresh egg to Crepe", "price": 2.05},
+        {"name": "Truffled Hummus Crepe", "price": 7.35},
+        {"name": "Egg Florentine Crepe", "price": 7.35},
+        {"name": "Chicken Pesto Crepe", "price": 8.50},
+        {"name": "Apple & Brie Crepe", "price": 7.35},
+
+        {"name": "Cinnamon Sugar Crepe", "price": 5.25},
+        {"name": "Nutella Crepe", "price": 6.30},
+        {"name": "S'Mores Crepe", "price": 7.50},
+
+        {"name": "Add Gelato Scoop to Crepe", "price": 2.05},
+        {"name": "Add Nutella to Crepe", "price": 1.55},
+        {"name": "Add Banana to Crepe", "price": 1.55},
+        {"name": "Add Strawberries to Crepe", "price": 1.55}
+        ]
+         },
+
+    {"name": "Tandoor",
+         "menu":
+            [
+        {"name": "Vegetable Samosa (2 Pc)", "price": 4.10},
+        {"name": "Masala Dosa", "price": 8.40},
+        {"name": "Chicken Tikka Dosa", "price": 10.25},
+        {"name": "Sada Dosa", "price": 6.30},
+        {"name": "Vegetable Dosa", "price": 8.40},
+        {"name": "Vegetarian/Vegan Lunch Combo (choice of 3 entrees)", "price": 7.40},
+        {"name": "Non-Vegetarian Lunch Combo (choice of 3 entrees)", "price": 8.40},
+        {"name": "Vegetarian/Vegan Dinner Combo (choice of 3 entrees)", "price": 8.40},
+        {"name": "Non-Vegetarian Dinner Combo (choice of 3 entrees)", "price": 9.50},
+        {"name": "Add samosa to combo", "price": 1.25},
+        {"name": "Add side to combo", "price": 3.00},
+
+        {"name": "Naan", "price": 2.00},
+        {"name": "Garlic Naan", "price": 3.00},
+
+        {"name": "Gulab Jamun", "price": 3.25},
+        {"name": "Kheer", "price": 3.25},
+        {"name": "Mango Lassi", "price": 3.25}
+        ]
+         },
+
+
+    {"name": "Sprout",
+         "menu":
+            [
+        {"name": "Sandwich", "price": 8.00},
+        {"name": "Sandwich w/side", "price": 10.00},
+        {"name": "Hotline Entree (specify in description)", "price": 7.00},
+        {"name": "Hotline Entree w/ one side (specify in description)", "price": 9.00},
+        {"name": "Hotline Entree w/ two sides (specify in description)", "price": 11.00},
+        {"name": "Avocado Toast", "price": 6.00},
+        {"name": "Cauliflower Flatbread", "price": 10.00},
+        {"name": "Falafel Bowl", "price": 10.00},
+        {"name": "Salad (one portion)", "price": 4.25},
+        {"name": "Salad (two portions)", "price": 7.50},
+        {"name": "Salad (three portions)", "price": 9.50},
+        {"name": "Salad (four portions)", "price": 11.50}
+        ]
+         },
+
+
+    {"name": "JB's",
+         "menu":
+            [
+        {"name": "Flank Steak (6 oz.) (please specify 2 sides in description)", "price": 10.50},
+        {"name": "Flank Steak (12 oz.) (please specify 2 sides in description)", "price": 14.95},
+        {"name": "Coal braised beef brisket (6 oz.) (please specify 2 sides in description)", "price": 9.75},
+        {"name": "Coal braised beef brisket (12 oz.) (please specify 2 sides in description)", "price": 12.85},
+        {"name": "Prime Rib au jus (6 oz.) (please specify 2 sides in description)", "price": 12.85},
+        {"name": "Prime Rib au jus (12 oz.) (please specify 2 sides in description)", "price": 18.99},
+
+        {"name": "NY Strip (6 oz.) (please specify 2 sides in description)", "price": 12.85},
+        {"name": "NY Strip (12 oz.) (please specify 2 sides in description)", "price": 18.99},
+        {"name": "Rotisserie chicken (quarter)", "price": 7.25},
+        {"name": "Rotisserie chicken (half)", "price": 9.25},
+
+        {"name": "Salmon", "price": 12.00},
+        {"name": "Yellow fin tuna", "price": 12.00},
+        {"name": "Mahi Mahi", "price": 12.50},
+
+        {"name": "Garlic Mashed Potatoes", "price": 2.50},
+        {"name": "Roasted Seasonal Vegetables", "price": 2.50},
+        {"name": "Steamed Broccoli", "price": 2.50},
+        {"name": "Onion Rings", "price": 2.50},
+        {"name": "Steak Fries", "price": 2.50}
+
+        ]
+         },
+
+
+         {"name": "Farmstead",
+         "menu":
+            [
+               {"name": "Farmer's Plate (please specify 2 sides in description)", "price": 10.25},
+               {"name": "Fisherman's Plate (please specify 2 sides in description)", "price": 11.50},
+               {"name": "Butcher's Plate (please specify 2 sides in description)", "price": 9.25},
+               {"name": "One side", "price": 4.00},
+               {"name": "Two sides", "price": 7.00},
+               {"name": "Three sides", "price": 9.00}
+               
+            ]
+         },
+
+
+         {"name": "Ginger and Soy",
+         "menu":
+            [
+               {"name": "Seoule Bowl", "price": 9.25},
+               {"name": "Tokyo Bowl", "price": 9.25},
+               {"name": "California Bowl", "price": 9.25}
+               
+            ]
+         }
+      ]
+}]
