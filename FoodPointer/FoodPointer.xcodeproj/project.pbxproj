@@ -115,6 +115,9 @@
 		DAD1E9D52393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
 		DAD1E9D62393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
 		DAD1E9D72393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */; };
+		DAFBAC3423C4E29D00752077 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBAC3323C4E29D00752077 /* HistoryTableViewCell.swift */; };
+		DAFBAC3523C4E29D00752077 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBAC3323C4E29D00752077 /* HistoryTableViewCell.swift */; };
+		DAFBAC3623C4E29D00752077 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBAC3323C4E29D00752077 /* HistoryTableViewCell.swift */; };
 		DAFBC9F8238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
 		DAFBC9F9238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
 		DAFBC9FA238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */; };
@@ -195,6 +198,7 @@
 		DAD1E9D0239357F000FE55E7 /* BuyFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyFoodViewController.swift; sourceTree = "<group>"; };
 		DAD1E9D42393720E00FE55E7 /* WaitForSellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForSellerViewController.swift; sourceTree = "<group>"; };
 		DADBAD4D23A7139300337097 /* FoodPointer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FoodPointer.entitlements; sourceTree = "<group>"; };
+		DAFBAC3323C4E29D00752077 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		DAFBC9F7238B7B6700A41663 /* MealSelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSelectorTableViewCell.swift; sourceTree = "<group>"; };
 		E305CDF0008E6C8DEA60D0CE /* Pods-FoodPointer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPointer.release.xcconfig"; path = "Target Support Files/Pods-FoodPointer/Pods-FoodPointer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -385,6 +389,7 @@
 				DAD1E9C02391C35E00FE55E7 /* ActiveSalesTableViewCell.swift */,
 				DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */,
 				DAD1E9A0238F58AC00FE55E7 /* SellLocationTableViewCell.swift */,
+				DAFBAC3323C4E29D00752077 /* HistoryTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -716,6 +721,7 @@
 				DAD1E99D238F584500FE55E7 /* SellLocationTableViewController.swift in Sources */,
 				DA5AABBB2387738000CB1B5C /* UserPageViewController.swift in Sources */,
 				DAD1E9D52393720E00FE55E7 /* WaitForSellerViewController.swift in Sources */,
+				DAFBAC3423C4E29D00752077 /* HistoryTableViewCell.swift in Sources */,
 				DA1D7F02239B200E00B042F4 /* CreateProfileViewController.swift in Sources */,
 				DAD1E9B123905DCE00FE55E7 /* SalePickerViewController.swift in Sources */,
 			);
@@ -751,6 +757,7 @@
 				DAD1E9C22391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
 				DAD1E9BE23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */,
 				DAFBC9F9238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */,
+				DAFBAC3523C4E29D00752077 /* HistoryTableViewCell.swift in Sources */,
 				DAD1E993238F317700FE55E7 /* Meal.swift in Sources */,
 				DAD1E9A2238F58AC00FE55E7 /* SellLocationTableViewCell.swift in Sources */,
 				DACE3CDE237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,
@@ -791,6 +798,7 @@
 				DAD1E9C32391C35E00FE55E7 /* ActiveSalesTableViewCell.swift in Sources */,
 				DAD1E9BF23917DB600FE55E7 /* ActiveSalesTableViewController.swift in Sources */,
 				DAFBC9FA238B7B6700A41663 /* MealSelectorTableViewCell.swift in Sources */,
+				DAFBAC3623C4E29D00752077 /* HistoryTableViewCell.swift in Sources */,
 				DAD1E994238F317700FE55E7 /* Meal.swift in Sources */,
 				DAD1E9A3238F58AC00FE55E7 /* SellLocationTableViewCell.swift in Sources */,
 				DACE3CDF237CC5060030804C /* LocationDetailTableViewController.swift in Sources */,

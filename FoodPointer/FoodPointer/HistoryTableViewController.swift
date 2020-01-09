@@ -9,13 +9,26 @@
 import UIKit
 
 class HistoryTableViewController: UITableViewController {
+    
     var user:User?
     
-    var purchases = [Purchase]()
+    var purchases = [[String:Any]]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        //print("history user ", self.user?.uid)
         self.user?.getHistory(completion: { transactions, error in
-            
+            if let error = error {
+                print("history error: ", error)
+            }
+            guard let transactions = transactions else{
+                print("no transaction returned")
+                return
+            }
+            print(transactions)
+            self.purchases = transactions
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         })
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,18 +46,78 @@ class HistoryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return purchases.count
+        return self.purchases.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as? HistoryTableViewCell else {
+            fatalError("History cell is not the right type")
+        }
+        let purchase = purchases[indexPath.row]
+        
+        var dateTime = purchase["complete_time"] as! String
+        print(dateTime)
+        //dateTime = dateTime.replacingOccurrences(of:":", with:"")
+        //dateTime = dateTime.replacingOccurrences(of: "-", with: "")
+        let dateTimeComponents = dateTime.components(separatedBy: ".")
+        dateTime = dateTimeComponents[0]
+        
+        dateTime += "Z"
+        print(dateTime)
+        let iso8601format = ISO8601DateFormatter()
 
+        guard let iso8601 = iso8601format.date(from: dateTime) else {
+            print("error converting date to iso8601")
+            return cell
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/DD hh:MM"
+        let converted = formatter.string(from: iso8601)
+        cell.dateLabel.text = converted
+        
+        
+        
+        let buyer = purchase["buyer"] as! [String:String]
+        cell.buyerLabel.text = "Buyer: " + (buyer["name"] ?? "")
+        let seller = purchase["seller"] as! [String:String]
+        cell.sellerLabel.text = "Seller: " + (seller["name"] ?? "")
+        
+        let approve = purchase["approve"] as! Bool
+        if approve{
+            cell.approveLabel.text = "Approved: Yes"
+        } else{
+            cell.approveLabel.text = "Approved: No"
+        }
+        let paid = purchase["paid"] as! Bool
+        if paid{
+            cell.paidLabel.text = "Paid: Yes"
+        } else{
+            cell.paidLabel.text = "Paid: No"
+        }
+        let description = purchase["description"] as! String
+        cell.itemsLabel.text = description.replacingOccurrences(of: "#", with: "\n", options: .literal, range: nil).replacingOccurrences(of: ":", with: "Notes: ")
         // Configure the cell...
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .none
+            let parent = self.parent as? ReportViewController
+            parent?.selected = nil
+        }
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .checkmark
+            let hid = purchases[indexPath.row]["hid"] as? Int
+            let parent = self.parent as? ReportViewController
+            parent?.selected = hid
+
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

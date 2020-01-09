@@ -1239,12 +1239,13 @@ class User {
         let scheme = "https"
         let host = "pdellinger.com"
         let path = "/history"
-        let queryItem = URLQueryItem(name: "email", value: "eq.\(self.email!)")
+        let queryItem = URLQueryItem(name: "select", value: "complete_time,price,approve,paid,description,buyer:bid(name),seller:sid(name)")
+        let queryItem2 = URLQueryItem(name:"order", value: "complete_time.desc")
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
         urlComponents.path = path
-        urlComponents.queryItems = [queryItem]
+        urlComponents.queryItems = [queryItem] + [queryItem2]
         
         guard let url = urlComponents.url else { return }
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)
@@ -1458,6 +1459,37 @@ class User {
         //We have to call the task here because it's asynchronous
         task.resume()
         
+    }
+    func createReport (note:String, hid:Int?, completion: @escaping ( _ error: Int?)-> ()){
+        
+        var parameters : String
+        if let hid = hid{
+            parameters = "{\"filer\":\"\(self.uid!)\",\"hid\": \(hid),\"note\":\"\(note)\"}"
+        } else{
+            parameters = "{\"filer\":\"\(self.uid!)\",\"note\":\"\(note)\"}"
+        }
+        let postData = parameters.data(using: .utf8)
+        
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/reports")!,timeoutInterval: Double.infinity)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        request.setValue("Bearer \(self.token ?? "")", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 201{
+                    completion(httpResponse.statusCode)
+                    return
+                } else{
+                    completion(nil)
+                    return
+                }
+            }
+        }
+
+        task.resume()
     }
 }
 

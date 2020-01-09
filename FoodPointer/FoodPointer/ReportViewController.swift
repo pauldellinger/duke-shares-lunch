@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ReportViewController: UIViewController {
+class ReportViewController: UIViewController, UITextViewDelegate {
+    
     @IBOutlet var detailField: UITextView!
-    var selected: Purchase?
+    var selected: Int?
     var user: User?
     
     
@@ -19,14 +20,25 @@ class ReportViewController: UIViewController {
         if passRegex(self.detailField.text){
             let details = detailField.text
             print(details)
-            let pid = self.selected?.pid
+            let hid = self.selected
+            self.user?.createReport(note: details!, hid: hid, completion:{ error in
+                if let error = error{
+                    print("create report error: ", error)
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
         } else {print("there's something wrong with your details field")}
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.detailField.delegate = self
         self.detailField.text = "Please give details on your problem"
         self.detailField.textColor = UIColor.lightGray
-        
+        let tap = UITapGestureRecognizer(target:self.view, action: #selector(self.detailField.endEditing))
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
     //mimic placeholder
@@ -38,8 +50,8 @@ class ReportViewController: UIViewController {
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "Please give details on your problem"
             textView.textColor = UIColor.lightGray
+            textView.text = "Please give details on your problem"
         }
     }
     func passRegex(_: String)->Bool{
