@@ -20,35 +20,40 @@ class CreateProfileViewController: UIViewController {
     @IBOutlet weak var dormField: UITextField!
     
     @IBAction func submitAction(_ sender: Any) {
-        if validate(){
+        validate(completion: { valid in
             // user = User(name: nameField.text!, email: emailField.text!, password: passwordField.text!, venmo: venmoField.text!, major: majorField.text, dorm: dormField.text)
-            user?.venmo = venmoField.text
-            user?.name = nameField.text
-            user?.major = majorField.text
-            user?.dorm = dormField.text
-            
-            
-            user?.addUser(completion: { user, error in
-                if let error = error{
-                    print(error)
-                    return
+            if valid{
+                DispatchQueue.main.async {
+                    self.user?.venmo = self.venmoField.text
+                    self.user?.name = self.nameField.text
+                    self.user?.major = self.majorField.text
+                    self.user?.dorm = self.dormField.text
+                    
+                    
+                    self.user?.addUser(completion: { user, error in
+                        if let error = error{
+                            print(error)
+                            return
+                        }
+                        
+                        self.user = user
+                        if (self.user?.uid) != nil{
+                            DispatchQueue.main.async{
+                                self.handleSuccessfulCreate()
+                            }
+                        } else{
+                            DispatchQueue.main.async{
+                                self.showError(error: error ?? "Error creating user in database")
+                            }
+                        }
+                    })
                 }
-                
-                self.user = user
-                if (self.user?.uid) != nil{
-                    DispatchQueue.main.async{
-                        self.handleSuccessfulCreate()
-                    }
-                } else{
-                    DispatchQueue.main.async{
-                        self.showError(error: error ?? "Error creating user in database")
-                    }
+            }else{
+                DispatchQueue.main.async{
+                self.showError(error: "Invalid fields\nDo you have an uppercase letter and digit in your password?")
                 }
-            })
-        }
-        else{
-            showError(error: "Invalid fields\nDo you have an uppercase letter and digit in your password?")
-        }
+            }
+        })
     }
     
     override func viewDidLoad() {
@@ -57,7 +62,7 @@ class CreateProfileViewController: UIViewController {
         view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
-    func validate()->Bool{
+    func validate(completion: @escaping (_ ok: Bool)-> ()){
         let name = nameField.text ?? ""
         //let email = emailField.text ?? ""
         //let password = passwordField.text ?? ""
@@ -83,28 +88,50 @@ class CreateProfileViewController: UIViewController {
         */
         if !regexIt(text: venmo, regex: try! NSRegularExpression(pattern:"^(?=.*[a-z])[a-zA-Z-_\\d]{6,30}$")){
             //invalid venmo
-            return false
+            completion(false)
+            return
         }
         
         if !regexIt(text: name, regex:  try! NSRegularExpression(pattern:"^(?=.*[a-z])[ a-zA-Z-_\\d]{5,50}$")){
             //invalid name
-            return false
+            completion(false)
+            return
         }
         if !dorm.isEmpty{
             if !regexIt(text: dorm, regex:  try! NSRegularExpression(pattern:"^(?=.*[a-z])[ a-zA-Z-_\\d]{0,50}$")){
                 //invalid dorm
-                return false
+                completion(false)
+                return
             }
         }
         if !major.isEmpty{
             if !regexIt(text: major, regex:  try! NSRegularExpression(pattern:"^(?=.*[a-z])[ a-zA-Z-_\\d]{0,50}$")){
                 //invalid name
-                return false
+                completion(false)
+                return
             }
         }
+        var request = URLRequest(url: URL(string: "https://venmo.com/\(venmo)")!,timeoutInterval: Double.infinity)
+        request.httpMethod = "HEAD"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200{
+                    completion(true)
+                    return
+                } else{
+                    completion(false)
+                    return
+                }
+            } else{
+                completion(false)
+                return
+            }
+        }
+
+        task.resume()
         // TODO: verify venmo account exists
         
-        return true
     }
     
     func regexIt(text: String, regex: NSRegularExpression)-> Bool{

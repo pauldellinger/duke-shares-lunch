@@ -13,8 +13,10 @@ class HistoryTableViewController: UITableViewController {
     var user:User?
     
     var purchases = [[String:Any]]()
+    var selectedRow: IndexPath?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.allowsSelection = true
         //print("history user ", self.user?.uid)
         self.user?.getHistory(completion: { transactions, error in
             if let error = error {
@@ -53,6 +55,11 @@ class HistoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as? HistoryTableViewCell else {
             fatalError("History cell is not the right type")
+        }
+        if indexPath == selectedRow{
+            cell.accessoryType = .checkmark
+        }else{
+            cell.accessoryType = .none
         }
         let purchase = purchases[indexPath.row]
         
@@ -98,6 +105,7 @@ class HistoryTableViewController: UITableViewController {
         let description = purchase["description"] as! String
         cell.itemsLabel.text = description.replacingOccurrences(of: "#", with: "\n", options: .literal, range: nil).replacingOccurrences(of: ":", with: "Notes: ")
         // Configure the cell...
+        cell.hid = purchase["hid"] as? Int
 
         return cell
     }
@@ -107,15 +115,24 @@ class HistoryTableViewController: UITableViewController {
             cell.accessoryType = .none
             let parent = self.parent as? ReportViewController
             parent?.selected = nil
+            self.selectedRow = nil
         }
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .checkmark
-            let hid = purchases[indexPath.row]["hid"] as? Int
-            let parent = self.parent as? ReportViewController
-            parent?.selected = hid
-
+            if indexPath == self.selectedRow {
+                let parent = self.parent as? ReportViewController
+                self.selectedRow = nil
+                parent?.selected = nil
+                cell.accessoryType = .none
+                
+            } else{
+                cell.accessoryType = .checkmark
+                let hid = purchases[indexPath.row]["hid"] as? Int
+                let parent = self.parent as? ReportViewController
+                self.selectedRow = indexPath
+                parent?.selected = hid
+            }
         }
     }
 

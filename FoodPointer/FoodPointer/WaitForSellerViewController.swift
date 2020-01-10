@@ -18,6 +18,12 @@ class WaitForSellerViewController: UIViewController {
         user?.removePurchase(pid: purchase!, viewController: self)
     }
     
+    @IBAction func reportAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
+        controller.user = self.user
+        self.present(controller, animated: true, completion: nil)
+    }
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var waitingSpinner: UIActivityIndicatorView!
@@ -28,6 +34,7 @@ class WaitForSellerViewController: UIViewController {
         scrollView.refreshControl = UIRefreshControl()
         scrollView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl),for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRefreshControl), name: .didReceivePush, object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRefreshControl), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     override func viewDidDisappear(_ animated: Bool) {
         print("wait for seller disappeared")

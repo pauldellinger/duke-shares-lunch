@@ -14,6 +14,12 @@ class PurchaseApprovalViewController: UIViewController {
     var user: User?
     var purchase: Purchase?
     
+    @IBAction func reportAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
+        controller.user = self.user
+        self.present(controller, animated: true, completion: nil)
+    }
     @IBOutlet weak var buyerNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var foodPointCostLabel: UILabel!

@@ -39,11 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
         // 1
         if let notification = notificationOption as? [String: AnyObject],
-          let aps = notification["aps"] as? [String: AnyObject] {
-          application.applicationIconBadgeNumber = 0
-
-          
+            let aps = notification["aps"] as? [String: AnyObject] {
         }
+        application.applicationIconBadgeNumber = 0
         return true
     }
 //    func signIn(){

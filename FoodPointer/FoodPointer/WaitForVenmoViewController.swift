@@ -10,6 +10,12 @@ import UIKit
 
 class WaitForVenmoViewController: UIViewController {
 
+    @IBAction func reportAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
+        controller.user = self.user
+        self.present(controller, animated: true, completion: nil)
+    }
     @IBOutlet weak var contentLabel: UILabel!
     @IBAction func venmoCompleteAction(_ sender: Any) {
         

@@ -22,6 +22,7 @@ class ActiveSalesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .didReceivePush, object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: UIApplication.willEnterForegroundNotification, object: nil)
         if user?.allSales?.isEmpty ?? true{
             //add refresh spinner
             refresh(sender: self)

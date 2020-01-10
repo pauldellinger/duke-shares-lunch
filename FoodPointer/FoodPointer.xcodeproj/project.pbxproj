@@ -58,9 +58,6 @@
 		DABA3C9F2389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
 		DABA3CA02389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
 		DABA3CA12389CB3700576315 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABA3C9E2389CB3700576315 /* TabController.swift */; };
-		DABA3CAC238A070000576315 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = DABA3CAB238A070000576315 /* restaurants.json */; };
-		DABA3CAD238A070000576315 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = DABA3CAB238A070000576315 /* restaurants.json */; };
-		DABA3CAE238A070000576315 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = DABA3CAB238A070000576315 /* restaurants.json */; };
 		DACE3C93237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
 		DACE3C94237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
 		DACE3C95237C7AA80030804C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE3C92237C7AA80030804C /* Seller.swift */; };
@@ -178,7 +175,6 @@
 		DA958256239443BF00F10973 /* VenmoSellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenmoSellerViewController.swift; sourceTree = "<group>"; };
 		DAAE652423C105BD0070A973 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DABA3C9E2389CB3700576315 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
-		DABA3CAB238A070000576315 /* restaurants.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 		DACE3C92237C7AA80030804C /* Seller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
 		DACE3C96237C7F620030804C /* LocationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailTableViewCell.swift; sourceTree = "<group>"; };
 		DACE3C9A237C811A0030804C /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
@@ -400,7 +396,6 @@
 				DA04220E237B697800864DEE /* AppDelegate.swift */,
 				DA042210237B697800864DEE /* SceneDelegate.swift */,
 				DADBAD4D23A7139300337097 /* FoodPointer.entitlements */,
-				DABA3CAB238A070000576315 /* restaurants.json */,
 				DA04221E237B697B00864DEE /* Info.plist */,
 				DAAE652423C105BD0070A973 /* GoogleService-Info.plist */,
 				DA042219237B697B00864DEE /* Assets.xcassets */,
@@ -519,7 +514,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DABA3CAC238A070000576315 /* restaurants.json in Resources */,
 				DA833A2223AD394F0064583D /* Main.storyboard in Resources */,
 				DA7EC98623B8044E00C20721 /* GoogleService-Info.plist in Resources */,
 				DA04221D237B697B00864DEE /* LaunchScreen.storyboard in Resources */,
@@ -532,7 +526,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA833A2323AD394F0064583D /* Main.storyboard in Resources */,
-				DABA3CAD238A070000576315 /* restaurants.json in Resources */,
 				DA7EC98723B8044E00C20721 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,7 +535,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA833A2423AD394F0064583D /* Main.storyboard in Resources */,
-				DABA3CAE238A070000576315 /* restaurants.json in Resources */,
 				DA7EC98823B8044E00C20721 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

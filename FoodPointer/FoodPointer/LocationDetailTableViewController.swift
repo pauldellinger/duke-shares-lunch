@@ -9,6 +9,12 @@
 import UIKit
 
 class LocationDetailTableViewController: UITableViewController {
+    @IBAction func reportAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
+        controller.user = self.user
+        self.present(controller, animated: true, completion: nil)
+    }
     
     var sellers = [Seller]()
     var restaurant:Location?
@@ -21,6 +27,7 @@ class LocationDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated:true);
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: UIApplication.willEnterForegroundNotification, object: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

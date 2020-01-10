@@ -52,6 +52,7 @@ class LocationTableViewController: UITableViewController {
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .didReceivePush, object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: UIApplication.willEnterForegroundNotification, object: nil)
         //self.navigationController?.setNavigationBarHidden(true, animated:true);
         // print(self.tabBarController.user)
 

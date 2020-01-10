@@ -1239,7 +1239,7 @@ class User {
         let scheme = "https"
         let host = "pdellinger.com"
         let path = "/history"
-        let queryItem = URLQueryItem(name: "select", value: "complete_time,price,approve,paid,description,buyer:bid(name),seller:sid(name)")
+        let queryItem = URLQueryItem(name: "select", value: "hid,complete_time,price,approve,paid,description,buyer:bid(name),seller:sid(name)")
         let queryItem2 = URLQueryItem(name:"order", value: "complete_time.desc")
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme

@@ -13,6 +13,12 @@ class VenmoSellerViewController: UIViewController {
     var seller: Seller?
     var cost: Double?
     
+    @IBAction func reportAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
+        controller.user = self.user
+        self.present(controller, animated: true, completion: nil)
+    }
     @IBAction func goVenmoAction(_ sender: Any) {
         tabBarController?.tabBar.isHidden = false
         let venmoHooks = "venmo://paycharge?txn=pay&recipients=\(seller!.sellerVenmo)&amount=\(cost!)&note=FoodPointer"

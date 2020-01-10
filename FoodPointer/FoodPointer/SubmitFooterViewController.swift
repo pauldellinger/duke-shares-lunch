@@ -13,6 +13,13 @@ class SubmitFooterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var commentsTextField: UITextField!
     
+    @IBAction func reportAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
+        controller.user = self.user
+        self.present(controller, animated: true, completion: nil)
+    }
+    
     @IBAction func submitAction(_ sender: Any) {
         print("button pressed!")
         let description = createDescription(meals: meals)

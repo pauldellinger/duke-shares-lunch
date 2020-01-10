@@ -19,7 +19,6 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         print("submitting report")
         if passRegex(self.detailField.text){
             let details = detailField.text
-            print(details)
             let hid = self.selected
             self.user?.createReport(note: details!, hid: hid, completion:{ error in
                 if let error = error{
@@ -38,6 +37,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         self.detailField.text = "Please give details on your problem"
         self.detailField.textColor = UIColor.lightGray
         let tap = UITapGestureRecognizer(target:self.view, action: #selector(self.detailField.endEditing))
+        tap.cancelsTouchesInView = false // was not allowing selection of tableview
         view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
