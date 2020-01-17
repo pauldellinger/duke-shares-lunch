@@ -14,7 +14,6 @@ class CreateProfileViewController: UIViewController {
     
     
     var user: User?
-    @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var venmoField: UITextField!
     @IBOutlet weak var majorField: UITextField!
     @IBOutlet weak var dormField: UITextField!
@@ -25,7 +24,6 @@ class CreateProfileViewController: UIViewController {
             if valid{
                 DispatchQueue.main.async {
                     self.user?.venmo = self.venmoField.text
-                    self.user?.name = self.nameField.text
                     self.user?.major = self.majorField.text
                     self.user?.dorm = self.dormField.text
                     
@@ -63,10 +61,7 @@ class CreateProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     func validate(completion: @escaping (_ ok: Bool)-> ()){
-        let name = nameField.text ?? ""
-        //let email = emailField.text ?? ""
-        //let password = passwordField.text ?? ""
-        //let passwordConfirm = passwordField.text ?? ""
+        
         let venmo = venmoField.text ?? ""
         let dorm = dormField.text ?? "No dorm"
         let major = majorField.text ?? "No Major"
@@ -92,11 +87,6 @@ class CreateProfileViewController: UIViewController {
             return
         }
         
-        if !regexIt(text: name, regex:  try! NSRegularExpression(pattern:"^(?=.*[a-z])[ a-zA-Z-_\\d]{5,50}$")){
-            //invalid name
-            completion(false)
-            return
-        }
         if !dorm.isEmpty{
             if !regexIt(text: dorm, regex:  try! NSRegularExpression(pattern:"^(?=.*[a-z])[ a-zA-Z-_\\d]{0,50}$")){
                 //invalid dorm
@@ -117,6 +107,7 @@ class CreateProfileViewController: UIViewController {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200{
+                    //user exists on venmo
                     completion(true)
                     return
                 } else{

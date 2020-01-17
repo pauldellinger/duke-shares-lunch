@@ -10,6 +10,10 @@ import UIKit
 
 class ReportViewController: UIViewController, UITextViewDelegate {
     
+    @IBAction func cancelAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     @IBOutlet var detailField: UITextView!
     var selected: Int?
     var user: User?
@@ -17,7 +21,8 @@ class ReportViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func submitAction(_ sender: Any) {
         print("submitting report")
-        if passRegex(self.detailField.text){
+        
+        if passRegex(text: self.detailField.text){
             let details = detailField.text
             let hid = self.selected
             self.user?.createReport(note: details!, hid: hid, completion:{ error in
@@ -33,6 +38,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         self.detailField.delegate = self
         self.detailField.text = "Please give details on your problem"
         self.detailField.textColor = UIColor.lightGray
@@ -54,7 +60,8 @@ class ReportViewController: UIViewController, UITextViewDelegate {
             textView.text = "Please give details on your problem"
         }
     }
-    func passRegex(_: String)->Bool{
+    func passRegex(text: String)->Bool{
+        if text == "Please give details on your problem" { return false }
         return true
     }
     

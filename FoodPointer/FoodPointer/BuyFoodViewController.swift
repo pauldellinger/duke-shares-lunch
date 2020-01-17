@@ -11,10 +11,9 @@ import UIKit
 class BuyFoodViewController: UIViewController {
     
     @IBAction func reportAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
-        controller.user = self.user
-        self.present(controller, animated: true, completion: nil)
+        if let user = self.user{
+            self.segueReport(user: user)
+        }
     }
     @IBAction func completePurchaseAction(_ sender: Any) {
         self.purchase?.complete(user: self.user!, viewController:self)

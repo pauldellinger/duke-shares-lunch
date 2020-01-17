@@ -125,9 +125,9 @@ class User {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode != 200 &&  !(viewController==nil){
                     DispatchQueue.main.async{
-                        if let viewController = viewController as? UserPageViewController{
-                            viewController.showError()
-                        }
+                        //if let viewController = viewController as? UserPageViewController{
+                            //viewController.showError()
+                        //}
                     }
                 }
             }
