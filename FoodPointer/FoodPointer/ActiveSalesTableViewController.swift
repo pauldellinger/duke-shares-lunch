@@ -59,7 +59,7 @@ class ActiveSalesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         // view.title
         //view.backgroundColor = .white
-        view.tintColor = UIColor.white.withAlphaComponent(1)
+        // view.tintColor = UIColor.white.withAlphaComponent(1)
       
         
         let header = view as! UITableViewHeaderFooterView
@@ -159,7 +159,7 @@ class ActiveSalesTableViewController: UITableViewController {
                     cell.timeLabel.text = "\(ordertime) minutes until ordering"
                 }
                 else {
-                    cell.timeLabel.text = "\(ordertime * -1) minutes past ordertime"
+                    cell.timeLabel.text = "\(ordertime * -1) minutes past order time"
                 }
                 //cell.timeLabel.text = sale.ordertime
                 var count = 0

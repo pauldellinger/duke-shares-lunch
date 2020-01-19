@@ -29,7 +29,7 @@ class Purchase {
 
     }
     
-    func approve(user: User,viewController: PurchaseApprovalViewController?){
+    func approve(user: User, completion: @escaping ( _ error: Int?)-> ()){
         print("Approving purchase!")
         let scheme = "https"
         let host = "pdellinger.com"
@@ -61,14 +61,9 @@ class Purchase {
                 if httpResponse.statusCode == 204 {
                     print("Purchase Approved!")
                     //call handle function in main queue
-                    if let viewController = viewController{
-                        DispatchQueue.main.async{
-                            viewController.handleApprove()
-                        }
-                    }
-                }
-                else{
-                    print("Did not get 204 code, something went wrong")
+                    completion(nil)
+                } else{
+                    completion(httpResponse.statusCode)
                 }
             }
         }
@@ -131,7 +126,7 @@ class Purchase {
         task.resume()
     }
     
-    func markPaid(user: User, viewController: WaitForVenmoViewController?){
+    func markPaid(user: User, completion: @escaping ( _ error: Int?)-> ()){
         print("Approving purchase!")
         let scheme = "https"
         let host = "pdellinger.com"
@@ -163,14 +158,10 @@ class Purchase {
                 if httpResponse.statusCode == 204 {
                     print("Purchase Approved!")
                     //call handle function in main queue
-                    if let viewController = viewController{
-                        DispatchQueue.main.async{
-                            viewController.handlePaid()
-                        }
-                    }
-                }
-                else{
+                    completion(nil)
+                }else{
                     print("Did not get 204 code, something went wrong")
+                    completion(httpResponse.statusCode)
                 }
             }
         }

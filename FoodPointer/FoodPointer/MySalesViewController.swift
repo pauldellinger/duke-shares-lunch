@@ -32,7 +32,7 @@ class MySalesViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {

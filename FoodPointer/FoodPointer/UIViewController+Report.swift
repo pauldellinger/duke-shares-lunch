@@ -15,6 +15,10 @@ extension UIViewController{
         let controller = storyboard.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
         controller.user = user
         let navController = UINavigationController(rootViewController: controller)
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        if let currentController = self.navigationController{
+            currentController.present(navController, animated: true, completion: nil)
+        } else{
+            self.present(navController, animated: true, completion: nil)
+        }
     }
 }

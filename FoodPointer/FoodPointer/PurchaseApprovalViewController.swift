@@ -28,7 +28,36 @@ class PurchaseApprovalViewController: UIViewController {
     }
     
     @IBAction func approveAction(_ sender: Any) {
-        purchase?.approve(user:user!, viewController: self)
+        purchase?.approve(user:user!, completion: { error in
+            if let error = error{
+                if error == 404 {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Purchase Not Found", message: "It seems the buyer deleted this purchase.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                            switch action.style{
+                            case .default:
+                                self.navigationController?.popToRootViewController(animated: true)
+                                print("default")
+                                
+                            case .cancel:
+                                print("cancel")
+                                
+                            case .destructive:
+                                print("destructive")
+                                
+                            }}))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }else{
+                    print("mark paid error: ", error)
+                }
+            }else{
+                DispatchQueue.main.async{
+                    self.performSegue(withIdentifier: "waitForVenmoSegue", sender: self)
+                }
+            }
+        })
+        
     }
     
     override func viewDidLoad() {
@@ -49,9 +78,6 @@ class PurchaseApprovalViewController: UIViewController {
             
             // Do any additional setup after loading the view.
         }
-    }
-    func handleApprove(){
-        performSegue(withIdentifier: "waitForVenmoSegue", sender: self)
     }
     func handleDecline(){
         self.navigationController?.popViewController(animated: true)

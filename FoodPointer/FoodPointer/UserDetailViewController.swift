@@ -12,7 +12,12 @@ import FirebaseUI
 class UserDetailViewController: UIViewController {
 
 
-  
+    @IBAction func reportAction(_ sender: Any) {
+        if let user = self.user{
+            self.segueReport(user: user)
+        }
+    }
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var venmoLabel: UILabel!
     @IBOutlet weak var dormLabel: UILabel!
