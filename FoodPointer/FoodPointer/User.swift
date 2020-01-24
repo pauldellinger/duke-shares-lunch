@@ -46,7 +46,11 @@ class User {
         self.dorm = dorm ?? ""
     }
     
-    
+    private func showConnectionError(){
+        DispatchQueue.main.async{
+            NotificationBanner.show("Connection Error")
+        }
+    }
     func createUser(viewController: CreateProfileViewController?){
         print("creating user!")
         var parameters : String
@@ -57,7 +61,7 @@ class User {
             parameters = "{ \"email\": \"\(self.email!)\", \"pass\": \"\(self.password!)\", \"venmo\": \"\(self.venmo!)\", \"name\": \"\(self.name!)\", \"major\": \"\(self.major ?? "")\", \"dorm\": \"\(self.dorm ?? "")\" }"
         }
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "https://pdellinger.com/rpc/make_user")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/rpc/make_user")!,timeoutInterval: 30)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -69,6 +73,10 @@ class User {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 print(String(describing: error))
+                return
+            }
+            if error != nil{
+                self.showConnectionError()
                 return
             }
             do{
@@ -111,7 +119,7 @@ class User {
         let parameters = "{ \"email\": \"\(email)\", \"pass\": \"\(password)\" }"
         
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "https://pdellinger.com/rpc/login")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/rpc/login")!,timeoutInterval: 30)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -197,7 +205,7 @@ class User {
         urlComponents.queryItems = [queryItem]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         // print(url)
         
         //specify type of request
@@ -208,6 +216,10 @@ class User {
         
         //make request to addresss in parameter
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
             }
@@ -274,7 +286,7 @@ class User {
         let parameters = "{  \"saleid\": \(seller.saleid), \"bid\": \"\(self.uid!)\", \"price\": \(price), \"p_description\": \"\(description)\"}"
         print(parameters)
         let postData = parameters.data(using: .utf8)
-        var request = URLRequest(url: URL(string: "https://pdellinger.com/purchase")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/purchase")!,timeoutInterval: 30)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -284,7 +296,10 @@ class User {
         request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
+            if error != nil{
+                self.showConnectionError()
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 
                 print("status code \(httpResponse.statusCode)")
@@ -317,7 +332,7 @@ class User {
     }
     func createSales(locations: [Location]?, ordertime: Int, rate: Double, completion: @escaping (_ error: Int?)->Void){
         let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
-        var request = URLRequest(url: URL(string: "https://pdellinger.com/activeseller")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/activeseller")!,timeoutInterval: 30)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("resolution=merge-duplicates", forHTTPHeaderField: "Prefer")
         
@@ -328,7 +343,11 @@ class User {
         request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
+            if error != nil{
+                self.showConnectionError()
+                completion(-1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 
                 //print("status code \(httpResponse.statusCode)")
@@ -358,7 +377,7 @@ class User {
 //        // postBody = genPostBody(locations)
 //
 //        let postData = genPostBody(locations: locations ?? [], ordertime: ordertime, rate:rate)
-//        var request = URLRequest(url: URL(string: "https://pdellinger.com/activeseller")!,timeoutInterval: Double.infinity)
+//        var request = URLRequest(url: URL(string: "https://pdellinger.com/activeseller")!,timeoutInterval: 30)
 //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 //        request.addValue("resolution=merge-duplicates", forHTTPHeaderField: "Prefer")
 //
@@ -421,6 +440,85 @@ class User {
         return formatter.string(from: date)
     }
     
+    func getBuyerPurchase(completion: @escaping (_ purchase: [Purchase]?, _ error: Int?)-> ()){
+        let scheme = "https"
+        let host = "pdellinger.com"
+        let path = "/purchase"
+        let buyerQuery = URLQueryItem(name: "bid", value: "eq.\(self.uid!)")
+        let select = URLQueryItem(name: "select", value: "*,activeseller(*, restaurant:location(id:lid, name),seller:registereduser(*))")
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [buyerQuery] + [select]
+        
+        guard let url = urlComponents.url else { return }
+        var request = URLRequest(url: url,timeoutInterval: 30)
+        // print(url)
+        
+        //specify type of request
+        request.httpMethod = "GET"
+        
+        //authorization
+        request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
+        
+        //make request to addresss in parameter
+        print(request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200{
+                    completion(nil, httpResponse.statusCode)
+                    return
+                }
+                
+            }
+            guard let data = data else {
+                completion(nil, 400)
+                return
+            }
+            do{
+                //print(data)
+                
+                //here data received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    data, options: [])
+                
+                //print(jsonResponse) //Response result
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    completion(nil, 400)
+                    return
+                }
+                print(jsonArray)
+                //iterate over JSON, adding each to location
+                var purchases = [Purchase]()
+                for dic in jsonArray{
+                    guard let pid = dic["pid"] as? Int else{ return }
+                    guard let sellerJSON = dic["activeseller"] as?  [String : Any] else{ return }
+                    guard let price = dic["price"] as? Double else{ return }
+                    guard let approve = dic["approve"] as? Bool else{ return }
+                    guard let paid = dic["paid"] as? Bool else{ return }
+                    guard let description = dic["p_description"] as? String else{ return }
+                    guard let seller = Seller(json:sellerJSON) else { return }
+                    guard let purchase = Purchase(pid: pid, seller: seller, buyer: self, price: price, approve: approve, paid: paid, description: description) else {
+                        print("unable to instantiate purchase from json response")
+                        return
+                    }
+                    purchases.append(purchase)
+                    
+                }
+                completion(purchases, nil)
+                return
+                //reload the table with the new values
+                //Response not in JSON format
+            } catch {
+                completion(nil, 400)
+                return
+            }
+        }
+        //We have to call the task here because it's asynchronous
+        task.resume()
+    }
+    
     func loadLocations(completion: @escaping (_ locations: [Location]?, _ error: Int?)->Void){
         
         let scheme = "https"
@@ -438,7 +536,7 @@ class User {
         
         guard let url = urlComponents.url else { return }
         //make request to addresss in parameter
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         
         //specify type of request
         request.httpMethod = "GET"
@@ -451,6 +549,11 @@ class User {
         //Initialize three vars  - data, response and error
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                completion(nil, -1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200{
                     completion(nil, httpResponse.statusCode)
@@ -519,7 +622,7 @@ class User {
         //urlComponents.queryItems! += [queryItem3]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         // print(url)
         
         //specify type of request
@@ -531,6 +634,15 @@ class User {
         
         //make request to addresss in parameter
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                DispatchQueue.main.async{
+                    if let viewcontroller = viewcontroller as? ActiveSalesTableViewController{
+                        viewcontroller.refreshControl?.endRefreshing()
+                    }
+                }
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 200 {
@@ -598,7 +710,7 @@ class User {
         urlComponents.queryItems = [queryItem]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         print(url)
         
         //specify type of request
@@ -612,6 +724,15 @@ class User {
         //make request to addresss in parameter
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             print("requesting!")
+            if error != nil{
+                self.showConnectionError()
+                DispatchQueue.main.async{
+                    if let viewController = viewController as? ActiveSalesTableViewController{
+                        viewController.refreshControl?.endRefreshing()
+                    }
+                }
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 200 {
@@ -699,7 +820,7 @@ class User {
         urlComponents.queryItems = [queryItem]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         print(url)
         
         //specify type of request
@@ -713,6 +834,13 @@ class User {
         //make request to addresss in parameter
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             print("requesting!")
+            if error != nil{
+                self.showConnectionError()
+                DispatchQueue.main.async{
+                    viewController?.handleApproval(approved: false)
+                }
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 200 {
@@ -782,7 +910,7 @@ class User {
         urlComponents.queryItems = [queryItem]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         print(url)
         request.httpMethod = "DELETE"
         //specify type of request
@@ -792,6 +920,10 @@ class User {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
@@ -825,7 +957,7 @@ class User {
         urlComponents.queryItems = [queryItem]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         print(url)
         
         //specify type of request
@@ -836,6 +968,10 @@ class User {
         
         //make request to addresss in parameter
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
@@ -879,7 +1015,7 @@ class User {
         urlComponents.queryItems! += [queryItem3]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         print(url)
         
         //specify type of request
@@ -933,7 +1069,7 @@ class User {
 
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         print(url)
         request.httpMethod = "GET"
 
@@ -986,7 +1122,7 @@ class User {
         urlComponents.queryItems = [queryItem]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         // print(url)
         
         //specify type of request
@@ -998,6 +1134,11 @@ class User {
         //make request to addresss in parameter
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                completion(self, "Connection Error")
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200{
                     completion(self, String(httpResponse.statusCode))
@@ -1074,7 +1215,7 @@ class User {
         //urlComponents.queryItems = [queryItem]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         
         var parameters: String
         
@@ -1097,7 +1238,11 @@ class User {
         print(parameters)
         print(String(describing: request.httpBody))
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
+            if error != nil{
+                self.showConnectionError()
+                completion(self, "Connection Error")
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 
                 print("status code \(httpResponse.statusCode)")
@@ -1125,7 +1270,7 @@ class User {
         let parameters = "{\"uid\":\"\(self.uid ?? "")\", \"token\":\"\(deviceToken)\" }"
         let postData = parameters.data(using: .utf8)
         
-        var request = URLRequest(url: URL(string: "https://pdellinger.com/devicetoken")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/devicetoken")!,timeoutInterval: 30)
         request.httpMethod = "POST"
         request.httpBody = postData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -1151,7 +1296,7 @@ class User {
     }
     func removeDeviceTokens(completion: @escaping (_ user: User, _ error: Int?)-> ()){
         
-        var request = URLRequest(url: URL(string: "https://pdellinger.com/devicetoken")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/devicetoken")!,timeoutInterval: 30)
         request.httpMethod = "DELETE"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(self.token!)", forHTTPHeaderField: "Authorization")
@@ -1176,18 +1321,24 @@ class User {
     
     func getActiveRestaurants(completion: @escaping (_ locations: [Location]?, _ error: Int?)->Void){
         
-        var request = URLRequest(url: URL(string: "https://pdellinger.com/activerestaurants")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/activerestaurants")!,timeoutInterval: 30)
         
         //specify type of request
         request.httpMethod = "GET"
         
         //authorization
         request.setValue("Bearer \(self.token ?? "")", forHTTPHeaderField: "Authorization")
-        
         //Use the URLSession built in to make a dataTask (basically a request)
         
         //Initialize three vars  - data, response and error
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                    completion(nil, -1)
+                    return
+                }
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 
                 print("status code \(httpResponse.statusCode)")
@@ -1248,7 +1399,7 @@ class User {
         urlComponents.queryItems = [queryItem] + [queryItem2]
         
         guard let url = urlComponents.url else { return }
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
         // print(url)
         
         //specify type of request
@@ -1260,6 +1411,11 @@ class User {
         //make request to addresss in parameter
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                completion(nil, -1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200{
                     completion(nil, httpResponse.statusCode)
@@ -1321,7 +1477,7 @@ class User {
         
         guard let url = urlComponents.url else { return }
         //make request to addresss in parameter
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
 
         //specify type of request
         request.httpMethod = "GET"
@@ -1334,6 +1490,11 @@ class User {
         //Initialize three vars  - data, response and error
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                completion(nil, -1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200{
                     completion(nil, httpResponse.statusCode)
@@ -1398,7 +1559,7 @@ class User {
         
         guard let url = urlComponents.url else { return }
         //make request to addresss in parameter
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: url,timeoutInterval: 30)
 
         //specify type of request
         request.httpMethod = "GET"
@@ -1411,6 +1572,11 @@ class User {
         //Initialize three vars  - data, response and error
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                completion(nil, -1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200{
                     completion(nil, httpResponse.statusCode)
@@ -1470,7 +1636,7 @@ class User {
         }
         let postData = parameters.data(using: .utf8)
         
-        var request = URLRequest(url: URL(string: "https://pdellinger.com/reports")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://pdellinger.com/reports")!,timeoutInterval: 30)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -1478,6 +1644,11 @@ class User {
         request.setValue("Bearer \(self.token ?? "")", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                self.showConnectionError()
+                completion(-1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 201{
                     completion(httpResponse.statusCode)

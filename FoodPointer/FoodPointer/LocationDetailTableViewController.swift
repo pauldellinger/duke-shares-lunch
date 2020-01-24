@@ -57,6 +57,9 @@ class LocationDetailTableViewController: UITableViewController {
         self.user?.getRestaurantSales(restaurant: self.restaurant!, completion: { agents, error in
             if let error = error{
                 print("error getting sellers: ", error)
+                DispatchQueue.main.async{
+                    self.refreshControl?.endRefreshing()
+                }
             }
             if agents != nil{
                 self.sellers = agents!

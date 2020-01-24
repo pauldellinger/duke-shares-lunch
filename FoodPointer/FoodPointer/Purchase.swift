@@ -56,6 +56,13 @@ class Purchase {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                completion(-1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
@@ -95,6 +102,12 @@ class Purchase {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
@@ -153,6 +166,13 @@ class Purchase {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                completion(-1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
@@ -193,6 +213,12 @@ class Purchase {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {

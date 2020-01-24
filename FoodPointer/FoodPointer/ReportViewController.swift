@@ -62,6 +62,8 @@ class ReportViewController: UIViewController, UITextViewDelegate {
     }
     func passRegex(text: String)->Bool{
         if text == "Please give details on your problem" { return false }
+        if text.count > 1500 { return false }
+        if text.count == 0 { return false }
         return true
     }
     

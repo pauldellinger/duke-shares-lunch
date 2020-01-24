@@ -29,7 +29,7 @@ class VenmoSellerViewController: UIViewController {
         } else {
             //redirect to safari because the user doesn't have Venmo
             print("Venmo not installed")
-            let alert = UIAlertController(title: "Venmo Not Installed", message: "Please Intstall Venmo", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Venmo Not Installed", message: "Please Install Venmo", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 switch action.style{
                 case .default:
@@ -52,7 +52,7 @@ class VenmoSellerViewController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        instructionLabel.text = "Venmo \(seller!.sellerName) \n $\(String(format: "%.2f", cost!))"
+        instructionLabel.text = "Venmo \(seller!.sellerName) $\(String(format: "%.2f", cost!))"
         // Do any additional setup after loading the view.
     }
     

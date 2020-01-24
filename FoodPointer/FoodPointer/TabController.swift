@@ -25,7 +25,8 @@ class TabController: UITabBarController{
         
     }
     func handleInfo(){
-        let userPage = self.viewControllers![2] as! UserDetailViewController
+        let userNav = self.viewControllers![2] as! UINavigationController
+        let userPage = userNav.children[0] as! UserDetailViewController
         userPage.user = user
         
         let buyNav = self.viewControllers![0] as! UINavigationController

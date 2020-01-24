@@ -27,15 +27,23 @@ class UserDetailViewController: UIViewController {
     @IBAction func logoutAction(_ sender: Any) {
         let authUI = FUIAuth.defaultAuthUI()
         
-        do {try authUI?.signOut() }catch { print("no user to sign out")}
-        self.user?.removeDeviceTokens(completion: { user, error in
-            if let error = error{
-                print("removedevicetoken error: ", error)
-            }else{
-                print("Device Tokens Sucessfully removed")
-            }
-        })
-        tabBarController?.navigationController?.popToRootViewController(animated: true)
+        do {
+            try authUI?.signOut()
+            self.user?.removeDeviceTokens(completion: { user, error in
+                if let error = error{
+                    print("removedevicetoken error: ", error)
+                    return
+                }else{
+                    print("Device Tokens Sucessfully removed")
+                    DispatchQueue.main.async{
+                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "initialVC") as! UINavigationController
+                        UIApplication.shared.keyWindow?.rootViewController = viewController
+                    }
+                }
+            })
+        }catch { print("no user to sign out")}
+        
     }
     var user: User?
     

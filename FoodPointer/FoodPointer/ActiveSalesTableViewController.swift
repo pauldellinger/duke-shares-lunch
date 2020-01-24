@@ -102,7 +102,7 @@ class ActiveSalesTableViewController: UITableViewController {
         print("calling get purchases")
         activeSales = getActivated(allSales: user?.allSales)
         user?.getPurchases(viewController: self)
-        //stop refresh spinner
+        
     }
     func handleSuccessfulGetPurchase(purchases: [[Purchase]]){
         //print(purchases)

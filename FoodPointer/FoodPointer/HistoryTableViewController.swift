@@ -21,6 +21,7 @@ class HistoryTableViewController: UITableViewController {
         self.user?.getHistory(completion: { transactions, error in
             if let error = error {
                 print("history error: ", error)
+                return
             }
             guard let transactions = transactions else{
                 print("no transaction returned")

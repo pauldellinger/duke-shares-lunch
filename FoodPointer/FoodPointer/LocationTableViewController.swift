@@ -32,9 +32,14 @@ class LocationTableViewController: UITableViewController {
         locations += [location1,location2,location3]
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.checkForPurchase()
         self.user?.getActiveRestaurants(completion: { restaurants, error in
             if let error = error{
                 print("error getting locations: ", error)
+                //DispatchQueue.main.async{
+                    print("Ending refresh")
+                    self.refreshControl?.endRefreshing()
+                //}
             }
             if restaurants != nil{
                 self.locations = restaurants!
@@ -73,6 +78,9 @@ class LocationTableViewController: UITableViewController {
         self.user?.getActiveRestaurants(completion: { restaurants, error in
             if let error = error{
                 print("error getting locations: ", error)
+                //DispatchQueue.main.async{
+                    print("Ending refresh")
+                    self.refreshControl?.endRefreshing()
             }
             if restaurants != nil{
                 self.locations = restaurants!
@@ -241,6 +249,29 @@ class LocationTableViewController: UITableViewController {
 //            navigationController?.pushViewController(viewController, animated: true)
 //        }
 //    }
+    private func checkForPurchase(){
+        self.user?.getBuyerPurchase(completion: { purchases, error in
+            if let error = error{
+                print(error)
+            }else{
+                guard let purchases = purchases else { return }
+                if purchases.count < 1 { return }
+                let purchase = purchases[0]
+                DispatchQueue.main.async{
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "WaitForSellerViewController") as! WaitForSellerViewController
+                    controller.user = self.user
+                    controller.cost = purchase.price
+                    controller.seller = purchase.seller
+                    controller.purchase = purchase.pid
+                    self.navigationController?.pushViewController(controller, animated: true)
+                    // self.present(controller, animated: true, completion: nil)
+                }
+                
+                print(purchases)
+            }
+        })
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //Give the restaurant selected to the next view controller (The detail page)
         guard let detailViewController = segue.destination as? LocationDetailTableViewController,

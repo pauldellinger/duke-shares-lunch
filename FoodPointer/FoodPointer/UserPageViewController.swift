@@ -26,6 +26,10 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
      */
     var handle: AuthStateDidChangeListenerHandle?
 
+    @IBAction func loginAction(_ sender: Any) {
+        self.tryLogin()
+    }
+    @IBOutlet weak var verifyEmailButton: UIButton!
     @IBAction func checkVerifyAction(_ sender: Any) {
         guard let currentUser = Auth.auth().currentUser else {
             print("no current user")
@@ -90,7 +94,9 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                 if let authVC = FUIAuth.defaultAuthUI()?.authViewController() {
                     self.present(authVC, animated: true, completion: nil)
                 }
-                return }
+                return
+                
+            }
             
             if signedInUser.isEmailVerified{
                 print(signedInUser.email)
@@ -109,6 +115,9 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                     print(self.user?.email, self.user?.password, self.user?.token, self.user?.uid, self.user?.name)
                     self.user?.getInfo2(completion:{user, error in
                         if let error = error{
+                            if error == "Connection Error"{
+                                return
+                            }
                             print("get info error: ", error)
                         }
                         print("user's venmo: ", self.user?.venmo)
@@ -131,8 +140,9 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                     })
                 }
             } else{
+                self.verifyEmailButton.alpha = 1
                 print("unverified email")
-                let alert = UIAlertController(title: "Unverified Email", message: "Email verification sent, please verify before continuing", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Unverified Email", message: "Email verification sent to \(signedInUser.email ?? ""), please verify before continuing", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                     switch action.style{
                     case .default:
@@ -156,19 +166,22 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                         }
                     }
                 }))
+                alert.addAction(UIAlertAction(title: "Wrong Email", style: .default, handler: { action in
+                    do {
+                        let firebaseAuth = Auth.auth()
+                        try firebaseAuth.signOut()
+                        self.tryLogin()
+                    }catch { print("no user to sign out")}
+                    
+                }))
                 self.present(alert, animated: true, completion: nil)
             }
         }
     }
 
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("view will appear")
-        //tryLogin()
-        
-    }
     override func viewWillDisappear(_ animated: Bool) {
-        //Auth.auth().removeStateDidChangeListener(handle!)
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
     
     
@@ -241,10 +254,9 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                     print(error)
                     return
                 }
+                self.verifyEmailButton.alpha = 1
             }
         }
-        
-        
     }
         
 }

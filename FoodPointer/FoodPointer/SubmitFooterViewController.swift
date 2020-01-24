@@ -25,7 +25,7 @@ class SubmitFooterViewController: UIViewController, UITextFieldDelegate {
         print(description)
         let price = tallyPrice()
         if price>0{
-            user?.createPurchase(seller: seller!, price: price, description: createDescription(meals: meals), viewController: self)
+            user?.createPurchase(seller: seller!, price: price, description: description, viewController: self)
         }
         //segue here
     }
@@ -66,9 +66,13 @@ class SubmitFooterViewController: UIViewController, UITextFieldDelegate {
     func createDescription(meals: [Meal])-> String{
         var description = ""
         for meal in meals {
-            description.append("\(meal.name)#")
+            description.append("\(meal.name)*")
         }
-        description.append(":\(commentsTextField.text ?? " ")")
+        guard var comments = commentsTextField.text else { return description }
+        comments = comments.replacingOccurrences(of: "*", with: "")
+        if comments.count < 1000 && comments.count > 0 {
+            description.append("\(comments)")
+        }
         return description
     }
     

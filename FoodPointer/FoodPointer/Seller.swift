@@ -31,7 +31,7 @@ class Seller{
         self.rate = rate
         self.ordertime = ordertime
         // Initialization should fail if there is no name or if the rating is negative.
-        if location.name.isEmpty || (rate < 0 || rate>1 ){
+        if location.name.isEmpty || (rate < 0 || rate > 1 ){
             return nil
         }
     }
@@ -52,15 +52,15 @@ class Seller{
             print("error instantiating location")
             return nil
         }
-        guard let sellerJSON = json["seller"] as? [String: String] else {
+        guard let sellerJSON = json["seller"] as? [String: Any?] else {
             print("Problem with seller statement or data input")
             return nil
         }
-        guard let sellerVenmo = sellerJSON["venmo"] else {
+        guard let sellerVenmo = sellerJSON["venmo"] as? String else {
             print("Problem with sellerVenmo statement or data input")
             return nil
         }
-        guard let sellerName = sellerJSON["name"] else {
+        guard let sellerName = sellerJSON["name"] as? String else {
             print("Problem with sellerName statement or data input")
             return nil
         }
@@ -119,10 +119,16 @@ class Seller{
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
-                    print("Sale Deleted Deleted!")
+                    print("Sale Deleted!")
                     if let viewController = viewController as? ActiveSalesTableViewController{
                         DispatchQueue.main.async{
                             viewController.handleSaleRemoval()

@@ -34,6 +34,7 @@ class WaitForSellerViewController: UIViewController {
         scrollView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl),for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRefreshControl), name: .didReceivePush, object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRefreshControl), name: UIApplication.willEnterForegroundNotification, object: nil)
+        self.handleRefreshControl()
     }
     override func viewDidDisappear(_ animated: Bool) {
         print("wait for seller disappeared")
@@ -53,7 +54,7 @@ class WaitForSellerViewController: UIViewController {
     func handleCancellation(){
         print("back to the main tab!")
         //go back to root view controller.
-        navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     func handleDeletion(){
         let alert = UIAlertController(title: "Purchase Declined", message: "Sorry, please try again", preferredStyle: .alert)
