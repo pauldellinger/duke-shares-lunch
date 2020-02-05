@@ -21,9 +21,22 @@ class MealSelectorTableViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        
-        loadMeals(restaurant: seller!.locationName)
-        refreshFooter()
+        self.user?.loadMeals(restaurant: self.seller!.location, completion: { items, error in
+            //print(items,error)
+            if let error = error{
+                print("load meals error: ", error)
+            }else{
+                if let items = items{
+                    self.meals = items
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.refreshFooter()
+                    }
+                }
+            }
+        })
+    }
+        // loadMeals(restaurant: seller!.location.id)
     
         // print(meals)
 
@@ -32,7 +45,6 @@ class MealSelectorTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
     
     /*
 

@@ -12,6 +12,11 @@ class MySalesViewController: UIViewController {
     var user: User?
     var selected: Purchase?
     
+    @IBAction func reportAction(_ sender: Any) {
+        if let user = self.user{
+            self.segueReport(user: user)
+        }
+    }
     @IBAction func pauseSalesAction(_ sender: Any) {
         user?.removeSales(viewController: self)
 
@@ -27,7 +32,7 @@ class MySalesViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {

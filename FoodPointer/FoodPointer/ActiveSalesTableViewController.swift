@@ -22,6 +22,7 @@ class ActiveSalesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .didReceivePush, object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: UIApplication.willEnterForegroundNotification, object: nil)
         if user?.allSales?.isEmpty ?? true{
             //add refresh spinner
             refresh(sender: self)
@@ -58,7 +59,7 @@ class ActiveSalesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         // view.title
         //view.backgroundColor = .white
-        view.tintColor = UIColor.white.withAlphaComponent(1)
+        // view.tintColor = UIColor.white.withAlphaComponent(1)
       
         
         let header = view as! UITableViewHeaderFooterView
@@ -101,7 +102,7 @@ class ActiveSalesTableViewController: UITableViewController {
         print("calling get purchases")
         activeSales = getActivated(allSales: user?.allSales)
         user?.getPurchases(viewController: self)
-        //stop refresh spinner
+        
     }
     func handleSuccessfulGetPurchase(purchases: [[Purchase]]){
         //print(purchases)
@@ -149,7 +150,7 @@ class ActiveSalesTableViewController: UITableViewController {
         //Copy the location from the array locations into a table cell
         if indexPath.section == 2{
             if let sale = user?.allSales?[indexPath.row]{
-                cell.locationLabel.text = sale.locationName
+                cell.locationLabel.text = sale.location.name
                 cell.rateLabel.text = "\(Int(sale.rate*100))%"
                 
                 // String(format: "%.2f", sale.rate)
@@ -158,13 +159,13 @@ class ActiveSalesTableViewController: UITableViewController {
                     cell.timeLabel.text = "\(ordertime) minutes until ordering"
                 }
                 else {
-                    cell.timeLabel.text = "\(ordertime * -1) minutes past ordertime"
+                    cell.timeLabel.text = "\(ordertime * -1) minutes past order time"
                 }
                 //cell.timeLabel.text = sale.ordertime
                 var count = 0
                 for purchase in sales[0]{
-                    print(purchase.seller.locationName, sale.locationName)
-                    if purchase.seller.locationName == sale.locationName{
+                    print(purchase.seller.location.name, sale.location.name)
+                    if purchase.seller.location.name == sale.location.name{
                         count = count + 1
                         print(count)
                     }
@@ -183,7 +184,7 @@ class ActiveSalesTableViewController: UITableViewController {
             let sale = sales[0][indexPath.row]
             cell.locationLabel.text = sale.buyer.name
             cell.rateLabel.text = "$\(String(format: "%.2f", sale.price))"
-            cell.timeLabel.text = sale.seller.locationName
+            cell.timeLabel.text = sale.seller.location.name
 //            let ordertime = timeUntilOrder(ordertime: sale.seller.ordertime)
 //            if ordertime > 0 {
 //                cell.timeLabel.text = "\(ordertime) minutes until ordering"
@@ -223,9 +224,9 @@ class ActiveSalesTableViewController: UITableViewController {
                 print(sale.saleid)
                 //print(sales[0][0].seller.saleid)
                 for purchase in sales[0]{
-                    if purchase.seller.locationName == sale.locationName{
+                    if purchase.seller.location.name == sale.location.name{
                         let parent = self.parent as! MySalesViewController
-                        print("giving purchase to parent", purchase.seller.locationName)
+                        print("giving purchase to parent", purchase.seller.location.name)
                         parent.showPurchaseDetail(purchase: purchase)
                     }
                 }

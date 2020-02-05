@@ -13,49 +13,47 @@ import Firebase
 import FirebaseUI
 import FirebaseAuth
 
-@objc(UserPageViewController)
+
 class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDelegate{
     
+    
+    var authUI: FUIAuth?
     var user: User?
+    
     
     /** @var handle
         @brief The handler for the auth state listener, to allow cancelling later.
      */
     var handle: AuthStateDidChangeListenerHandle?
 
-    @IBOutlet weak var emailInput: UITextField!
-    @IBOutlet weak var passwordInput: UITextField!
-    @IBOutlet weak var invalidLabel: UILabel!
-    
     @IBAction func loginAction(_ sender: Any) {
-        print("logging in!")
-        if !(emailInput.text?.isEmpty ?? true) && !(passwordInput.text?.isEmpty ?? true) {
-            let email = emailInput.text!
-            let pass = passwordInput.text!
-            if credentialValidate(email: email, password: pass){
-                print("valid!")
-                Auth.auth().signIn(withEmail: email, password: pass) { [weak self] authResult, error in
-                  guard let strongSelf = self else { return }
-                  // ...
-                }
-                self.user?.email = email
-                self.user?.password = pass
-                self.user?.login(viewController: self)
-                
-            }
-            else{
-                showError()
-            }
+        self.tryLogin()
+    }
+    @IBOutlet weak var verifyEmailButton: UIButton!
+    @IBAction func checkVerifyAction(_ sender: Any) {
+        guard let currentUser = Auth.auth().currentUser else {
+            print("no current user")
+            return
             
         }
+        print(currentUser.email)
+        Auth.auth().currentUser?.reload(completion: { (error) in
+            if let error = error{
+                print(error)
+            }
+            print("email verified: ",currentUser.isEmailVerified)
+            self.tryLogin()
+        })
     }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaults = UserDefaults.standard
-        let email = defaults.string(forKey: "email")
-        print(email)
+        print("view loaded")
+        self.tryLogin()
+    }
         
-        //FirebaseApp.configure()
         
         /*
         if !(email?.isEmpty ?? true){ //if email has already been set
@@ -81,13 +79,28 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
         view.addGestureRecognizer(tap)
         }
     */
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
+    private func tryLogin(){
+        print("trying login")
         self.handle = Auth.auth().addStateDidChangeListener { auth, signedInUser in
-            if let signedInUser = signedInUser {
+            guard let signedInUser = signedInUser else {
+                print("no signed in user")
+                self.authUI = FUIAuth.defaultAuthUI()
+                self.authUI?.delegate = self as FUIAuthDelegate
+                let providers: [FUIAuthProvider] = [
+                    FUIGoogleAuth(),
+                    FUIEmailAuth()
+                ]
+                self.authUI?.providers = providers
+                if let authVC = FUIAuth.defaultAuthUI()?.authViewController() {
+                    self.present(authVC, animated: true, completion: nil)
+                }
+                return
+                
+            }
+            
+            if signedInUser.isEmailVerified{
                 print(signedInUser.email)
+                
                 signedInUser.getIDTokenForcingRefresh(true) { idToken, error in
                     if let error = error {
                         print(error)
@@ -97,10 +110,14 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                     self.user = User(email: signedInUser.email ?? "", password: "")
                     self.user?.token = idToken
                     self.user?.uid = signedInUser.uid
+                    self.user?.name = signedInUser.displayName
                     print("got here")
-                    print(self.user?.email, self.user?.password, self.user?.token, self.user?.uid)
+                    print(self.user?.email, self.user?.password, self.user?.token, self.user?.uid, self.user?.name)
                     self.user?.getInfo2(completion:{user, error in
                         if let error = error{
+                            if error == "Connection Error"{
+                                return
+                            }
                             print("get info error: ", error)
                         }
                         print("user's venmo: ", self.user?.venmo)
@@ -111,7 +128,8 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                                 }
                                 print("user role creation successful")
                                 DispatchQueue.main.async{
-                                    self.performSegue(withIdentifier: "createProfileSegue", sender: self)
+                                    //let topVC = topMostController()
+                                    self.performSegue(withIdentifier: "newUserSegue", sender: self)
                                 }
                             })
                         } else{
@@ -119,43 +137,55 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                                 self.performSegue(withIdentifier: "loginSegue", sender: self)
                             }
                         }
-                        })
+                    })
+                }
+            } else{
+                self.verifyEmailButton.alpha = 1
+                print("unverified email")
+                let alert = UIAlertController(title: "Unverified Email", message: "Email verification sent to \(signedInUser.email ?? ""), please verify before continuing", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    switch action.style{
+                    case .default:
+                        print("default")
+                        
+                    case .cancel:
+                        print("cancel")
+                        
+                    case .destructive:
+                        print("destructive")
+                        
+                        
+                    }}))
+                alert.addAction(UIAlertAction(title: "Resend Verifcation Email", style: .default, handler: { action in
+                    if !signedInUser.isEmailVerified{
+                        print("email not verifed, resending verification email")
+                        signedInUser.sendEmailVerification { (error) in
+                            if let error = error{
+                                print(error)
+                            }
+                        }
                     }
-                } else {
-                let authUI = FUIAuth.defaultAuthUI()
-                // You need to adopt a FUIAuthDelegate protocol to receive callback
-                authUI?.delegate = self as FUIAuthDelegate
-                let providers: [FUIAuthProvider] = [
-                    FUIGoogleAuth(),
-                    FUIEmailAuth()
-                ]
-                authUI?.providers = providers
-                let authViewController = authUI?.authViewController()
-                self.present(authViewController!, animated: true)
+                }))
+                alert.addAction(UIAlertAction(title: "Wrong Email", style: .default, handler: { action in
+                    do {
+                        let firebaseAuth = Auth.auth()
+                        try firebaseAuth.signOut()
+                        self.tryLogin()
+                    }catch { print("no user to sign out")}
+                    
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         }
-        
     }
+
+    
     override func viewWillDisappear(_ animated: Bool) {
         Auth.auth().removeStateDidChangeListener(handle!)
     }
     
     
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if (textField == passwordInput) {
-           passwordInput.text = ""
-        }
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == emailInput {
-            textField.resignFirstResponder()
-            passwordInput.becomeFirstResponder()
-        } else if textField == passwordInput {
-            loginAction(self)
-        }
-        return false
-    }
     
     private func credentialValidate(email:String, password:String) ->Bool{
         let range = NSRange(location: 0, length: email.utf16.count)
@@ -170,22 +200,22 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
         return true
     }
     
-    func showError() {
-        let animationDuration = 0.25
-
-        // Fade in the view
-        UIView.animate(withDuration: animationDuration, animations: { () -> Void in
-            self.invalidLabel.alpha = 1
-            }) { (Bool) -> Void in
-
-                // After the animation completes, fade out the view after a delay
-
-                UIView.animate(withDuration: animationDuration, delay: 5, animations: { () -> Void in
-                    self.invalidLabel.alpha = 0
-                    },
-                    completion: nil)
-        }
-    }
+//    func showError() {
+//        let animationDuration = 0.25
+//
+//        // Fade in the view
+//        UIView.animate(withDuration: animationDuration, animations: { () -> Void in
+//            self.invalidLabel.alpha = 1
+//            }) { (Bool) -> Void in
+//
+//                // After the animation completes, fade out the view after a delay
+//
+//                UIView.animate(withDuration: animationDuration, delay: 5, animations: { () -> Void in
+//                    self.invalidLabel.alpha = 0
+//                    },
+//                    completion: nil)
+//        }
+//    }
 
     /*
     // MARK: - Navigation
@@ -211,42 +241,22 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
         self.performSegue(withIdentifier: "loginSegue", sender: self)
         
     }
-    func authUI(_ authUI: FUIAuth, didSignInWith firebaseUser: FirebaseUI.User?, additionalInfo: AdditionalUserInfo?, error: Error?) {
-      // handle user and error as necessary
-        print("Signed in with Firebase!!!")
-        if let error = error{
+    func authUI(_ authUI: FUIAuth, didSignInWith user: FirebaseUI.User?, error: Error?) {
+        print("signed in baby!!!")
+        guard let user = user else {
             print(error)
             return
         }
-        
-        firebaseUser?.getIDToken(completion: {idToken, error in
-            if let error = error {
-                print(error)
-                return
+        print("email is verified: ",user.isEmailVerified)
+        if !user.isEmailVerified{
+            user.sendEmailVerification { error in
+                if let error = error{
+                    print(error)
+                    return
+                }
+                self.verifyEmailButton.alpha = 1
             }
-            print(firebaseUser?.email)
-            self.user?.token = idToken
-            self.user?.email = firebaseUser?.email
-            self.user?.uid = firebaseUser?.uid
-            if (additionalInfo?.isNewUser ?? false){
-                self.user?.createRole(uid: firebaseUser?.uid ?? "", completion: {user, error in
-                    if let error = error{
-                        print(error)
-                    }
-                    print("user role creation successful")
-                    self.performSegue(withIdentifier: "createProfileSegue", sender: self)
-                })
-            } else{
-                self.user?.getInfo2(completion:{user, error in
-                    if let error = error{
-                        print(error)
-                    }
-                    print(user)
-                })
-                
-            self.performSegue(withIdentifier: "loginSegue", sender: self)
-            }
-        })
-        
+        }
     }
+        
 }

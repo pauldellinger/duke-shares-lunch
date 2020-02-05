@@ -10,12 +10,11 @@ import UIKit
 
 class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    var locations: [String]?
+    var locations: [Location]?
     var user: User?
    
     @IBOutlet var rateSlider: UISlider!
     @IBOutlet var rateLabel: UILabel!
-    @IBOutlet var orderTimeSlider: UISlider!
     @IBOutlet weak var noTimeSwitch: UISwitch!
     
     @IBAction func rateSliderChanged(_ sender: Any) {
@@ -32,21 +31,27 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
         let rate = Double(String(format: "%.2f", rateSlider.value))
         
         print(locations, ordertime, rate)
-            user?.createSales(locations: locations, ordertime: ordertime, rate:rate!, viewController:self)
+        user?.createSales(locations: locations, ordertime: ordertime, rate:rate!, completion: { error in
+            if let error = error{
+                print("create sale error: ", error)
+            } else{
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "showMyActiveSalesSegue", sender: self)
+                }
+            }
+        }
+        )
     }
     
     
-    @IBOutlet weak var ratePicker: UIPickerView!
+ 
+
     @IBOutlet weak var timePicker: UIPickerView!
     
-    
-    
-    let ratePickerData = Array(stride(from: 95, through: 0, by: -5))
+
     let timePickerData = Array(stride(from: 0, through: 59, by: 1))
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.ratePicker.delegate = self
-        self.ratePicker.dataSource = self
         self.timePicker.delegate = self
         self.timePicker.dataSource = self
         self.rateSlider.value = 0.5
@@ -60,19 +65,11 @@ class SalePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
            return 1
        }
        
-       func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-           if pickerView == timePicker {
-            return 60
-           } else {
-               return 20
-           }
-       }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 60
+    }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == ratePicker {
-            return "\(ratePickerData[row])%"
-        } else {
-            return "\(timePickerData[row]) minutes"
-        }
+        return "\(timePickerData[row]) minutes"
     }
     
 

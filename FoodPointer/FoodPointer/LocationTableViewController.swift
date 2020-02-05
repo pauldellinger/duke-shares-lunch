@@ -20,21 +20,26 @@ class LocationTableViewController: UITableViewController {
     private func loadSampleLocations() {
         // Function that loads three sample locations (call when testing)
         
-        guard let location1 = Location(name: "Caprese Salad", count: 4) else {
+        guard let location1 = Location(name: "Caprese Salad", count: 4, id: -1) else {
             fatalError("Unable to instantiate location1")
         }
-        guard let location2 = Location(name: "MarketPlace", count: 20) else {
+        guard let location2 = Location(name: "MarketPlace", count: 20, id:-2) else {
             fatalError("Unable to instantiate location2")
         }
-        guard let location3 = Location(name: "Dominos", count: 2) else {
+        guard let location3 = Location(name: "Dominos", count: 2, id:-3) else {
             fatalError("Unable to instantiate location3")
         }
         locations += [location1,location2,location3]
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.checkForPurchase()
         self.user?.getActiveRestaurants(completion: { restaurants, error in
             if let error = error{
                 print("error getting locations: ", error)
+                //DispatchQueue.main.async{
+                    print("Ending refresh")
+                    self.refreshControl?.endRefreshing()
+                //}
             }
             if restaurants != nil{
                 self.locations = restaurants!
@@ -52,6 +57,7 @@ class LocationTableViewController: UITableViewController {
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .didReceivePush, object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: UIApplication.willEnterForegroundNotification, object: nil)
         //self.navigationController?.setNavigationBarHidden(true, animated:true);
         // print(self.tabBarController.user)
 
@@ -72,6 +78,9 @@ class LocationTableViewController: UITableViewController {
         self.user?.getActiveRestaurants(completion: { restaurants, error in
             if let error = error{
                 print("error getting locations: ", error)
+                //DispatchQueue.main.async{
+                    print("Ending refresh")
+                    self.refreshControl?.endRefreshing()
             }
             if restaurants != nil{
                 self.locations = restaurants!
@@ -111,7 +120,7 @@ class LocationTableViewController: UITableViewController {
         //Copy the location from the array locations into a table cell
         let location = locations[indexPath.row]
         cell.nameLabel.text = location.name
-        cell.numberLabel.text = String(location.count)
+        cell.numberLabel.text = String(location.count!)
         
         // Configure the cell...
 
@@ -152,8 +161,9 @@ class LocationTableViewController: UITableViewController {
                 for dic in jsonArray{
                     guard let name = dic["location"] as? String else { return }
                     guard let count = dic["count"] as? Int else { return }
+                    guard let id = dic["id"] as? Int else { return }
                     //print(name, count) //Output
-                    guard let location = Location(name: name, count: count) else {
+                    guard let location = Location(name: name, count: count, id: id) else {
                         fatalError("Unable to instantiate location")
                     }
                     self.locations += [location]
@@ -239,6 +249,29 @@ class LocationTableViewController: UITableViewController {
 //            navigationController?.pushViewController(viewController, animated: true)
 //        }
 //    }
+    private func checkForPurchase(){
+        self.user?.getBuyerPurchase(completion: { purchases, error in
+            if let error = error{
+                print(error)
+            }else{
+                guard let purchases = purchases else { return }
+                if purchases.count < 1 { return }
+                let purchase = purchases[0]
+                DispatchQueue.main.async{
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "WaitForSellerViewController") as! WaitForSellerViewController
+                    controller.user = self.user
+                    controller.cost = purchase.price
+                    controller.seller = purchase.seller
+                    controller.purchase = purchase.pid
+                    self.navigationController?.pushViewController(controller, animated: true)
+                    // self.present(controller, animated: true, completion: nil)
+                }
+                
+                print(purchases)
+            }
+        })
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //Give the restaurant selected to the next view controller (The detail page)
         guard let detailViewController = segue.destination as? LocationDetailTableViewController,

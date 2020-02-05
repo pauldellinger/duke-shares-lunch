@@ -9,7 +9,6 @@
 import UIKit
 import UserNotifications
 import Firebase
-import FirebaseUI
 
 
 @UIApplicationMain
@@ -23,19 +22,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        if FirebaseApp.app() == nil {
-            FirebaseApp.configure()
+        FirebaseApp.configure()
+        let notificationOption = launchOptions?[.remoteNotification]
+        // 1
+        if let notification = notificationOption as? [String: AnyObject],
+            let aps = notification["aps"] as? [String: AnyObject] {
         }
-//        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-//        notificationCenter.requestAuthorization(options: options) {
-//            (didAllow, error) in
-//            if !didAllow {
-//                print("User has declined notifications")
-//                //TODO: mark token as inactive in database
-//            }
-//        }
+        application.applicationIconBadgeNumber = 0
+
+        if #available(iOS 13, *) {
+            // do only pure app launch stuff, not interface stuff
+            
+        } else {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginPage")
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
         return true
     }
 //    func signIn(){
@@ -125,6 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         fetchCompletionHandler completionHandler:
         @escaping (UIBackgroundFetchResult) -> Void
     ) {
+        application.applicationIconBadgeNumber = 0
         guard let aps = userInfo["aps"] as? [String: AnyObject] else {
             completionHandler(.failed)
             return
@@ -142,6 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         */
         
     }
+    
 }
 
 extension Notification.Name {

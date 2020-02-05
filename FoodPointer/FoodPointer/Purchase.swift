@@ -29,7 +29,7 @@ class Purchase {
 
     }
     
-    func approve(user: User,viewController: PurchaseApprovalViewController?){
+    func approve(user: User, completion: @escaping ( _ error: Int?)-> ()){
         print("Approving purchase!")
         let scheme = "https"
         let host = "pdellinger.com"
@@ -56,19 +56,21 @@ class Purchase {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                completion(-1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
                     print("Purchase Approved!")
                     //call handle function in main queue
-                    if let viewController = viewController{
-                        DispatchQueue.main.async{
-                            viewController.handleApprove()
-                        }
-                    }
-                }
-                else{
-                    print("Did not get 204 code, something went wrong")
+                    completion(nil)
+                } else{
+                    completion(httpResponse.statusCode)
                 }
             }
         }
@@ -100,6 +102,12 @@ class Purchase {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
@@ -131,7 +139,7 @@ class Purchase {
         task.resume()
     }
     
-    func markPaid(user: User, viewController: WaitForVenmoViewController?){
+    func markPaid(user: User, completion: @escaping ( _ error: Int?)-> ()){
         print("Approving purchase!")
         let scheme = "https"
         let host = "pdellinger.com"
@@ -158,19 +166,22 @@ class Purchase {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                completion(-1)
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {
                     print("Purchase Approved!")
                     //call handle function in main queue
-                    if let viewController = viewController{
-                        DispatchQueue.main.async{
-                            viewController.handlePaid()
-                        }
-                    }
-                }
-                else{
+                    completion(nil)
+                }else{
                     print("Did not get 204 code, something went wrong")
+                    completion(httpResponse.statusCode)
                 }
             }
         }
@@ -202,6 +213,12 @@ class Purchase {
         
         print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil{
+                DispatchQueue.main.async{
+                    NotificationBanner.show("Connection Error")
+                }
+                return
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("status code \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 204 {

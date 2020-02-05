@@ -10,11 +10,24 @@ import UIKit
 
 class SellLocationTableViewController: UITableViewController {
     
-    var locations = [String]()
+    var user: User?
+    var locations = [Location]()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.allowsMultipleSelection = true
-        loadLocations()
+        self.user?.loadLocations(completion: { restaurants, error in
+            if let error = error {
+                print("error loading locations: ", error)
+            }
+            guard let restaurants = restaurants else{
+                print("no restaurants here")
+                return
+            }
+            self.locations = restaurants
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,42 +47,42 @@ class SellLocationTableViewController: UITableViewController {
         return locations.count
     }
     
-    func loadLocations(){
-        if let path = Bundle.main.path(forResource: "restaurants", ofType: "json") {
-            do {
-                  let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                  let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                    // print(jsonResult)
-                guard let jsonArray = jsonResult as? [[String: Any]] else {
-                    return
-                }
-                for dic in jsonArray{
-                    guard let westunion = dic["West Union"] as? [[String:Any]] else {return}
-                    for place in westunion{
-                        locations += [place["name"] as! String]
-                        
-                    /*
-                        if (place["name"] as! String? == restaurant){
-                            guard let menu = place["menu"] as? [[String:Any]] else { return }
-                            for item in menu {
-                                // print(item["name"]!, item["price"]!)
-                                let meal = Meal(name:item["name"] as! String, price: item["price"] as! Double)
-                                 += [meal!]
-
-                            }
-                        }
-                        */
-                    }
-                    
-                }
-                tableView.reloadData()
-            
-              } catch {
-                print("Unable to read json with the meals")
-                return
-              }
-        }
-    }
+//    func loadLocations(){
+//        if let path = Bundle.main.path(forResource: "restaurants", ofType: "json") {
+//            do {
+//                  let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                  let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+//                    // print(jsonResult)
+//                guard let jsonArray = jsonResult as? [[String: Any]] else {
+//                    return
+//                }
+//                for dic in jsonArray{
+//                    guard let westunion = dic["West Union"] as? [[String:Any]] else {return}
+//                    for place in westunion{
+//                        //locations += [place["name"] as! String]
+//
+//                    /*
+//                        if (place["name"] as! String? == restaurant){
+//                            guard let menu = place["menu"] as? [[String:Any]] else { return }
+//                            for item in menu {
+//                                // print(item["name"]!, item["price"]!)
+//                                let meal = Meal(name:item["name"] as! String, price: item["price"] as! Double)
+//                                 += [meal!]
+//
+//                            }
+//                        }
+//                        */
+//                    }
+//
+//                }
+//                tableView.reloadData()
+//
+//              } catch {
+//                print("Unable to read json with the meals")
+//                return
+//              }
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -87,7 +100,7 @@ class SellLocationTableViewController: UITableViewController {
         
         //Copy the location from the array locations into a table cell
         let location = locations[indexPath.row]
-        cell.nameLabel.text = location
+        cell.nameLabel.text = location.name
         
         // Configure the cell...
 
@@ -104,7 +117,7 @@ class SellLocationTableViewController: UITableViewController {
     }
     func refreshParent(){
         let parent = self.parent as? SubmitSellLocationViewController
-        parent?.selectedLocations = [String]()
+        parent?.selectedLocations = [Location]()
         let selected = self.tableView.indexPathsForSelectedRows
         for (index, location) in locations.enumerated() {
             

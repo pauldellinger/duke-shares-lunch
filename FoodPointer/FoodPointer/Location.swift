@@ -13,15 +13,17 @@ class Location {
     //MARK: Properties
     
     var name: String
-    var count: Int
+    var count: Int?
+    var id: Int
     
     
     //MARK: Initialization
-    init?(name: String, count: Int) {
+    init?(name: String, count: Int?, id: Int) {
         self.name = name
         self.count = count
+        self.id = id
         // Initialization should fail if there is no name or if the rating is negative.
-        if name.isEmpty || count < 0 {
+        if name.isEmpty || count ?? 1 < 0 {
             return nil
         }
     }
