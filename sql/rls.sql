@@ -29,9 +29,9 @@ GRANT SELECT ON ACTIVERESTAURANTS to todo_user;
 grant usage, select on sequence ActiveSeller_saleid_seq to todo_user;
 grant usage, select on sequence Purchase_pid_seq to todo_user;
 GRANT usage, select on sequence history_hid_seq to todo_user;
-GRANT usage, select on sequence history_rid_seq to todo_user;
+GRANT usage, select on sequence reports_rid_seq to todo_user;
 
-GRANT INSERT ON REPORTS to todo_user;
+GRANT INSERT,SELECT ON REPORTS to todo_user;
 GRANT INSERT,SELECT ON History to todo_user;
 GRANT SELECT ON LOCATIONS to todo_user;
 GRANT SELECT ON MENUS to todo_user;
@@ -104,3 +104,7 @@ CREATE POLICY history_select on HISTORY FOR SELECT
 
 CREATE POLICY history_insert on HISTORY FOR INSERT
         WITH CHECK(true); -- rls on purchase covers this one
+
+ALTER TABLE REPORTS ENABLE ROW LEVEL SECURITY;
+CREATE POLICY reports_select on REPORTS
+	USING (filer = current_user);

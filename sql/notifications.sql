@@ -104,8 +104,8 @@ CREATE OR REPLACE FUNCTION process_update_queue() RETURNS TRIGGER AS
             INSERT INTO NotificationQueue SELECT
 		dt.token,
 		NEW.pid,
-		CONCAT('You have a purchase for ', NEW.price, ' awaiting approval at ',
-			(SELECT location from activeseller where activeseller.saleid = NEW.saleid)),
+		CONCAT('You have a purchase for $', NEW.price, ' awaiting approval at ',
+			(SELECT name from locations where lid = (SELECT activeseller.location from activeseller where activeseller.saleid = NEW.saleid))),
 		now(),
 		NULL
 		FROM devicetoken as dt
