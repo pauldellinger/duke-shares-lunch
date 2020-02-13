@@ -12,7 +12,7 @@ def main():
     cur = dbc.cursor()
     with open('restaurants.json', 'r') as file:
         restaurants = json.loads(file.read())
-    #print(restaurants)
+
     for index in range(len(restaurants)):
         region = restaurants[index]
         #print(region)
