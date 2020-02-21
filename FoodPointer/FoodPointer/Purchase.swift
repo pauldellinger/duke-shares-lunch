@@ -32,7 +32,7 @@ class Purchase {
     func approve(user: User, completion: @escaping ( _ error: Int?)-> ()){
         print("Approving purchase!")
         let scheme = "https"
-        let host = "pdellinger.com"
+        let host = "foodpointer.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()
@@ -82,7 +82,7 @@ class Purchase {
     func decline(user: User, viewController: Any?){
         print("Removing purchase!")
         let scheme = "https"
-        let host = "pdellinger.com"
+        let host = "foodpointer.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()
@@ -142,7 +142,7 @@ class Purchase {
     func markPaid(user: User, completion: @escaping ( _ error: Int?)-> ()){
         print("Approving purchase!")
         let scheme = "https"
-        let host = "pdellinger.com"
+        let host = "foodpointer.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()
@@ -192,7 +192,7 @@ class Purchase {
     func complete(user: User, viewController: BuyFoodViewController?){
         print("completing purchase!")
         let scheme = "https"
-        let host = "pdellinger.com"
+        let host = "foodpointer.pdellinger.com"
         let path = "/purchase"
         let queryItem = URLQueryItem(name: "pid", value: "eq.\(self.pid)")
         var urlComponents = URLComponents()

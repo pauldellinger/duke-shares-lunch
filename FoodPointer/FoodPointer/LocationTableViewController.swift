@@ -36,10 +36,11 @@ class LocationTableViewController: UITableViewController {
         self.user?.getActiveRestaurants(completion: { restaurants, error in
             if let error = error{
                 print("error getting locations: ", error)
-                //DispatchQueue.main.async{
+                DispatchQueue.main.async{
                     print("Ending refresh")
+                
                     self.refreshControl?.endRefreshing()
-                //}
+                }
             }
             if restaurants != nil{
                 self.locations = restaurants!
@@ -48,7 +49,7 @@ class LocationTableViewController: UITableViewController {
                 }
             }
         })
-        //getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
+        //getDataFromUrl(website: "https://foodpointer.pdellinger.com/activerestaurants")
     }
     
     override func viewDidLoad() {
@@ -68,7 +69,7 @@ class LocationTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         //Make request for data, add it to locations (global variable)
-        // getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
+        // getDataFromUrl(website: "https://foodpointer.pdellinger.com/activerestaurants")
         
     }
     @objc func refresh(){
@@ -89,7 +90,7 @@ class LocationTableViewController: UITableViewController {
                 }
             }
         })
-        // getDataFromUrl(website: "https://pdellinger.com/activerestaurants")
+        // getDataFromUrl(website: "https://foodpointer.pdellinger.com/activerestaurants")
     }
 
     // MARK: - Table view data source

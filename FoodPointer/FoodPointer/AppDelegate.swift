@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginPage")
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "initialVC")
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()

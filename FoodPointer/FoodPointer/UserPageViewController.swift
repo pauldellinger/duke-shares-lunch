@@ -82,7 +82,8 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
     private func tryLogin(){
         print("trying login")
         self.handle = Auth.auth().addStateDidChangeListener { auth, signedInUser in
-            guard let signedInUser = signedInUser else {
+            guard let signedInUser = auth.currentUser else {
+                //changed to currentUser here bc signedInUser was nil after force quit
                 print("no signed in user")
                 self.authUI = FUIAuth.defaultAuthUI()
                 self.authUI?.delegate = self as FUIAuthDelegate
@@ -91,6 +92,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                     FUIEmailAuth()
                 ]
                 self.authUI?.providers = providers
+                
                 if let authVC = FUIAuth.defaultAuthUI()?.authViewController() {
                     self.present(authVC, animated: true, completion: nil)
                 }
@@ -128,12 +130,19 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                                 }
                                 print("user role creation successful")
                                 DispatchQueue.main.async{
-                                    //let topVC = topMostController()
+                                    guard self.navigationController == UIApplication.shared.keyWindow?.rootViewController else {
+                                        //dont segue anywhere if we're not on the right view
+                                        return
+                                    }
                                     self.performSegue(withIdentifier: "newUserSegue", sender: self)
                                 }
                             })
                         } else{
                             DispatchQueue.main.async{
+                                guard self.navigationController == UIApplication.shared.keyWindow?.rootViewController else {
+                                    //dont segue anywhere if we're not on the right view
+                                    return
+                                }
                                 self.performSegue(withIdentifier: "loginSegue", sender: self)
                             }
                         }
@@ -181,7 +190,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
 
     
     override func viewWillDisappear(_ animated: Bool) {
-        Auth.auth().removeStateDidChangeListener(handle!)
+        //Auth.auth().removeStateDidChangeListener(handle!)
     }
     
     
@@ -238,7 +247,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
     }
     func tokenUpdated(user:User){
         //segue to main app
-        self.performSegue(withIdentifier: "loginSegue", sender: self)
+        //self.performSegue(withIdentifier: "loginSegue", sender: self)
         
     }
     func authUI(_ authUI: FUIAuth, didSignInWith user: FirebaseUI.User?, error: Error?) {
@@ -256,6 +265,8 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                 }
                 self.verifyEmailButton.alpha = 1
             }
+        }else{
+            self.tryLogin()
         }
     }
         
