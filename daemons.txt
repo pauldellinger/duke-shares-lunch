@@ -1,0 +1,38 @@
+# /etc/systemd/system/postgrest.service
+[Unit]
+Description=REST API for any Postgres database
+After=postgresql.service
+[Service]
+ExecStart=/bin/postgrest /etc/postgrest/conf/database-server.conf
+ExecReload=/bin/kill -SIGUSR1 $MAINPID
+[Install]
+WantedBy=multi-user.target
+
+
+
+# /etc/systemd/system/notifications.service
+[Unit]
+Description=Python App to serve push notifications based on database changes
+After=network.target
+[Service]
+User=pauldell123
+Group=www-data
+WorkingDirectory=/home/pauldell123/duke-shares-lunch/flask
+Environment="PATH=/home/pauldell123/duke-shares-lunch/flask/auth/bin"
+ExecStart=/home/pauldell123/anaconda/bin/python /home/pauldell123/duke-shares-lunch/flask/notification.py
+[Install]
+WantedBy=multi-user.target
+
+
+# /etc/systemd/system/flask.service
+[Unit]
+Description=Gunicorn instance to serve auth2
+After=network.target
+[Service]
+User=pauldell123
+Group=www-data
+WorkingDirectory=/home/pauldell123/duke-shares-lunch/flask
+Environment="PATH=/home/pauldell123/duke-shares-lunch/flask/auth/bin"
+ExecStart=/home/pauldell123/anaconda/bin/gunicorn --workers 3 --bind unix:app.sock -m 007 wsgi:app
+[Install]
+WantedBy=multi-user.target
