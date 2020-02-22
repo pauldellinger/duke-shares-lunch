@@ -105,7 +105,9 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
                 
                 signedInUser.getIDTokenForcingRefresh(true) { idToken, error in
                     if let error = error {
-                        print(error)
+                        DispatchQueue.main.async{
+                            NotificationBanner.show("Error Signing In")
+                        }
                         return;
                     }
                     print(idToken)
@@ -251,12 +253,12 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, FUIAuthDele
         
     }
     func authUI(_ authUI: FUIAuth, didSignInWith user: FirebaseUI.User?, error: Error?) {
-        print("signed in baby!!!")
         guard let user = user else {
-            print(error)
+            DispatchQueue.main.async{
+                NotificationBanner.show("Error Signing In")
+            }
             return
         }
-        print("email is verified: ",user.isEmailVerified)
         if !user.isEmailVerified{
             user.sendEmailVerification { error in
                 if let error = error{

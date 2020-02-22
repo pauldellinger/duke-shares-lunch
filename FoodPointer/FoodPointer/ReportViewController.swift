@@ -34,7 +34,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
                     self.dismiss(animated: true, completion: nil)
                 }
             })
-        } else {print("there's something wrong with your details field")}
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,9 +61,15 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         }
     }
     func passRegex(text: String)->Bool{
-        if text == "Please give details on your problem" { return false }
-        if text.count > 1500 { return false }
-        if text.count == 0 { return false }
+        if text == "Please give details on your problem" {
+            NotificationBanner.show("Please give some details")
+            return false }
+        if text.count > 1500 {
+            NotificationBanner.show("Report is too long")
+            return false }
+        if text.count == 0 {
+            NotificationBanner.show("Please give some details")
+            return false }
         return true
     }
     
