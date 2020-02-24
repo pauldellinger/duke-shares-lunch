@@ -51,7 +51,11 @@ class ReportViewController: UIViewController, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
-            textView.textColor = UIColor.black
+            if #available(iOS 13.0, *) {
+                textView.textColor = UIColor.label
+            } else {
+                textView.textColor = UIColor.black
+            }
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {

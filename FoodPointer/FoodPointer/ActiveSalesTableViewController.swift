@@ -174,6 +174,7 @@ class ActiveSalesTableViewController: UITableViewController {
                     cell.buyerCountLabel.text = String(count)
                     cell.notifyCircle.alpha = 1
                 } else{
+                    cell.selectionStyle = .none
                     cell.buyerCountLabel.alpha = 0
                     cell.notifyCircle.alpha = 0
                 }
